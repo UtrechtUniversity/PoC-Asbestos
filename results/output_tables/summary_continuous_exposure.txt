@@ -1,0 +1,3 @@
+"status"	"asbestos_cum0_mean"	"asbestos_cum0_sd"	"asbestos_cum0_median"	"asbestos_cum0_q1"	"asbestos_cum0_q3"	"asbestos_cum0_min"	"asbestos_cum0_max"	"asbestos_dur0_mean"	"asbestos_dur0_sd"	"asbestos_dur0_median"	"asbestos_dur0_q1"	"asbestos_dur0_q3"	"asbestos_dur0_min"	"asbestos_dur0_max"
+"1"	"0"	2.225	3.014	1.173	0.476	2.856	0.002	64.6	17.87	13.846	14	5	30	1	63
+"2"	"1"	2.602	2.998	1.538	0.622	3.532	0.002	35.432	18.883	13.954	15.5	6	31	1	62

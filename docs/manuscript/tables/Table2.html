@@ -1,0 +1,144 @@
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg .tg-9wq8{border-color:inherit;text-align:center;vertical-align:middle}
+.tg .tg-c3ow{border-color:inherit;text-align:center;vertical-align:top}
+.tg .tg-uzvj{border-color:inherit;font-weight:bold;text-align:center;vertical-align:middle}
+.tg .tg-bxk5{background-color:#EFEFEF;border-color:inherit;font-style:italic;text-align:left;vertical-align:middle}
+</style>
+<table class="tg" style="undefined;table-layout: fixed; width: 1250px"><colgroup>
+<col style="width: 100.166667px">
+<col style="width: 111.166667px">
+<col style="width: 233.166667px">
+<col style="width: 308.166667px">
+<col style="width: 269.166667px">
+<col style="width: 228.166667px">
+</colgroup>
+<thead>
+  <tr>
+    <th class="tg-uzvj">Error Factor</th>
+    <th class="tg-uzvj">PoC Scenario</th>
+    <th class="tg-uzvj">Lung cancer odds increase (%) per fiber-years</th>
+    <th class="tg-uzvj">Number of compensated lung cancer cases based on SYNERGY</th>
+    <th class="tg-uzvj">Number of compensated cases per 10,000 lung cancer cases</th>
+    <th class="tg-uzvj">Cumulative exposure at PoC  ≥ 50% in fiber-years</th>
+  </tr></thead>
+<tbody>
+  <tr>
+    <td class="tg-bxk5" colspan="6">Logistic Regression Model</td>
+  </tr>
+  <tr>
+    <td class="tg-9wq8" rowspan="2">No error</td>
+    <td class="tg-9wq8">Point estimate</td>
+    <td class="tg-9wq8">3.78</td>
+    <td class="tg-9wq8">21</td>
+    <td class="tg-9wq8">12</td>
+    <td class="tg-9wq8">18.97</td>
+  </tr>
+  <tr>
+    <td class="tg-9wq8">Upper bound</td>
+    <td class="tg-9wq8">4.97</td>
+    <td class="tg-9wq8">66</td>
+    <td class="tg-9wq8">39</td>
+    <td class="tg-9wq8">14.29</td>
+  </tr>
+  <tr>
+    <td class="tg-9wq8" rowspan="2">1.5</td>
+    <td class="tg-c3ow">Point estimate</td>
+    <td class="tg-9wq8">5.72</td>
+    <td class="tg-9wq8">105</td>
+    <td class="tg-9wq8">62</td>
+    <td class="tg-9wq8">12.48</td>
+  </tr>
+  <tr>
+    <td class="tg-9wq8">Upper bound</td>
+    <td class="tg-9wq8">7.55</td>
+    <td class="tg-9wq8">266</td>
+    <td class="tg-9wq8">157</td>
+    <td class="tg-9wq8">9.54</td>
+  </tr>
+  <tr>
+    <td class="tg-9wq8" rowspan="2">2</td>
+    <td class="tg-c3ow">Point estimate</td>
+    <td class="tg-9wq8">7.70</td>
+    <td class="tg-9wq8">275</td>
+    <td class="tg-9wq8">163</td>
+    <td class="tg-9wq8">9.35</td>
+  </tr>
+  <tr>
+    <td class="tg-9wq8">Upper bound</td>
+    <td class="tg-9wq8">10.19</td>
+    <td class="tg-9wq8">586</td>
+    <td class="tg-9wq8">347</td>
+    <td class="tg-9wq8">7.14</td>
+  </tr>
+  <tr>
+    <td class="tg-bxk5" colspan="6">Mixed-Effects Logistic Regression Model</td>
+  </tr>
+  <tr>
+    <td class="tg-9wq8" rowspan="2">No error</td>
+    <td class="tg-c3ow">Point estimate</td>
+    <td class="tg-9wq8">6.76</td>
+    <td class="tg-9wq8">193</td>
+    <td class="tg-9wq8">114</td>
+    <td class="tg-9wq8">10.59</td>
+  </tr>
+  <tr>
+    <td class="tg-9wq8">Upper bound</td>
+    <td class="tg-9wq8">17.46</td>
+    <td class="tg-9wq8">1429</td>
+    <td class="tg-9wq8">846</td>
+    <td class="tg-9wq8">4.31</td>
+  </tr>
+  <tr>
+    <td class="tg-bxk5" colspan="6">Spline Model</td>
+  </tr>
+  <tr>
+    <td class="tg-9wq8" rowspan="2">No error</td>
+    <td class="tg-c3ow">Point estimate</td>
+    <td class="tg-9wq8">-</td>
+    <td class="tg-9wq8">0</td>
+    <td class="tg-9wq8">0</td>
+    <td class="tg-9wq8">-</td>
+  </tr>
+  <tr>
+    <td class="tg-9wq8">Upper bound</td>
+    <td class="tg-9wq8">-</td>
+    <td class="tg-9wq8">5</td>
+    <td class="tg-9wq8">3</td>
+    <td class="tg-9wq8">26.57</td>
+  </tr>
+  <tr>
+    <td class="tg-9wq8" rowspan="2">1.5</td>
+    <td class="tg-c3ow">Point estimate</td>
+    <td class="tg-9wq8">-</td>
+    <td class="tg-9wq8">0</td>
+    <td class="tg-9wq8">0</td>
+    <td class="tg-9wq8">-</td>
+  </tr>
+  <tr>
+    <td class="tg-c3ow">Upper bound</td>
+    <td class="tg-9wq8">-</td>
+    <td class="tg-9wq8">30</td>
+    <td class="tg-9wq8">18</td>
+    <td class="tg-9wq8">17.48</td>
+  </tr>
+  <tr>
+    <td class="tg-9wq8" rowspan="2">2</td>
+    <td class="tg-c3ow">Point estimate</td>
+    <td class="tg-9wq8">-</td>
+    <td class="tg-9wq8">0</td>
+    <td class="tg-9wq8">0</td>
+    <td class="tg-9wq8">-</td>
+  </tr>
+  <tr>
+    <td class="tg-9wq8">Upper bound</td>
+    <td class="tg-9wq8">-</td>
+    <td class="tg-9wq8">94</td>
+    <td class="tg-9wq8">56</td>
+    <td class="tg-9wq8">13.05</td>
+  </tr>
+</tbody></table>

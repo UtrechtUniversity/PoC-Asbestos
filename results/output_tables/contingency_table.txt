@@ -1,0 +1,3 @@
+"ever_asbestos0"	"Cases"	"Controls"
+"1"	"1"	7440	7312
+"2"	"0"	9461	13653

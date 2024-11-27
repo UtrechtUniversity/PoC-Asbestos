@@ -1,0 +1,301 @@
+---
+title: "Probability of Causation: Lung cancer due to occupational exposure to asbestos"
+author: 
+  - "Susan Peters¹, Javier Mancilla Galindo¹, Jenny Deng¹, Lützen Portengen¹, Roel Vermeulen¹, Dick Heederik¹˒²"
+  - "1.	Institute for Risk Assessment Sciences, Utrecht University, Utrecht, the Netherlands"
+  - "2.	National Expertise Centre for Substance-related Occupational Diseases (Lexces), Bilthoven, the Netherlands"
+abstract: |
+  <b>Objectives:</b> We here investigate the process of deciding on compensation claims by lung cancer patients exposed occupationally to asbestos by calculating the probability of causation (PoC) threshold at which lung cancer is *more likely than not* due to asbestos.  
+  <b>Methods:</b> The pooled case-control SYNERGY study (n = 37,866) was used to calculate exposure thresholds (lifetime cumulative exposure to asbestos and duration of exposure) at which PoC of lung cancer equals 0.5, by applying logistic regression and generalized linear-mixed models under scenarios correcting for exposure-response underestimation (factors: 1.5 and 2), and using the upper bound (UB) of the 95% confidence interval. The spline meta-regression curve derived from published studies (n = 22) was also used to calculate the PoC. Lung cancer cases compensated are given as counts and rates (per 10,000).
+  <b>Results:</b> A total of 17,705 lung cancer cases (44% ever-exposed to asbestos) and 21,813 controls (34.9% ever-exposed) were included. Compensation thresholds (cases per 10,000) with the PoC UB from logistic regression were: 14.29 (39), 9.54 (157), and 7.14 (347) fiber-years for correction factors of: none, 1.5, and 2; and 62 (1), 38 (599), and 31 (1,132) years, respectively. In the models accounting for study-specific effects, cut-offs were 4.31 fiber-years (846) for cumulative asbestos and 47 (82), 32 (1,044), and 24 (2,739) years for exposure duration. Using the spline model, thresholds were 26.57 (3), 17.48 (18), and 13.05 (56) fiber-years.
+  <b>Conclusions:</b> These asbestos exposure thresholds for lung cancer can be used and adapted to local contexts to inform worker compensation schemes.
+keywords: ["Asbestos", "Lung cancer", "Probability of causation", "Causality", "Workers' compensation"]
+execute: 
+  echo: false
+  warning: false
+toc: false
+format: 
+  docx:
+    reference-doc: template.docx
+    link-citations: true
+  html:
+    embed-resources: true
+    toc: true
+bibliography: PoC-Asbestos.bib
+csl: bmj.csl
+editor: visual
+---
+
+```{r}
+if (!require("pacman", quietly = TRUE)) {
+  install.packages("pacman")
+}
+
+pacman::p_load(
+  tidyverse,
+  flextable,
+  htmltools
+  )
+```
+
+### Key Messages
+
+-   *What is already known on this topic*: A lifetime cumulative exposure to asbestos threshold of 25 fiber-years is used in the Helsinki criteria as the value at which lung cancer risk is twice as large in the exposed. Studies have suggested that the exposure-response curve is steeper at lower exposure values and is underestimated in the order of 1.5 to 2.
+
+-   *What this study adds*: We apply the probability of causation (PoC) principle on a large pooled case-control study (SYNERGY) to provide exposure thresholds for the compensation of lung cancer cases due to asbestos under different scenarios incorporating uncertainties in the benefit of the claimant.
+
+-   *How this study might affect research, practice or policy*: An exposure threshold of 5 fiber-years has been selected for the one-time compensation of workers occupationally exposed to asbestos in the Netherlands who develop lung cancer.
+
+### Keywords
+
+-   [**Asbestos**](https://www.ncbi.nlm.nih.gov/mesh/68001194)
+
+-   [**Lung cancer**](https://www.ncbi.nlm.nih.gov/mesh/68008175)
+
+-   **Probability of Causation**
+
+-   [**Causality**](https://www.ncbi.nlm.nih.gov/mesh/68015984)
+
+-   [**Workers' Compensation**](https://www.ncbi.nlm.nih.gov/mesh/68014942)
+
+------------------------------------------------------------------------
+
+### About this manuscript
+
+Target journal: [*Occupational & Environmental Medicine (OEM)*](https://oem.bmj.com/)
+
+Section: *Practice*
+
+Word count: 3342 (limit 3500)
+
+Tables/Illustrations: 5 (2 figures, 3 tables)
+
+References: 35
+
+{{< pagebreak >}}
+
+# Introduction
+
+The assessment of individual causality is complicated for multi-causal diseases. Lung cancer also has multiple known causes, with cigarette smoking being the leading risk factor.[@Leiter2023] There are various occupational exposures that increase the risk of lung cancer, including asbestos, respirable crystalline silica, diesel engine exhaust, arsenic, nickel and chromium.[@Leiter2023; @IARCChemicalAgentsOccupations2012] Thus, it is most often not possible to conclude what caused an individual case of lung cancer. Gaps in knowledge further hinder elucidation of causality.[@MoonYoo2021] Nonetheless, the question of what share of the disease is attributable to a specific exposure is of utmost importance for worker compensation schemes.[@Wakeford2006]
+
+One commonly applied method for determining whether compensation due to a workplace exposure is granted is the probability of causation (PoC), also known as the assigned share (AS). [@NCICDCreport2003; @Wakeford2006] When PoC in the individual is greater than 50%, the disease is "more likely than not" caused by the exposure of interest. This is because a PoC of 0.5 corresponds mathematically to a doubling in the risk of the disease, compared to the baseline risk (i.e., risk in non-exposed). This method has been historically applied to cancer due to radiation,[@Wakeford2006; @NCICDCreport2003] aluminium,[@Armstrong1988] smoking, [@Siemiatycki2014] among other exposures.
+
+One advantage of the PoC is that it can be estimated from epidemiological studies or meta-analyses from which the exposure-response relationship can be determined.[@Siemiatycki2014] However, the PoC approach is limited due to uncertainties in estimations arising from measurement error, misclassification, confounding, and estimate precision, which may act in detriment of the heir. Therefore, uncertainties should be considered to the benefit of the claimant when applying the PoC.[@Wakeford2006; @Armstrong1988; @NCICDCreport2003; @ThomasPoC2000] Nonetheless, it has been largely debated whether the PoC can be identified due to its lack of consideration of accelerated outcome occurrence, among other issues.[@GreenlandPoC1999] More recently, the PoC has been recognized as a valid and estimable measure from observational studies, provided two main assumptions hold (no confounding and monotonicity).[@PearlPoC2009]
+
+In the Netherlands, a compensation scheme for occupational diseases is in place, which adopts the *presumably plausible principle*, in which uncertainties in individual causality are considered in favor of the worker, for a one-time compensation (all or none).[@Coenen2024] Lung cancer due to asbestos is one of the occupational diseases included in the scheme. Asbestos was banned in the Netherlands in 1993; however, it has been projected that between 5,300 and 10,200 cases of asbestos-related lung cancer will occur by 2050.[@RIVMAsbest2017] The 2014 Helsinki report uses a lifetime cumulative exposure to asbestos of 25 fiber-years as the value of doubling in the risk of lung cancer.[@HelsinkiAsbestos2015] However, the exposure-response curve is known to be steeper at lower asbestos exposure values and is affected by quality of exposure assessment.[@vanderbij2013; @ECHA2021] Thus, the objective of this study is to incorporate new knowledge in the investigation process of deciding on compensation claims by lung cancer patients exposed occupationally to asbestos.
+
+{{< pagebreak >}}
+
+# Methods
+
+## Study design and setting
+
+The SYNERGY project is a pooled case-control study of the joint effects of occupational carcinogens in the development of lung cancer.[@SYNERGYwebsite] Between 1985 and 2020, SYNERGY captured data from 14 case-control studies conducted in Europe and Canada, including 17,705 lung cancer cases and 21,813 controls. The characteristics of the study population and key inclusion criteria have been published elsewhere.[@Olsson2017] The SYNERGY study was approved by the IARC Ethics Committee in addition to the individual country-specific study ethics approval.
+
+## Exposure
+
+The cumulative occupational exposure to asbestos was obtained from the quantitative job exposure matrix (JEM) *SYN-JEM*,[@Peters2016SYNJEM] which uses the region, duration, and period of exposure within an ISCO-68 job title to calculate exposure to asbestos as fiber-years (ff/ml-years). The model incorporates the effect of country-specific asbestos ban. Sensitivity analyses for SYN-JEM have been conducted[@Peters2013] and this method has been applied in a large epidemiological study of the relationship between asbestos exposure and lung cancer.[@Olsson2017]
+
+## Outcome
+
+Lung cancer cases with histological or cytological confirmation were included in the individual case-control studies with an overall response rate of 83% (range: 62 – 98%). Controls are mostly recruited from the general population (79%), with a response rate of 70% (range: 41 – 100%) and are individually or frequency-matched to cases by sex and age. A description of cases and controls included per study is available elsewhere.[@Olsson2017]
+
+## Statistical Analysis
+
+### *PoC from exposure-response spline meta-regression of published studies*
+
+The exposure-response curve of the relative risk (RR) of lung cancer and lifetime cumulative exposure to asbestos (fiber-years) was modeled by fitting linear and non-linear meta-regression models as described by van der Bij, et al.[@vanderbij2013] A total of 22 studies were incorporated by using those in the original systematic review (n = 19)[@vanderbij2013] plus the additional studies (n = 3) in the update for the European Chemicals Agency report on occupational exposure limits for asbestos.[@ECHA2021] It has been recognized by restricting analyses to studies of high-quality exposure measurement that this method underestimates the exposure-response curve with an approximate magnitude of 1.5 to 2 due to measurement error or misclassification of exposure.[@ECHA2021]
+
+PoC calculation was based on a widely applied method for the compensation of cancer cases,[@Armstrong1988; @NCICDCreport2003; @Wakeford1998] as the excess risk due to exposure (risk of lung cancer attributable to occupational exposure minus risk among unexposed persons) divided by the total risk. It can be re-expressed as formula 1:
+
+$$PoC = \frac{(RR-1)}{RR} \quad (1)$$
+
+The RR from a spline model assuming no difference in background rate of the outcome was used as this is a common assumption for the application of the PoC[@Armstrong1988] and a reasonable approach when measurement error is thought to be responsible of differences in background risk.[@ArmstrongMeasurementError1998] This model allows risk to vary non-linearly with exposure, such that estimates at low exposure are less affected by estimates in the upper exposure categories.[@Greenland1995] Fixed correction factors of 1.5 and 2 were directly applied to the predictions generated by natural splines to represent scenarios of adjusted underestimation of the slope. Upper 95% prediction intervals were computed as a measure of uncertainty from study heterogeneity, following the method by Higgins, et al.[@HigginsMetanalysis2009]
+
+### *PoC from the exposure-response curve in SYNERGY*
+
+For the calculation of the PoC using SYNERGY data, odds ratios (ORs) were considered estimates of the RR of occupational exposure and lung cancer occurrence because of the nature of the case-control study design. Logistic regression and generalized linear mixed models (logit link function) were fitted with the case-control studies data to make inference about the exposure-response relationship of occupational exposure and lung cancer risk, and substantially calculating the PoC. ORs and corresponding 95% confidence intervals (95% CI) of lung cancer associated with two metrics of occupational exposure: total duration of exposure in years, and lifetime cumulative exposure in fiber-years (Formula 2), where $\beta$ is the common slope associated with exposure across studies. Again, we assume that there is no difference in the background risk of lung cancer between exposed and non-exposed individuals. Therefore, coefficients of the intercepts were not included in the PoC calculation.
+
+$$OR = \beta \times occupational\ exposure \quad (2)$$
+
+$$PoC = \frac{(OR-1)}{OR} \quad (3)$$
+
+In the generalized linear mixed model, study-specific random intercepts and random slopes for exposure were included to take the potential between-study heterogeneity into account. Both linear models were adjusted for sex, study, age group (\<45, 45–49, 50–54, 55–59, 60–64, 65–69, 70–74, and \> 74 years), smoking (cigarette pack-years \[log (cigarette pack-years +1)\] and time-since-quitting smoking cigarettes (current smokers; stopping smoking 2–7, 8–15, 16–25, ≥ 26 years before interview/diagnosis; and never-smokers).
+
+Several scenario analyses were performed. Besides PoC calculated based on the point OR estimates from the models, upper band limits of the 95% CI were also used in the calculation of PoC to take statistical uncertainty into account. Fixed factors of 1.5 and 2 were applied to the exposure response slopes estimated from the linear models (both for the point estimate and upper band limits of the 95% CI). Thus, the odds ratios per unit of exposure (or the upper confidence interval of this OR) were obtained from steeper exposure-response relations.
+
+### *Number of compensated cases and exposure thresholds at PoC ≥ 0.5*
+
+The absolute frequency of lung cancer cases with a calculated PoC ≥ 0.5 is reported for the different modelling scenarios as the total count of compensated cases and the rate of compensated cases per 10,000 lung cases cancer based on SYNERGY. The exposure threshold at which PoC is ≥ 0.5 is reported for every modelling scenario, provided this threshold is within the range of exposure values in SYNERGY.
+
+{{< pagebreak >}}
+
+# Results
+
+```{r}
+#| include: false
+contingency_table <- read.table("../../results/output_tables/contingency_table.txt")
+
+cases <- sum(contingency_table$Cases)
+controls <- sum(contingency_table$Controls)
+
+exposed_cases <- contingency_table$Cases[1]
+exposed_controls <- contingency_table$Controls[1]
+
+nonexposed_cases <- contingency_table$Cases[2]
+nonexposed_controls <- contingency_table$Controls[2]
+
+total_population <- cases + controls
+total_exposed <- exposed_cases + exposed_controls
+
+or <- (exposed_cases/exposed_controls)/(nonexposed_cases/nonexposed_controls)
+af <- (or-1)/or
+```
+
+```{r}
+#| include: false
+summary_table <- read.table("../../results/output_tables/summary_continuous_exposure.txt")
+
+median_cum0_cases <- summary_table$asbestos_cum0_median[2] %>% round(2)
+q1_cum0_cases <- summary_table$asbestos_cum0_q1[2] %>% round(2)
+q3_cum0_cases <- summary_table$asbestos_cum0_q3[2] %>% round(2)
+min_cum0_cases <- summary_table$asbestos_cum0_min[2] 
+max_cum0_cases <- summary_table$asbestos_cum0_max[2] %>% round(2)
+
+median_cum0_controls <- summary_table$asbestos_cum0_median[1] %>% round(2)
+q1_cum0_controls <- summary_table$asbestos_cum0_q1[1] %>% round(2)
+q3_cum0_controls <- summary_table$asbestos_cum0_q3[1] %>% round(2)
+min_cum0_controls <- summary_table$asbestos_cum0_min[1] 
+max_cum0_controls <- summary_table$asbestos_cum0_max[1] %>% round(2)
+
+median_dur0_cases <- summary_table$asbestos_dur0_median[2] 
+q1_dur0_cases <- summary_table$asbestos_dur0_q1[2] 
+q3_dur0_cases <- summary_table$asbestos_dur0_q3[2]
+min_dur0_cases <- summary_table$asbestos_dur0_min[2] 
+max_dur0_cases <- summary_table$asbestos_dur0_max[2] 
+
+median_dur0_controls <- summary_table$asbestos_dur0_median[1] 
+q1_dur0_controls <- summary_table$asbestos_dur0_q1[1] 
+q3_dur0_controls <- summary_table$asbestos_dur0_q3[1] 
+min_dur0_controls <- summary_table$asbestos_dur0_min[1] 
+max_dur0_controls <- summary_table$asbestos_dur0_max[1] 
+```
+
+A summary of the characteristics of the study population (n = `r total_population`) is provided in **Table 1**. Ever exposure to asbestos was reported in `r round((total_exposed/total_population*100), 1)`% (n = `r total_exposed`). The percentage of exposure to asbestos in lung cancer cases and controls was `r round((exposed_cases/cases*100), 1)`% (n = `r exposed_cases`/`r cases`) and `r round((exposed_controls/controls*100), 1)`% (n = `r exposed_controls`/`r controls`), respectively. This corresponds to a crude OR of `r round(or, 2)` and attributable fraction of `r round(af, 2)`.
+
+**Table 1**. Descriptive characteristics of participants.
+
+```{r}
+includeHTML("tables/Table1.html")
+```
+
+> Abbreviations: fiber-years (ff/ml-years), maximum (Max), minimum (Min), 25th percentile (Q1), 75th percentile (Q3), standard deviation (SD).
+
+{{< pagebreak >}}
+
+The median lifetime cumulative exposure to asbestos in the ever-exposed was `r median_cum0_cases` (IQR: `r q1_cum0_cases` – `r q3_cum0_cases`, range: `r min_cum0_cases` – `r max_cum0_cases`) fiber-years in the cases and `r median_cum0_controls` (IQR: `r q1_cum0_controls` – `r q3_cum0_controls`, range: `r min_cum0_controls` – `r max_cum0_controls`) fiber-years in the controls. The total duration of exposure in the cases and controls was `r median_dur0_cases` (IQR: `r q1_dur0_cases` – `r q3_dur0_cases`, range: `r min_dur0_cases` – `r max_dur0_cases`) years and `r median_dur0_controls` (IQR: `r q1_dur0_controls` – `r q3_dur0_controls`, range: `r min_dur0_controls` – `r max_dur0_controls`) years, respectively.
+
+### *PoC of lung cancer due to lifetime cumulative exposure to asbestos*
+
+The exposure-response curves of the relative risk of lung cancer with increasing quantitative levels of asbestos exposure, highlighting the range of exposure values (0 to 65 fiber-years) observed in SYNERGY are shown in **Supplementary Figure 1**. The threshold (RR = 2) corresponding to a PoC of 0.5 is not reached in such range in the uncorrected models.
+
+```{r}
+counts_spline <- read.table("../../results/output_tables/PoC_spline_model_cum0_count_plus50.txt")
+
+spline_upper_bound_rate <- counts_spline %>% filter(Bound == "Upper Bound") %>% 
+  pull(Cases.per.10.000)
+
+spline_upper_bound_min.cum.exp <- counts_spline %>% filter(Bound == "Upper Bound") %>% 
+  pull(Min.cum.exp) %>% round(2)
+```
+
+The spline model assuming no difference in background risk was applied to the exposure values of participants of SYNERGY under 3 scenarios of exposure-response underestimation: none, 1.5 factor, and factor of 2 (**Figure 1A**). The point estimate reached the PoC = 0.5 threshold in all scenarios, except the first (**Figure 1B**). Nonetheless, these exposure values are higher than the maximal exposure in lung cancer cases (`r max_cum0_cases` fiber-years). The upper bound of the 95% prediction interval exceeded this threshold at values within the exposure range of cases (**Table 2**), resulting in the compensation of `r spline_upper_bound_rate[1]`, `r spline_upper_bound_rate[2]`, and `r spline_upper_bound_rate[3]` cases per 10,000 lung cancer cases at `r spline_upper_bound_min.cum.exp[1]`, `r spline_upper_bound_min.cum.exp[2]`, and `r spline_upper_bound_min.cum.exp[3]` fiber-years, respectively.
+
+![**Figure 1**. Exposure-response curves (A) and Probability of Causation (B) from a spline meta-regression model assuming no difference in background risk of lung cancer, for the range of lifetime cumulative asbestos exposures in the pooled case-control SYNERGY study. Scenario analyses were performed for the uncorrected and error-corrected (fixed factors 1.5 and 2) curves due to exposure measurement error, and for the upper bound of the 95% confidence prediction intervals. The horizontal dotted line represents the PoC = 0.5 threshold above which the outcome is *more likely than not* caused by the exposure. Curves were fitted using relative risk estimates from the studies (n = 22) reviewed by van der Bij, et al. @vanderbij2013 and updated for the European Chemicals Agency report on occupational exposure limits for asbestos. @ECHA2021](images/Figure_1.png){fig-align="center"}
+
+{{< pagebreak >}}
+
+**Table 2**. Number of compensated cases per 10,000 lung cancer cases according to various scenarios applied to the lung cancer cases (n = 16901) within the SYNERGY population, for the probability of causation (PoC) due to lifetime cumulative exposure to asbestos (fiber-years). It was estimated at what cumulative exposure the PoC is equal or larger than 50%.
+
+```{r}
+# This table was created with https://www.tablesgenerator.com/html_tables
+includeHTML("tables/Table2.html")
+```
+
+{{< pagebreak >}}
+
+Modelling of the exposure-response curve using SYNERGY data showed a steeper increase in the PoC in the scenarios incorporating error and uncertainty with a logistic regression model (**Figure 2A**), compared to the spline meta-regression model. The scenario in which uncertainties are not taken into account resulted in the compensation of 12 cases per 10,000 at an exposure threshold of 18.97 fiber-years (**Table 2**). Conversely, the scenario incorporating an error factor of 2 and the upper bound of the 95% CI corresponds to 347 cases per 10,000 compensated at 7.14 fiber-years.
+
+The steepest increase in PoC is attained with the generalized linear mixed model approach (**Figure 2B**). The PoC estimate exceeds the 0.5 threshold at a cumulative exposure to asbestos of 10.59 fiber-years, with 114 cases per 10,000 compensated, whereas the upper 95%CI surpassed it at 4.31 fiber-years, which translates into the compensation of 846 per 10,000 cases.
+
+{{< pagebreak >}}
+
+![**Figure 2**. Probability of causation of lung cancer across the range of lifetime cumulative exposure to asbestos (fiber-years) values in SYNERGY, based on (A) logistic regression with correction factors of 1.5 and 2 for exposure-response underestimation due to exposure misclassification/measurement error, and (B) a mixed-effects logistic regression model with random intercepts for study source and random exposure slopes within each study source. Models were adjusted for age, sex, smoking (pack-years), and time since quitting smoking.](images/Figure_2.png){fig-align="center"}
+
+{{< pagebreak >}}
+
+### *PoC of lung cancer due to duration of exposure to asbestos*
+
+A model assuming no error and using the point estimate of the PoC (0.94% odds increase in lung cancer per year) does not reach the compensation threshold in SYNERGY exposure duration ranges, whereas using the 95%CI (1.13% odds increase in lung cancer per year) leads to compensating 1 worker per 10,000 at 62 years of exposure (**Table 3**). Exposure-response curves using the upper bound of statistical uncertainty reach the PoC = 0.5 threshold at 38 and 31 years, respectively, with correction factors of 1.5 and 2 (**Supplementary Figure 2**). Steeper exposure response curves with greater uncertainty were obtained with the mixed-effects logistic regression model, resulting in compensation at 47 (no correction), 32 (correction factor: 1.5), and 24 (correction factor: 2) years with the upper 95%CI.
+
+**Table 3**. Number of compensated cases per 10,000 lung cancer cases according to various scenarios applied to the lung cancer cases (n = 16901) within the SYNERGY population, for the probability of causation (PoC) due to duration of exposure to asbestos (years).
+
+```{r}
+# This table was created with https://www.tablesgenerator.com/html_tables
+includeHTML("tables/Table3.html")
+```
+
+{{< pagebreak >}}
+
+# Discussion
+
+In this study, we applied different approaches for the calculation of the probability of causation of lung cancer due to exposure to asbestos, to determine exposure thresholds for the financial compensation of lung cancer cases occupationally exposed to asbestos. We used a widely applied method for the calculation of PoC[@Armstrong1988; @NCICDCreport2003; @Wakeford1998] from the exposure-response curves of lung cancer risk due to lifetime cumulative exposure to asbestos of (1) a systematic review with spline meta-regression [@vanderbij2013; @ECHA2021] and (2) a large pooled case-control study of lung cancer and occupational carcinogens (SYNERGY).[@SYNERGYwebsite; @Olsson2017] We present multiple scenario analyses to incorporate uncertainties in the benefit of the claimant. These findings show that a lifetime cumulative exposure threshold between 4 and 5 fiber-years to compensate workers occupationally exposed to asbestos is defensible, as it incorporates uncertainties in the benefit of the claimant.
+
+Siemiatycki, et al. recommend a two stages for the calculation of the PoC, where the critical amount of exposure at which PoC = 0.5 (RR = 2) is estimated from the exposure-response curve from a published meta-analysis of studies in multiple populations, or individual epidemiological studies when the first is not available or feasible.[@Siemiatycki2014] As a second step, the fraction of cases exceeding the critical value of exposure can be estimated, requiring that the exposure metric is available for both steps. We chose lifetime cumulative exposure to asbestos determined from SYN-JEM and duration of exposure, as these are two metrics strongly associated with lung cancer that are widely available and meet the condition for the two-stepped approach.
+
+One important limitation of the spline meta-regression is that it underestimates the exposure-response curve due to low quality exposure assessment in some studies, a widely recognized issue due to exposure misclassification and measurement error.[@Grandjean2004; @MoonYoo2021] The magnitude of underestimation was estimated to be between 1.5 and 2 by restricting to high-quality exposure studies.[@ECHA2021] Thus, we incorporated this knowledge to correct PoC estimation scenarios. The implied assumptions, however, are that high-quality studies are not affected by misclassification/measurement error and that error is non-differential across cases and controls in all studies. Thus, correction scenarios are likely conservative.
+
+In spline modelling scenarios not taking precision into account (thus using only the PoC point estimates), the RR = 2 threshold for compensation is not reached within the exposure values in lung cancer cases in SYNERGY. However, using the upper bound of the 95%CI results in a PoC critical value of 26.57 fiber-years without correcting for error. This value is close to the 25 fiber-years threshold recommended in the Helsinki criteria, which asumes a linear increase in lung cancer risk of 4% per fiber-year.[@HelsinkiAsbestos2015] Noteworthy, only 3 out of 10,000 lung cancer cases are compensated with this threshold. A correction of magnitude 2 in the exposure-response curve results in compensation at 13.05 fiber-years of 56 cases per 10,000. We recommend that compensation limits relying on this model are only used when high-quality exposure measurements are available for the worker, due to the aforementioned mentioned assumptions.
+
+Our second approach used the exposure-response curve from SYNERGY data. Cumulative exposure to asbestos in SYNERGY is based on SYN-JEM,[@Peters2016SYNJEM] which has the advantage of assigning values with a homogeneous method across studies. However, it introduces Berkson-type error by assigning average exposure values,[@ArmstrongMeasurementError1998] resulting in imprecise (wider confidence intervals) estimations of the exposure-response curve.[@Rhomberg2011] There is also potential for exposure misclassification, for instance, if the job title does not fully represent the average exposure for the specific workers' tasks. Such misclassification is non-differential with respect to outcome, thereby resulting in attenuation of the exposure response curve.[@PetersJEM2020] Therefore, we similarly corrected PoC calculations in the initial logistic regression models. Scenarios that favor the claimant with this approach are exposure thresholds for compensation of 7.14 fiber-years and exposure duration of 31 years, corresponding to an increase in the odds of lung cancer of 10.19% per fiber-years and 2.27% per year, respectively.
+
+The mixed-effects logistic regression model accounts for study-specific effects. While it is a better specified model, wider confidence intervals occur due to the increased number of terms. Thus, further correction was not done for cumulative asbestos (fiber-years) since decreased precision of the model is accentuated due to Berkson-type error, which likely compensates exposure-response underestimation when the upper bound is used. Uncorrected thresholds for the upper bound of PoC are 4.31 fiber-years and duration of exposure of 47 years, with an increase in the odds of lung cancer of 17.46% per fiber-years and 1.49% per year. For duration of exposure to asbestos (years), correction factors were similarly applied, with an exposure duration of 24 years resulting in the compensation of 1621 lung cancer cases per 10,000 when the upper interval of PoC and correction factor of 2 are used.
+
+In the Dutch context, uncertainties are used in the favor of the worker to receive a one-time compensation for occupational diseases. Our approach incorporates substantial knowledge of the exposure-response relationship to define exposure thresholds of PoC = 50% at the upper bound of statistical uncertainty (95%CI). However, extensive documentation may not be available for other occupational diseases and exposures. Alternative ways of incorporating uncertainties may be used in such cases. For instance, lowering of the PoC threshold had been used in the United Kingdom to initiate partial payments at PoC of 20% and full payment above 50%,[@Wakeford2006] and Italy, where flexible use of PoC thresholds of 25% and 50% has been proposed according to the specific judicial scenario.[@AIRMpoc2017] Both cases use the upper bound of the 95%CI, which is different from the approach used in the US where greater weight is given to statistical uncertainties by using the 99%CI.[@NCICDCreport2003; @EEOICPA2020] Lack of knowledge of the exposure-response curve in the population of interest can be a source of uncertainty in other cases, such as the German compensation scheme for cancer due to radiation, where dose-response predictions derived from radiation exposure in atomic bomb survivors in Hiroshima and Nagasaki are corrected to be applicable in the population of Germany.[@ProZES2020] Nonetheless, other sources of uncertainty remain largely unexplored, such as incorporation of potential residual confounding into the estimations.
+
+Strengths of this study include the large sample size and diverse representativity of European and Canadian populations. The PoC can be calculated from epidemiological studies and is easy to communicate to occupational health workers, patients, and stakeholders. Nonetheless, incorporation of uncertainties into its calculation to benefit the individual worker affected by an occupational disease requires substantial knowledge of the sources of uncertainty. The criticisms to the PoC approach in prior decades[@GreenlandPoC1999] have been followed by its continued application in worker compensation schemes. However, such critical appraisals remain latent[@Greenland2015] and it is thus important that our field continues seeking for robust alternatives to the PoC, or improvements thereof. Potential future directions could involve the PoC for other outcomes accounting for accelerated occurrence and other dimensions of affection, such as years of working life lost,[@YWLL2021] disability-adjusted life years,[@Haagsma2015] or loss of income.[@HernandezIncomeLoss2021] Nonetheless, these approaches also rely on the average population-level effects to make inferences about the individual. Disentangling the causal role of occupational exposures at the individual level may thus require the exploration of personalized decision making,[@MuellerPearl2023] for which robust knowledge networks may be required to make inferences about events in workers who are part of complex human risk systems.[@Antonsen2024]
+
+{{< pagebreak >}}
+
+# Conclusions
+
+We have estimated exposure thresholds for the compensation of lung cancer cases presumably due to asbestos exposure in the workplace, based on the probability of causation. Knowledge of the exposure-response curves and their sources of uncertainty were considered to arrive at a series of cutoff values under different scenarios of exposure measurement error or misclassification, Berkson-type error, and precision. These exposure thresholds can be used and adapted to country-specific circumstances by researchers and stakeholders interested in creating or updating financial compensation schemes for workers who develop lung cancer due to asbestos. The lifetime cumulative exposure to asbestos can be used in combination with exposure thresholds derived from the exposure-response curve of publised studies, provided that quality of available measurements is high. If cumulative exposure is assigned using SYN-JEM, exposure thresholds derived from the exposure-response curve in SYNERGY are more appropriate. If only duration of exposure to asbestos is available, estimates from SYNERGY may be appropriate, provided that this pooled case-controls study is judged sufficiently representative of the worker population in state.
+
+{{< pagebreak >}}
+
+## Funding
+
+This work was supported by the Dutch Ministry of Social Affairs and Employment, grant number 25719.
+
+## Competing interests
+
+None reported.
+
+## Data and code availability
+
+Data are available upon reasonable request (inquiries can be directed to Dr. Susan Peters. Alternatively, <https://synergy.iarc.who.int/contact/>). The source code for this manuscript, statistical analyses, and project documentation is available through the online repository: <https://github.com/UtrechtUniversity/PoC-Asbestos>.
+
+# References
+
+::: {#refs}
+:::
+
+{{< pagebreak >}}
+
+# Supplementary Material
+
+![**Supplementary Figure 1**. Exposure-response curves under different model assumptions: (1) linear model, assumes difference in background rate of outcome; (2) linear model, assumes no difference in background rate of outcome; (3) spline model, assumes difference in background rate of outcome; (4) spline model, assumes no difference in background rate of outcome. The gray-shaded area represents the range of exposure values observed in SYNERGY. The horizontal red dashed line marks the relative risk threshold at which PoC = 0.5. The curves were fitted using relative risk estimates from the studies (n = 22) reviewed by van der Bij, et al. @vanderbij2013 and updated for the European Chemicals Agency report on occupational exposure limits for asbestos. @ECHA2021](images/Figure_S1.png){fig-align="center"}
+
+{{< pagebreak >}}
+
+![**Supplementary Figure 2**. Probability of causation of lung cancer as a function of duration of exposure to asbestos (years) in SYNERGY, based on (A) logistic regression and (B) a mixed-effects logistic regression model with random intercepts for study source and random exposure slopes within each study source. Correction factors of 1.5 and 2 for exposure-response underestimation due to exposure misclassification/measurement error. Models were adjusted for age, sex, smoking (pack-years), and time since quitting smoking.](images/Figure_S2.png){fig-align="center"}

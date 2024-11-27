@@ -44,8 +44,14 @@ vignettes/*.pdf
 # R Environment Variables
 .Renviron
 
-# pkgdown site
+# Manuscript and related documentation
 # docs/
+
+# TIFF figures to avoid large putting up large files
+results/output_figures/*.tiff
+
+# Manuscript template 
+docs/manuscript/template.docx
 
 # translation temp files
 po/*~

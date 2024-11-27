@@ -1,12 +1,51 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
 cff-version: 1.2.0
-message: "If you use this software, please cite it as below."
-title: "My Research Software"
+title: >-
+  Probability of Causation: Lung cancer due to occupational
+  exposure to asbestos
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
 authors:
-  - family-names: Druskat
-    given-names: Stephan
-    orcid: https://orcid.org/1234-5678-9101-1121
-version: 2.0.4
-date-released: 2021-08-11
-doi: 10.5281/zenodo.1234
-license: Apache-2.0
-repository-code: "https://github.com/citation-file-format/my-research-software"
+  - given-names: Javier
+    family-names: Mancilla Galindo
+    email: j.mancillagalindo@uu.nl
+    affiliation: Utrecht University
+    orcid: 'https://orcid.org/0000-0002-0718-467X'
+  - given-names: Jenny
+    family-names: Deng
+    email: h.deng@uu.nl
+    affiliation: Utrecht University
+  - given-names: Susan
+    family-names: Peters
+    email: s.peters@uu.nl
+    affiliation: Utrecht University
+    orcid: 'https://orcid.org/0000-0001-5662-1971'
+  - given-names: Lützen
+    family-names: Portengen
+    email: l.portengen@uu.nl
+    affiliation: Utrecht Unviersity
+    orcid: 'https://orcid.org/0000-0003-1537-1843'
+  - given-names: Roel C.H.
+    family-names: Vermeulen
+    email: r.c.h.vermeulen@uu.nl
+    affiliation: Utrecht University
+    orcid: 'https://orcid.org/0000-0003-4082-8163'
+  - given-names: Dick
+    family-names: Heederick
+    email: d.heederik@uu.nl
+    affiliation: >-
+      National Expertise Centre for Substance-related
+      Occupational Diseases (Lexces)
+repository-code: 'https://github.com/UtrechtUniversity/PoC-Asbestos'
+keywords:
+  - Asbestos
+  - Lung cancer
+  - Probability of Causation
+  - Causality
+  - Assigned share
+  - Worker's compensation
+license: MIT

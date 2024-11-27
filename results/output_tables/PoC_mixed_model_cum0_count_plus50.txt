@@ -1,0 +1,4 @@
+"Scenario"	"Cases"	"Cases per 10,000"	"Min cum exp"
+"1"	"PoC"	193	114	10.59
+"2"	"PoC_LB"	0	0	NA
+"3"	"PoC_UB"	1429	846	4.31

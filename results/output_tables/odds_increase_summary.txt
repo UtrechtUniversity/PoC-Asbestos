@@ -1,0 +1,11 @@
+"Model"	"Error"	"Beta"	"Upper_Bound"
+"1"	"Logistic: fiber-years"	"None"	3.78	4.97
+"2"	"Logistic: fiber-years"	"1.5"	5.72	7.55
+"3"	"Logistic: fiber-years"	"2"	7.7	10.19
+"4"	"Mixed: fiber-years"	"None"	6.76	17.46
+"5"	"Logistic: years"	"None"	0.94	1.13
+"6"	"Logistic: years"	"1.5"	1.41	1.7
+"7"	"Logistic: years"	"2"	1.88	2.27
+"8"	"Mixed: years"	"None"	0.87	1.49
+"9"	"Mixed: years"	"1.5"	1.3	2.25
+"10"	"Mixed: years"	"2"	1.74	3.01

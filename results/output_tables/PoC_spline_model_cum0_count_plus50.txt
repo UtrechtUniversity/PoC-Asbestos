@@ -1,0 +1,7 @@
+"Scenario"	"Bound"	"Cases"	"Cases per 10,000"	"Min cum exp"
+"1"	"No Error Factor"	"PoC"	0	0	Inf
+"2"	"No Error Factor"	"Upper Bound"	5	3	26.5711
+"3"	"Error Factor: 1.5"	"PoC"	0	0	Inf
+"4"	"Error Factor: 1.5"	"Upper Bound"	30	18	17.48189
+"5"	"Error Factor: 2"	"PoC"	0	0	Inf
+"6"	"Error Factor: 2"	"Upper Bound"	94	56	13.05413
