@@ -1,0 +1,149 @@
+---
+title: "Probability of causation in individual workers with disease: Lung cancer due to occupational exposure to asbestos"
+subtitle: "Supplementary Materials"
+author: 
+  - "Javier Mancilla-Galindo¹, Susan Peters¹, Jenny Deng¹, Henk van der Molen², Hans Kromhout¹, Lützen Portengen¹, Roel Vermeulen¹, Dick Heederik¹˒³"
+  - "1.	Institute for Risk Assessment Sciences, Utrecht University, Utrecht, the Netherlands"
+  - "2.	Department of Public and Occupational Health, Amsterdam UMC, Amsterdam, the Netherlands"
+  - "3.	National Expertise Centre for Substance-related Occupational Diseases (Lexces), Utrecht, the Netherlands"
+execute: 
+  echo: false
+  warning: false
+toc: true
+format: 
+  docx:
+    reference-doc: template.docx
+    link-citations: true
+  pdf: 
+    documentclass: scrartcl
+  html:
+    embed-resources: true
+bibliography: PoC-Asbestos.bib
+csl: european-respiratory-journal.csl
+editor: visual
+---
+
+{{< pagebreak >}}
+
+```{r}
+if (!require("pacman", quietly = TRUE)) {
+  install.packages("pacman")
+}
+
+pacman::p_load(
+  tidyverse,
+  flextable,
+  htmltools
+  )
+```
+
+### Supplementary Methods 
+
+#### Causal Model
+
+A causal model of the effect of cumulative exposure to asbestos (fibre-years) on lung cancer risk was stipulated and represented in a directed acyclic graph (DAG) (**Supplementary Figure 1**). The diagram was updated by testing implied conditional independencies as described by Ankan et al.[@ankan2021] Co-exposure to other occupational carcinogens is represented with RCS as a motivating example. True exposure is unmeasured and estimated with SYN-JEM, resulting in loss of individual variation (Epsilon), and exposure error terms (U) that are independent of outcome status (Berkson-type error).[@ArmstrongMeasurementError1998] Age, sex, smoking status and intensity, and time since quitting act as confounders. Study centre is considered a proxy for other study-level covariates. Occupational lung carcinogens are assumed to be associated through the common cause industry which serves as a proxy for shared working environment conditions. This backdoor pathway was intentionally not closed as co-exposure to occupational lung carcinogens is frequent.[@olsson2024] Estimating conditional effects by setting such co-exposures to zero could violate positivity (if certain covariate combinations never occur for a given job title) and consistency (counterfactual scenarios such as high asbestos exposure with zero RCS are implausible in some industries). The model assumes monotonicity, implying that asbestos cannot prevent lung cancer through any causal mechanism, and no-interference (only individual exposure is relevant for the effect and not affected by others' exposures).
+
+{{< pagebreak >}}
+
+### Supplementary Table 1
+
+**Supplementary Table 1**. Studies included in the systematic review by Lenters, et al.[@Lenters2011] and van der Bij, et al.[@vanderbij2013], updated in 2021 for the European Chemicals Agency report on occupational exposure limits for asbestos.[@ECHA2021]
+
+| Study | Asbestos Exposure Period | Study design | N | Type of risk estimate | Fibre type | Lowest–highest exposure category (f–y/cm³) | Exposure quality | Lagged CE |
+|--------|--------|--------|--------|--------|--------|--------|--------|--------|
+| Quebec, Canada, mines and mills [@Liddell1997] | \~ 1904–1976 | Cohort | ∼11,000 | SMR | Chrysotile | 4.7–4,710 | Low | CE to age 55 |
+| Italy, Balangero, mine and mill [@Pira2017] | 1916–1990 | Cohort | 1,056 | SMR | Chrysotile | 50–667 | Low | CE |
+| Connecticut, friction product plant [@McDonald1984] | 1913–1977 | Cohort | 3,513 | SMR | Chrysotile | 15–400 | Low | CE |
+| South Carolina, textile plant [@Hein2007] | 1896–1977 | Cohort | 3,072 | SMR | Chrysotile | 0.75–200 | High | CE10 |
+| North Carolina, textile plant [@Loomis2009] | 1925–1994 | Cohort | 5,770 | RR adj ᵃ | Chrysotile | 5.7–408 ᶜ | Low | CE10 |
+| Wittenoom, Australia, mine [@Berry2004] | 1937–1966 | Cohort | 6,358 | SMR | Amphibole, crocidolite | 0.11–220 | Low | CE |
+| Patterson, NJ, insulation manufacture [@Seidman1986] | 1941–1954 | Cohort | 820 | SMR | Amphibole, amosite | 3–417 | Low | CE |
+| Tyler, TX, insulation manufacture [@Levin1998] | 1954–1972 | Cohort | 1,121 | SMR | Amphibole, amosite | 11–375 | High | CE |
+| Libby, MT, mines and mills [@Larson2010] | 1935–1990 | Cohort | 1,862 | RR | Amphibole, tremolite b | 0.7–73 | High | CE20 |
+| UK, friction products factory [@Berry1983] | 1910–1979 | Nested case-control | 13,460 | OR | Mixed | 29.5–228 ᶜ | Low | CE |
+| Ontario, asbestos cement plant [@Finkelstein1984] | 1948–1977 | Cohort | 740 | SMR | Mixed | 15–250 | Low | CE |
+| New Orleans, LA, asbestos cement plants [@Hughes1987] | 1937–1972 | Cohort | 6,931 | SMR | Mixed | 4.2–256 | Low | CE10 |
+| Sweden, asbestos cement plant [@Albin1990] | 1907–1977 | Cohort (external reference) | 2,898 | RR adj ᵃ | Mixed | 3.1–88 | Low | CE |
+| Belgium, asbestos cement plant [@lacquet1980] | 1928–1977 | Cohort | 1,973 | SMR | Mixed | 25–2,000 | Low | CE |
+| US factory retirees (Johns Manville) [@enterline1987] | 1890–1980 | Cohort | 1,074 | SMR | Mixed | 186–2,928 | High | CE |
+| US and Canada, insulation workers [@Selikoff1991] | \~ 1920–1986 | Cohort | 17,800 | SMR | Mixed | 38–375 | Low | CE10 |
+| Pennsylvania, textile plant [@McDonald1983] | \~ 1900–1967 | Cohort | 4,024 | SMR | Mixed | 15–330 | High | CE10 |
+| Rochdale, UK, textile plant [@Peto1985] | 1933–1978 | Cohort | 3,211 | SMR | Mixed | 5.9–257 | High | CE5 |
+| Calvados, France, textile and friction product plant [@Clin2011] | 1978–2004 | Cohort | 2,024 | HR adj ᵃ | Mixed | 90–500 ᶜ | Low | CE10 |
+| China, textile, rubber product and cement plant [@Courtice2016] | 1972–2008 | Cohort | 577 | HR adj ᵃ | Chrysotile | 156–913 ᶜ | Low | CE10 |
+| China, mine [@Wang2013] | 1981–2006 | Cohort | 1,539 | SMR | Chrysotile | 10–750 | Low | CE10 |
+| Europe and Canada pooled case-control study, women [@Olsson2017] | 1922–2009 | Case-control | 3,296 cases, 4,514 controls | OR adj ᵃ | Mixed | 0.25–4.7 | High | CE |
+
+ᵃ In the North Carolina textile plants study, results were adjusted for age, gender, race, calendar year, and birth cohort; In the Swedish cement plant study, results were adjusted for age and calendar year; In the Calvados plant study, results were adjusted for age and gender; In the Chinese textile, rubber product and cement plant study, results were adjusted for age and smoking (ever/never); In the Europe/Canada pooled case-control study, results were adjusted for study, age, smoking (pack-years, time-since-quitting smoking), and ever-employment in jobs with known increased lung cancer risk due to factors other than asbestos (Yes/No).
+
+ᵇ Exposure in the Libby cohort is for the so-called Libby amphibole that includes tremolite and closely related fibrous amphiboles (winchite and richterite).
+
+ᶜ The lowest exposure category (corresponding to 0.383 f–y/cm³ in the North Carolina textile plant and 4.5 f–y/cm³ in the British friction factory, 20 f–y/cm³ in the Calvados plant and 44.5 f–y/cm³ in the Chinese textile, rubber product and cement plant) was excluded as no risk estimate could be calculated because it was used as the reference category.
+
+{{< pagebreak >}}
+
+### Supplementary Table 2
+
+**Supplementary Table 2**. Description of studies included in the SYNERGY project.
+
+| Study | Country | Period of recruitment | Sampling ᵃ | Source of Controls ᵇ | Interviewee ᶜ | Cases (N) | Response cases (%) | Controls (N) | Response controls (%) | Female (N) | Male (N) |
+|------|------|------|------|------|------|------|------|------|------|------|------|
+| AUT [@bruske-hohlfeld2000] | Germany | 1990–1995 | C | P | S | 3180 | 77 | 3249 | 41 | 1068 | 5361 |
+| HdA [@jockel1998] | Germany | 1988–1993 | C | P | S | 1004 | 69 | 1002 | 68 | 330 | 1676 |
+| EAGLE [@consonni2010] | Italy | 2002–2005 | C | P | S | 1908 | 87 | 2065 | 72 | 875 | 3098 |
+| TURIN [@richiardi2004] | Italy | 1990–1994 | C | P | S | 1086 | 79 | 1489 | 80 | 404 | 2171 |
+| ROME [@fortes2003] | Italy | 1993–1996 | C | H | S | 326 | 74 | 321 | 63 | 99 | 548 |
+| LUCA [@stucker2002] | France | 1989–1992 | D | H | S | 280 | 98 | 282 | 98 | NA | 562 |
+| PARIS [@kazma2012] | France | 1988–1992 | C | H | S | 169 | 95 | 227 | 95 | 19 | 377 |
+| ICARE [@papadopoulos2011] | France | 2001–2007 | D | P | S & NOK | 2739 | 87 | 3449 | 81 | 1331 | 4857 |
+| CAPUA [@felicitaslópez-cima2007] | Spain | 2000–2010 | C | H | S | 559 | 91 | 512 | 96 | 102 | 969 |
+| MORGEN ᵈ [@beulens2009] | Netherlands | 1993–1997 | D (nested) | P | S | 43 | NA | 115 | NA | 78 | 80 |
+| INCO_Czech Republic [@brennan2006; @carel2006] | Czech Republic | 1999–2002 | C | H | S | 304 | 94 | 452 | 80 | 228 | 528 |
+| INCO_Hungary [@brennan2006; @carel2006] | Hungary | 1998–2001 | C | H | S | 391 | 90 | 305 | 100 | 139 | 557 |
+| INCO_Poland [@brennan2006; @carel2006] | Poland | 1998–2002 | C | P & H | S | 793 | 88 | 835 | 88 | 793 | 835 |
+| INCO_Slovakia [@brennan2006; @carel2006] | Slovakia | 1998–2002 | C | H | S | 345 | 90 | 285 | 84 | 107 | 523 |
+| INCO_Romania [@brennan2006; @carel2006] | Romania | 1998–2002 | C | H | S | 179 | 90 | 225 | 99 | 113 | 291 |
+| INCO_Russia [@brennan2006; @carel2006] | Russia | 1998–2001 | C | H | S | 599 | 96 | 580 | 90 | 156 | 1023 |
+| INCO_UK [@carel2006] | United Kingdom | 1998–2005 | C | P | S | 441 | 78 | 916 | 84 | 504 | 853 |
+| LUCAS [@ilar2017] | Sweden | 1985–1990 | C | P | S & NOK | 1014 | 87 | 2307 | 85 | NA | 3321 |
+| MONTREAL [@ramanakumar2007] | Canada | 1996–2002 | C | P | S & NOK | 1176 | 85 | 1505 | 69 | 1073 | 1608 |
+| Toronto [@brenner2010] | Canada | 1997–2002 | C | P & H | S | 365 | 62 | 844 | 71 | 679 | 530 |
+
+Frequencies of participants included for analysis are presented.
+
+ᵃ C = Cumulative, D = Density.
+
+ᵇ P = Population, H = Hospital.
+
+ᶜ S = Subject, NOK = Next-of-kin.
+
+ᵈ Nested case-control study: 45% of invited participants to the original cohort completed the baseline questionnaire.
+
+{{< pagebreak >}}
+
+### Supplementary Figure 1
+
+![**Supplementary Figure 1**. Directed acyclic graph (DAG) depicting the causal relationship between two occupational lung carcinogens and lung cancer. Each circle (node) represents a variable, while arrows represent the hypothesized relationships between variables. Unobserved variables are coloured in grey, whereas observed variables are green (exposures), blue (outcome) and white (adjusted). The minimal set of adjustment for this model consists of age (agegroup), sex, smoking status and time since quitting (time_quit), lifetime smoking intensity (packyears), and study (study_name). The true value of exposure (X_asb_true and X_rcs_true) are unobserved and thus estimated with a job exposure matrix (asbestos_cum0 and silica_cum0), resulting in loss of individual variation (Epsilon), and exposure error terms (U) that are independent of outcome status (Berkson-type error). This DAG and its associated model code can be accessed at: <https://dagitty.net/mjsrVdmjg>.](images/Figure_S1.png){fig-align="center"}
+
+{{< pagebreak >}}
+
+### Supplementary Figure 2
+
+![**Supplementary Figure 2**. Exposure-response relations under different model assumptions: (1) linear model, assumes difference in background rate of outcome; (2) linear model, assumes no difference in background rate of outcome; (3) spline model, assumes difference in background rate of outcome; (4) spline model, assumes no difference in background rate of outcome. The models were fitted using logRR estimates from the studies reviewed by Lenters, et al. @Lenters2011 and van der Bij, et al. @vanderbij2013, updated in 2021 for the European Chemicals Agency report on occupational exposure limits for asbestos. @ECHA2021 The grey-shaded area represents the range of exposure values observed in SYNERGY. The horizontal red dashed line marks the relative risk threshold at which RR = 2. Vertical tick marks (bottom) represent average exposure values for the reported pooled estimates per exposure catgory in ECHA. Abbreviations: Relative risk (RR), 95% prediction interval (PI).](images/Figure_S2.png){fig-align="center"}
+
+{{< pagebreak >}}
+
+### Supplementary Figure 3
+
+![**Supplementary Figure 3**. Exposure response relations of lung cancer risk increase at low cumulative asbestos exposure in the SYNERGY study, stratified according to the source of controls: population controls **A)** and hospital controls **B)**. Models were adjusted for age, sex, smoking (pack-years), and time since quitting smoking. Solid lines represent the average meta-estimates; shaded areas, the 95% prediction intervals (95% PI), and the dotted red line, the doubling in increase of risk threshold (RR = 2). Vertical tick marks represent observed individual participant exposure values in each subset.](images/Figure_S3.png){fig-align="center"}
+
+{{< pagebreak >}}
+
+### Supplementary Figure 4
+
+![**Supplementary Figure 4**. Probability of causation of lung cancer due to cumulative asbestos exposure in the SYNERGY study, stratified according to the source of controls: population controls **A)** and hospital controls **B)**. Models were adjusted for age, sex, smoking (pack-years), and time since quitting smoking. Solid lines represent the average meta-estimates; shaded areas, the upper 95% prediction interval (Upper PI), and the dotted blue line, the PoC = 0.5 threshold. Vertical tick marks represent observed individual participant exposure values of lung cancer cases in each subset.](images/Figure_S4.png){fig-align="center"}
+
+{{< pagebreak >}}
+
+
+### References

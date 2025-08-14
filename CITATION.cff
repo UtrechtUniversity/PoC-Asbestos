@@ -15,15 +15,21 @@ authors:
     email: j.mancillagalindo@uu.nl
     affiliation: Utrecht University
     orcid: 'https://orcid.org/0000-0002-0718-467X'
-  - given-names: Jenny
-    family-names: Deng
-    email: h.deng@uu.nl
-    affiliation: Utrecht University
   - given-names: Susan
     family-names: Peters
     email: s.peters@uu.nl
     affiliation: Utrecht University
     orcid: 'https://orcid.org/0000-0001-5662-1971'
+  - given-names: Jenny
+    family-names: Deng
+    email: h.deng@uu.nl
+    affiliation: Utrecht University
+  - given-names: Henk van der Molen
+    family-names: van der Molen
+    affiliation: Department of Public and Occupational Health, Amsterdam UMC
+  - given-names: Hans
+    family-names: Kromhout
+    affiliation: Utrecht University
   - given-names: Lützen
     family-names: Portengen
     email: l.portengen@uu.nl
@@ -35,7 +41,7 @@ authors:
     affiliation: Utrecht University
     orcid: 'https://orcid.org/0000-0003-4082-8163'
   - given-names: Dick
-    family-names: Heederick
+    family-names: Heederik
     email: d.heederik@uu.nl
     affiliation: >-
       National Expertise Centre for Substance-related

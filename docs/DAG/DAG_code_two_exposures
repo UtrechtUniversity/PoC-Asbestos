@@ -1,0 +1,48 @@
+dag {
+Age [adjusted,pos="0.357,0.963"]
+Epsilon_asb [latent,pos="0.000,5.932"]
+Epsilon_rcs [latent,pos="1.006,5.932"]
+Job_Title [pos="0.013,1.833"]
+Lung_Cancer [outcome,pos="2.000,5.000"]
+Sex [adjusted,pos="0.991,0.483"]
+Smoking [adjusted,pos="1.984,1.670"]
+Smoking_cessation [adjusted,pos="1.682,0.947"]
+Time_Period [pos="1.000,2.000"]
+U_asb [latent,pos="-1.000,4.000"]
+U_rcs [latent,pos="2.332,4.004"]
+X_asb_jem [exposure,pos="0.000,4.000"]
+X_asb_true [latent,pos="0.000,5.000"]
+X_rcs_jem [exposure,pos="1.000,4.000"]
+X_rcs_true [latent,pos="1.000,5.000"]
+Age -> Job_Title
+Age -> Lung_Cancer
+Age -> Smoking_cessation
+Age -> Time_Period
+Age -> X_asb_true
+Age -> X_rcs_true
+Epsilon_asb -> X_asb_true
+Epsilon_rcs -> X_rcs_true
+Job_Title -> X_asb_jem
+Job_Title -> X_rcs_jem
+Sex -> Job_Title
+Sex -> Lung_Cancer
+Sex -> Smoking
+Sex -> Smoking_cessation
+Sex -> X_asb_true
+Smoking -> Job_Title
+Smoking -> Lung_Cancer
+Smoking -> Smoking_cessation
+Smoking -> Time_Period
+Smoking_cessation -> Job_Title
+Smoking_cessation -> Lung_Cancer
+Smoking_cessation -> Time_Period
+Time_Period -> X_asb_jem
+Time_Period -> X_rcs_jem
+U_asb -> X_asb_jem
+U_rcs -> X_rcs_jem
+X_asb_jem -> X_asb_true
+X_asb_true -> Lung_Cancer [pos="0.864,5.972"]
+X_rcs_jem -> X_rcs_true
+X_rcs_true -> Lung_Cancer
+}
+

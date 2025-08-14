@@ -1,0 +1,47 @@
+dag {
+Epsilon_asb [latent,pos="0.999,6.027"]
+Epsilon_rcs [latent,pos="0.000,5.932"]
+U_asb [latent,pos="0.623,3.993"]
+U_rcs [latent,pos="-0.323,3.991"]
+X_asbestos_true [latent,pos="1.000,5.000"]
+X_rcs_true [latent,pos="0.000,5.000"]
+agegroup [adjusted,pos="0.115,1.155"]
+asbestos_cum0 [exposure,pos="1.000,4.000"]
+industry [latent,pos="0.495,4.727"]
+packyears [adjusted,pos="1.977,2.040"]
+sex [adjusted,pos="0.618,0.804"]
+silica_cum0 [exposure,pos="0.000,4.000"]
+status [outcome,pos="2.000,5.000"]
+study_name [adjusted,pos="-0.106,1.928"]
+time_quit [adjusted,pos="1.496,0.909"]
+Epsilon_asb -> X_asbestos_true
+Epsilon_rcs -> X_rcs_true
+U_asb -> asbestos_cum0
+U_rcs -> silica_cum0
+X_asbestos_true -> status
+X_rcs_true -> status [pos="0.864,5.972"]
+agegroup -> asbestos_cum0
+agegroup -> packyears
+agegroup -> silica_cum0
+agegroup -> status
+agegroup -> time_quit
+asbestos_cum0 -> X_asbestos_true
+industry -> asbestos_cum0
+industry -> silica_cum0
+packyears -> asbestos_cum0
+packyears -> silica_cum0
+packyears -> status
+packyears -> time_quit
+sex -> asbestos_cum0
+sex -> packyears
+sex -> silica_cum0
+sex -> status
+sex -> time_quit
+silica_cum0 -> X_rcs_true
+study_name -> asbestos_cum0
+study_name -> silica_cum0
+study_name -> status
+time_quit -> asbestos_cum0
+time_quit -> silica_cum0
+time_quit -> status
+}

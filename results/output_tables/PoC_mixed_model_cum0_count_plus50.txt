@@ -1,4 +1,2 @@
-"Scenario"	"Cases"	"Cases per 10,000"	"Min cum exp"
-"1"	"PoC"	193	114	10.59
-"2"	"PoC_LB"	0	0	NA
-"3"	"PoC_UB"	1429	846	4.31
+"Model"	"Risk_per_ffyr_est"	"Risk_per_ffyr_PI"	"Min_exp_50pct_PoC"	"Min_exp_conservative"	"Point_per_10k"	"Presumably_plausible_per_10k"
+"1"	"Population-average"	"6.8%"	"-3% ; 17.5%"	10.59	4.31	115	845

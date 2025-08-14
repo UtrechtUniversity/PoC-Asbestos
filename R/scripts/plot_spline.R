@@ -15,26 +15,36 @@
 
 # Calculate spline data for the 4 models 
 spline_results <- data.frame()
-x <- seq(0, 200, 1)
+x <- seq(0, 200, 0.1)
 for (mix in 1:4) {
-  results <- getPoC(mix = mix, x = x, MOD)
+  results <- getRR(mix = mix, x = x, MOD)
   results$Model <- paste("Model =", mix)
   spline_results <- bind_rows(spline_results, results)
 }
 
 # Plot splines, with a shaded are corresponding to exposure values observed in
 # SYNERGY study (0 to 65 ff/ml-years) and dashed line in y = 2 (RR = 2)
-spline_plot <- ggplot(spline_results, aes(x = Exposure, y = RR)) +
-  geom_rect(aes(xmin = 0, xmax = 65, ymin = -Inf, ymax = Inf), 
-            fill = "gray95", alpha = 0.5) +
-  geom_hline(yintercept = 2, linetype = "dashed", color = "red", linewidth = 0.5) +
-  geom_line(linewidth = 0.7) +
-  ylim(0.9, 3.5) +
+spline_plot <- ggplot(spline_results, aes(x = Exposure)) +
+  annotate("rect", xmin = 0, xmax = 65, ymin = -Inf, ymax = Inf,
+           fill = "gray95", alpha = 0.5) +
+  geom_hline(aes(yintercept = 2, linetype = "RR = 2"), color = "red", linewidth = 0.5) +
+  geom_line(aes(y = RR, linetype = "RR"), linewidth = 0.7) +
+  geom_line(aes(y = RR_PI_lower, linetype = "95% PI"), color ="grey20", linewidth = 0.5) +
+  geom_line(aes(y = RR_PI_upper, linetype = "95% PI"), color ="grey20", linewidth = 0.5) +
+  geom_rug(data = datasets[[4]], aes(x = exposure), color = "grey25",
+           alpha = 0.6, sides = "b", length = unit(0.02, "npc"), 
+           show.legend = TRUE) +
+  xlim(NA, 200) +
+  scale_linetype_manual(
+    name = "Line",
+    values = c("RR" = "solid", "95% PI" = "dashed", "RR = 2" = "dotted"),
+    breaks = c("RR", "95% PI", "RR = 2")
+  ) +
   facet_wrap(~ Model, nrow = 1, ncol = 4) + 
-  labs(title = "Exposure-Response Curves (asbestos and lung cancer)",
-       x = "Fiber-years (ff/ml-years)",
+  labs(title = "Exposure-Response relations of lung cancer due to asbestos in the ECHA study",
+       x = "Asbestos fibre-years (ff/ml-years)",
        y = "Relative Risk (RR)") +
-  theme_minimal() + 
+  theme_minimal() +
   theme(
     panel.spacing = unit(2, "lines"),
     axis.text = element_text(size = 9),
@@ -42,101 +52,80 @@ spline_plot <- ggplot(spline_results, aes(x = Exposure, y = RR)) +
     axis.title.x = element_text(margin = margin(t = 10)),
     axis.title.y = element_text(margin = margin(r = 10)),
     panel.grid.minor = element_blank(),
-    panel.grid.major.x = element_blank()
-  ) + 
-  expand_limits(x = 0, y = 0) + 
+    panel.grid.major.x = element_blank(),
+    legend.title = element_text(size = 10),
+    legend.text = element_text(size = 9)
+  ) +
+  expand_limits(x = 0, y = 0) +
   coord_cartesian(expand = FALSE)
 
-
-# Save plot
-ggsave(
-  spline_plot,
-  filename = file.path(figfolder, "Exposure_Response_Curves.pdf"),
-  width = 10, height = 5, dpi = 600, bg = "white"
-)
-
-ggsave(
-  spline_plot,
-  filename = file.path(manuscript_images, "Figure_S1.png"),
-  width = 10, height = 5, dpi = 600, bg = "white"
-)
 
 #### RR spline for the range of exposure values in SYNERGY ####
 
 # Select subset of variables of interest and apply PoC function: 
-df.spline.cum0 <- df %>%
-  select(subjctid, status, sex, agegroup, study_name, country, smoking, packyrs,
-         time_quit, list_a, ever_asbestos0, asbestos_cum0, asbestos_dur0) %>%
+expo_grid <- seq(0, 100, 0.01)
+
+# Apply PoC function to the exposure grid 
+df_grid <- data.frame(asbestos_cum0 = expo_grid) %>%
   cbind(
     ., 
-    getPoC(x = .$asbestos_cum0, mix = 4, MOD, scale_factor = 1) %>% 
-      rename_with(~ paste0(., "_factor1"), -Exposure),
-    getPoC(x = .$asbestos_cum0, mix = 4, MOD, scale_factor = 1.5) %>%
-      rename_with(~ paste0(., "_factor1.5"), -Exposure),
-    getPoC(x = .$asbestos_cum0, mix = 4, MOD, scale_factor = 2) %>%
-      rename_with(~ paste0(., "_factor2"), -Exposure)
+    getPoC(x = expo_grid, mix = 4, MOD, scale_factor = 1) %>% 
+      select(-Exposure)
   )
 
-# Reshape data for RR, PoC, and confidence intervals
-df_long <- df.spline.cum0 %>%
-  select(asbestos_cum0, starts_with("RR_factor"), starts_with("PoC_factor"), 
-         starts_with("p2.5%"), starts_with("p97.5%")) %>%
-  pivot_longer(
-    cols = -asbestos_cum0,
-    names_to = c(".value", "ErrorFactor"),
-    names_pattern = "(RR|PoC|p2.5%|p97.5%)_factor(.+)"
-  ) %>%
-  mutate(
-    ErrorFactor = factor(ErrorFactor, 
-                         levels = c("1", "1.5", "2"), 
-                         labels = c("None", "1.5", "2"))
-  )
-
-# Custom colors for error factor
-color_values <- c("None" = "black", "1.5" = "paleturquoise3", "2" = "skyblue3")
-
-# Create RR spline plot different error factors
-spline_RR <- ggplot(df_long, aes(x = asbestos_cum0, y = RR, color = ErrorFactor)) +
+# Create RR spline plot
+spline_RR <- ggplot(df_grid, aes(x = asbestos_cum0)) +
   geom_hline(yintercept = 2, linetype = "dotted", color = "red", linewidth = 0.5) +
-  geom_line(linewidth = 0.7) +
-  ylim(0.5, 3.5) +
-  scale_x_continuous(breaks = seq(0, 70, by = 5)) +
-  labs(title = "Exposure-response curves",
-       x = "Fiber-years (ff/ml-years)",
-       y = "Relative Risk (RR)",
-       color = "Error Factor",
-       tag = "A") +
-  scale_color_manual(values = color_values) +
+  # Upper 95% prediction interval
+  geom_ribbon(aes(ymin = RR, ymax = RR_PI_upper, fill = "Upper PI"), alpha = 0.4) +
+  # Main RR line
+  geom_line(aes(y = RR, color = "RR"), linewidth = 0.7) +
+  ylim(1, 6) +
+  scale_x_continuous(breaks = seq(0, 70, by = 5), limits = c(0, 65)) +
+  labs(
+    title = "Lung cancer risk increase due to asbestos in the ECHA study",
+    x = "Asbestos fibre-years (ff/ml-years)",
+    y = "Relative Risk (RR)",
+    color = NULL,
+    fill = NULL,
+    tag = "A"
+  ) +
+  scale_color_manual(values = "seagreen") +
+  scale_fill_manual(values = "seagreen3") +
+  guides(
+    color = guide_legend(order = 1),
+    fill = guide_legend(order = 2)
+  ) +
   theme_minimal() + 
   theme(
     axis.text = element_text(size = 10),
     axis.title.x = element_text(margin = margin(t = 10)),
     axis.title.y = element_text(margin = margin(r = 10)),
+    axis.line = element_line(colour = "black"),
     panel.grid.minor = element_blank(),
     panel.grid.major.x = element_blank(),
     legend.title = element_text(face = "bold"),
     plot.margin = margin(5, 5, 5, 5, "mm"),
     plot.tag = element_text(face = "bold")
   ) + 
-  expand_limits(x = .5, y = 0) + 
   coord_cartesian(expand = FALSE)
 
 #### PoC and upper bound for the range of exposure values in SYNERGY ####
-spline_PoC <- ggplot(df_long, aes(x = asbestos_cum0, color = ErrorFactor)) +
+spline_PoC <- ggplot(df_grid, aes(x = asbestos_cum0)) +
   geom_hline(yintercept = 0.5, linetype = "dotted", color = "royalblue2", linewidth = 0.5) +
-  geom_line(aes(y = PoC, linetype = "PoC"), linewidth = 0.7) +
-  geom_line(aes(y = `p97.5%`, linetype = "Upper Bound"), linewidth = 0.7) +
+  geom_line(aes(y = PoC, color = "PoC"), linewidth = 0.7) +
+  geom_ribbon(aes(ymin = PoC, ymax = PoC_PI_upper, fill = "Upper PI"), alpha = 0.4) +
   ylim(0, 1) +
-  scale_x_continuous(breaks = seq(0, 70, by = 5)) +
-  labs(title = "Spline models with upper uncertainty boundary",
-       x = "Fiber-years (ff/ml-years)",
+  scale_x_continuous(breaks = seq(0, 70, by = 5), limits = c(0, 65)) +
+  labs(title = "PoC of lung cancer due to asbestos in the ECHA study",
+       x = "Asbestos fibre-years (ff/ml-years)",
        y = "Probability of Causation (PoC)",
-       color = "Error Factor",
-       linetype = "Line Type",
-       tag = "B") +
-  scale_color_manual(values = color_values) +  # Color scale for PoC and upper bound lines
-  scale_linetype_manual(values = c("PoC" = "solid", "Upper Bound" = "dashed")) +  # Line types
+       color = NULL,
+       fill = NULL,
+       tag = "A") +
   theme_minimal() + 
+  scale_color_manual(values = "seagreen") +
+  scale_fill_manual(values = "seagreen3") +
   theme(
     axis.text = element_text(size = 10),
     axis.title.x = element_text(margin = margin(t = 10)),
@@ -148,19 +137,60 @@ spline_PoC <- ggplot(df_long, aes(x = asbestos_cum0, color = ErrorFactor)) +
     plot.margin = margin(5, 5, 5, 5, "mm"),
     plot.tag = element_text(face = "bold")
   ) + 
-  expand_limits(x = 0, y = 0) + 
   coord_cartesian(expand = FALSE)
 
 
-# Combine spline_RR and spline_PoC plots and save
+#### Save plots #### 
+saveRDS(spline_plot, file.path(tempfolder, "spline_plot.RDS"))
+saveRDS(spline_RR, file.path(tempfolder, "spline_RR.RDS"))
+saveRDS(spline_PoC, file.path(tempfolder, "spline_PoC.RDS"))
+
 ggsave(
-  filename = file.path(figfolder, "Spline_RR_PoC.pdf"),
-  plot = arrangeGrob(spline_RR, spline_PoC, nrow = 2),
-  width = 8, height = 10, dpi = 600, bg = "white"
+  spline_plot,
+  filename = file.path(figfolder, "Exposure_Response_Curves.pdf"),
+  width = 10, height = 5, dpi = 600, bg = "white"
 )
 
 ggsave(
-  filename = file.path(manuscript_images, "Figure_1.png"),
-  plot = arrangeGrob(spline_RR, spline_PoC, nrow = 2),
-  width = 8, height = 10, dpi = 600, bg = "white"
+  spline_RR,
+  filename = file.path(figfolder, "Spline_RR.pdf"),
+  width = 6, height = 4, dpi = 600, bg = "white"
 )
+
+ggsave(
+  spline_PoC,
+  filename = file.path(figfolder, "Spline_PoC.pdf"),
+  width = 6, height = 4, dpi = 600, bg = "white"
+)
+
+#### Derivatives #### 
+
+# Function to calculate numerical derivatives from grid data
+calculate_spline_slopes <- function(df_grid) {
+  
+  slopes <- df_grid %>%
+    arrange(asbestos_cum0) %>%
+    mutate(
+      # Calculate numerical derivative for PoC (point estimate)
+      PoC_slope = (lead(PoC) - lag(PoC)) / (lead(asbestos_cum0) - lag(asbestos_cum0)),
+      
+      # Calculate derivative for  PI
+      PoC_upper_slope = (lead(PoC_PI_upper) - lag(PoC_PI_upper)) / (lead(asbestos_cum0) - lag(asbestos_cum0)),
+      PoC_lower_slope = (lead(PoC_PI_lower) - lag(PoC_PI_lower)) / (lead(asbestos_cum0) - lag(asbestos_cum0)),
+      
+      # Convert to "risk increase per fibre-year" (similar to linear model units)
+      # This approximates d(PoC)/d(exposure) 
+      Risk_per_ffyr_instantaneous = PoC_slope * 100,  # Convert to percentage
+      Risk_per_ffyr_upper_instantaneous = PoC_upper_slope * 100,
+      Risk_per_ffyr_lower_instantaneous = PoC_lower_slope * 100
+    ) 
+  
+  return(slopes)
+}
+
+# Calculate slopes for later use 
+df_grid <- calculate_spline_slopes(df_grid)
+
+# Save data 
+df_grid %>% 
+  write.table(., paste0(tempfolder, "/spline_grid.txt"), sep = "\t")

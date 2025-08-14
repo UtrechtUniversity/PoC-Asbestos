@@ -81,9 +81,3 @@ ggsave(
   plot = arrangeGrob(logistic_PoC_plot, mixed_PoC_plot, nrow = 2),
   width = 8, height = 10, dpi = 600, bg = "white"
 )
-
-ggsave(
-  filename = file.path(manuscript_images, "Figure_S2.png"),
-  plot = arrangeGrob(logistic_PoC_plot, mixed_PoC_plot, nrow = 2),
-  width = 8, height = 10, dpi = 600, bg = "white"
-)

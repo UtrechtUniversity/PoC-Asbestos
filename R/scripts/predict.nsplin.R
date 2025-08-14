@@ -1,9 +1,9 @@
 predict.nsplin <- function(obj, newx, scale_factor = 1) {
-  #' @title Predict Natural Splines (with optional correction factor)
-  #' @description Generate predictions using natural spline transformations based on the provided model object, with optional correction for a known measurement error factor.
+  #' @title Predict Natural Splines (with optional adjustment factor)
+  #' @description Generate predictions using natural spline transformations based on the provided model object, with optional adjustment for a scalar error factor.
   #' @param obj An object containing the spline model attributes.
   #' @param newx Numeric vector of new data points to generate predictions for.
-  #' @param scale_factor Numeric, optional factor to scale the predictions to correct for underestimation (default = 1, no scaling).
+  #' @param scale_factor Numeric, optional factor to scale the predictions (default = 1, no scaling).
   #' @return A matrix of predicted values using natural splines.
   #' @examples
   #' # Assuming `model` is a predefined spline model object

@@ -1,0 +1,402 @@
+---
+title: "Probability of Causation: ECHA Systematic Review with Meta-regression"
+subtitle: "Lung cancer due to occupational asbestos exposure"
+author:
+  - name: Javier Mancilla-Galindo
+    affiliations:
+      - ref: iras
+  - name: Susan Peters
+    affiliations:
+      - ref: iras
+  - name: Jenny Deng
+    affiliations:
+      - ref: iras
+  - name: Henk van der Molen
+    affiliations:
+      - ref: amc
+  - name: Hans Kromhout
+    affiliations:
+      - ref: iras
+  - name: Lützen Portengen
+    affiliations:
+      - ref: iras
+  - name: Roel Vermeulen
+    affiliations:
+      - ref: iras
+  - name: Dick Heederik
+    affiliations:
+      - ref: iras
+      - ref: lexces
+affiliations:
+  - id: iras
+    name: Institute for Risk Assessment Sciences, Utrecht University
+    city: Utrecht
+    country: the Netherlands
+  - id: amc
+    name: Department of Public and Occupational Health, Amsterdam UMC
+    city: Amsterdam
+    country: the Netherlands
+  - id: lexces
+    name: National Expertise Centre for Substance-related Occupational Diseases (Lexces)
+    city: Utrecht
+    country: the Netherlands
+date: today
+execute: 
+  echo: false
+  warning: false
+format:
+  pdf: 
+    toc: true
+    colorlinks: true
+    documentclass: scrartcl
+bibliography: ../docs/manuscript/PoC-Asbestos.bib
+csl: ../docs/manuscript/european-respiratory-journal.csl
+editor: source
+---
+
+\pagebreak
+
+```{r}
+#| label: directories
+#| include: false
+
+# Create directories for sub-folders  
+inputfolder <- "../data/raw"
+psfolder <- "../data/processed"
+tempfolder <- "../data/temp"
+figfolder <- "../results/output_figures"
+tabfolder <- "../results/output_tables"
+manuscript_images <- "../docs/manuscript/images"
+manuscript_tables <- "../docs/manuscript/tables"
+
+dir.create(inputfolder, showWarnings = FALSE)
+dir.create(psfolder, showWarnings = FALSE)
+dir.create(tempfolder, showWarnings = FALSE)
+dir.create(figfolder, showWarnings = FALSE)
+dir.create(tabfolder, showWarnings = FALSE)
+dir.create(manuscript_images, showWarnings = FALSE)
+dir.create(manuscript_tables, showWarnings = FALSE)
+```
+
+```{r}
+#| label: packages
+#| include: false 
+
+if (!require("pacman", quietly = TRUE)) {
+  install.packages("pacman")
+}
+
+pacman::p_load(
+  tidyverse,        # Used for basic data handling and visualization.
+  conflicted,       # Resolve conflicts between packages.
+  table1,           # Create table of descriptive characteristics. 
+  flextable,        # Used to render and save table 1. 
+  lme4,             # Linear mixed-effects models.
+  mixmeta,          # Derive exposure-response function based on meta-analysis.
+  splines,          # Natural spline to model exposure-response function.
+  gridExtra,        # Arrange multiple ggplot2 plots.
+  docstring,        # Write and read documentation of functions. 
+  gt,               # Used to print html tables.  
+  report            # Used to cite packages used in this session.   
+)
+
+conflicts_prefer(dplyr::filter, dplyr::select, dplyr::lag)
+```
+
+```{r}
+#| label: load data
+#| include: false 
+
+source("scripts/load_data.R")
+```
+
+\pagebreak
+
+
+```{r}
+exposed <- df %>% filter(ever_asbestos0 == 1) %>% count %>% pull
+cases <- df %>% filter(status == 1) %>% count %>% pull
+
+cases_male <- df %>% filter(status == 1 & sex == "Male") %>% count %>% pull
+cases_female <- df %>% filter(status == 1 & sex == "Female") %>% count %>% pull
+```
+
+## Spline Model
+
+This model incorporates the the exposure-response relation from nonlinear meta-regression models as determined by Lenters, et al.[@Lenters2011] and van der Bij, et al.[@vanderbij2013], and updated in the scientific opinion for the European Chemicals Agency (ECHA).[@ECHA2021] The underlying data and results of the meta-regression are contained within the list element `MOD`. Tailored-made functions are sourced into this analysis, namely:
+
+-   `predict.nsplin`: Generates predictions using natural spline transformations based on the provided model object.
+-   `getRR`: Calculate relative risk (RR) based on a specified (linear/spline) model that estimates the exposure-response relationship.
+-   `getPoC`: Calculate probability of causation (PoC) based on the RR obtained from getRR function.
+
+
+```{r}
+#| echo: true
+
+MOD <- readRDS(file.path(inputfolder,"MOD.rds"))
+source("scripts/predict.nsplin.R")
+source("scripts/getRR.R")
+source("scripts/getPoC.R")
+```
+
+
+```{r}
+#| eval: false
+
+# Documentation of functions: 
+docstring(predict.nsplin)
+docstring(getRR)
+docstring(getPoC)
+```
+
+There are 4 different models possible:
+
+1.  linear model, assumes difference in background rate of outcome
+
+2.  linear model, assumes no difference in background rate of outcome
+
+3.  spline model, assumes difference in background rate of outcome
+
+4.  spline model, assumes no difference in background rate of outcome
+
+```{r}
+#| include: false 
+# pull out the 4 models and their data in lists
+models   <- map(MOD, ~ .x$m[[1]])
+datasets <- map(MOD, "data")
+
+# loop by index
+walk(seq_along(models), function(i) {
+  mod_i <- models[[i]]
+  data_i <- datasets[[i]]
+
+  # console summary
+  cat(sprintf("\n------- Model %d -------\n", i))
+  print(summary(mod_i))
+
+  # save data_i as txt
+  write.table(data_i, 
+              file = file.path(tempfolder, sprintf("data_model_%d.txt", i)),
+              sep = "\t",
+              row.names = FALSE,
+              quote = FALSE)
+})
+```
+
+```{r}
+ECHA_absestos_exposure <- datasets[[4]] %>% 
+  filter(exposure > 0) %>% 
+  summarize(
+    N = n(),
+    Min = min(exposure),
+    Q1 = quantile(exposure, 0.25),
+    Median = median(exposure),
+    Q3 = quantile(exposure, 0.75),
+    Max = max(exposure)
+  ) %>% round(1)
+
+ECHA_absestos_exposure %>% 
+  write.table(., paste0(tabfolder, "/ECHA_absestos_exposure.txt"), sep = "\t")
+```
+
+
+The range of reported exposure values greater than 0 for the pooled estimates in ECHA is `r ECHA_absestos_exposure$Min` - `r ECHA_absestos_exposure$Max` fiber-years, with a median of `r ECHA_absestos_exposure$Median` (IQR: `r ECHA_absestos_exposure$Q1` - `r ECHA_absestos_exposure$Q3`)
+
+\pagebreak
+
+```{r}
+I2 <- summary(models[[4]])$i2stat
+```
+
+The I-square statistic for model 4 (spline, no difference in background rate) is **`r I2 %>% round(1)`%**. The following plot shows the relative risk estimates reported by study, grouped by quality of exposure assessment. The plot data margins were fixed to y = 5 and x = 100 to focus on lower exposure values, thus resulting in the removal of 52 rows out of 134. 
+
+```{r}
+datasets[[4]] %>% mutate(quality = factor(quality, levels = c("0","1"), labels = c("low", "high"))) %>% 
+ggplot(., aes(x = exposure, y = exp(logRR), group = id, color = quality)) +
+  geom_point(alpha = 0.3, size = 1.5) +
+  geom_line() +
+  
+  labs(
+    x = "Fiber-years (ff/ml-years)",
+    y = "RR",
+    color = "Quality",
+    title = "Exposure-Response Curves by Study Quality"
+  ) +
+  xlim(0,100) +
+  ylim(0,5) +
+  scale_color_brewer(palette = "Set1") +  # Use a colorblind-friendly palette
+  theme_minimal() +
+  theme(
+    legend.position = "bottom",
+    panel.grid.minor = element_blank()
+  ) + 
+  facet_wrap(~ quality)
+```
+
+\pagebreak
+
+### Exposure-response 
+
+```{r}
+#| include: false
+source("scripts/plot_spline.R")
+```
+
+Shape of the exposure response under the 0-200 fiber-years range: 
+
+```{r}
+spline_plot
+```
+
+This figure shows that a doubling in the risk of lung cancer (RR = 2) is not expected to be seen with the values of exposure observed in the SYNERGY study (shaded area).
+
+
+Using modelling strategy number 4, and the actual exposure data in SYNERGY, the PoC and prediction intervals as a measure of uncertainty from study heterogeneity can be obtained following Higgins, et al. method.[@HigginsMetanalysis2009]
+
+\pagebreak
+
+This is the plot of lung cancer risk ratio with the observed exposure values in this study: 
+
+```{r}
+#| warning: false
+spline_RR
+```
+
+And the probability of causation, with the upper prediction interval: 
+
+```{r}
+#| warning: false
+spline_PoC 
+```
+
+\pagebreak
+
+Participants with outcome and a PoC greater than or equal to 50%:
+
+```{r}
+beta_coefficients_spline <- df_grid %>%
+  summarise(
+    Min_exp_50pct_PoC = round(asbestos_cum0[which(PoC >= 0.5)[1]], 2),
+    Min_exp_conservative = round(asbestos_cum0[which(PoC_PI_upper >= 0.5)[1]], 2),
+    .groups = 'drop'
+  ) %>%
+  # Add risk estimates at 1.5 fibre-years
+  bind_cols(
+    df_grid %>%
+      filter(abs(asbestos_cum0 - 1.5) == min(abs(asbestos_cum0 - 1.5))) %>%
+      summarise(
+        Risk_per_ffyr_instantaneous = first(Risk_per_ffyr_instantaneous),
+        Risk_per_ffyr_upper_instantaneous = first(Risk_per_ffyr_upper_instantaneous),
+        Risk_per_ffyr_lower_instantaneous = first(Risk_per_ffyr_lower_instantaneous)
+      )
+  ) %>%
+  mutate(
+    Model = "Spline",
+    Risk_per_ffyr_est = paste0(round(Risk_per_ffyr_instantaneous, 1), "%"),
+    Risk_per_ffyr_PI = paste0(round(Risk_per_ffyr_lower_instantaneous, 1), "% ; ", round(Risk_per_ffyr_upper_instantaneous, 1), "%")
+  ) %>%
+  # Add case counts
+  mutate(
+    Point_per_10k = round(sum(df$status == 1 & df$asbestos_cum0 >= Min_exp_50pct_PoC, na.rm = TRUE) / cases * 10000),
+    Presumably_plausible_per_10k = round(sum(df$status == 1 & df$asbestos_cum0 >= Min_exp_conservative, na.rm = TRUE) / cases * 10000)
+  ) %>%
+  select(Model, Risk_per_ffyr_est, Risk_per_ffyr_PI, Min_exp_50pct_PoC, Min_exp_conservative, Point_per_10k, Presumably_plausible_per_10k)
+
+beta_coefficients_spline %>% 
+  write.table(., paste0(tabfolder, "/PoC_spline_model_cum0_count_plus50.txt"), sep = "\t")
+```
+
+```{r}
+beta_coefficients_spline <- beta_coefficients_spline %>% 
+  gt() %>%
+  cols_label(
+    Model = "Model",
+    Risk_per_ffyr_est = "Estimate",
+    Risk_per_ffyr_PI = "95% Prediction Interval", 
+    Min_exp_50pct_PoC = "Point Estimate",
+    Min_exp_conservative = "Presumably Plausible",
+    Point_per_10k = "Point Estimate", 
+    Presumably_plausible_per_10k = "Presumably Plausible"
+  ) %>%
+  tab_spanner(
+    label = "Risk Increase per Fibre-year",
+    columns = c(Risk_per_ffyr_est, Risk_per_ffyr_PI)
+  ) %>%
+  tab_spanner(
+    label = "Min Exposure for 50% PoC (fibre-years)",
+    columns = c(Min_exp_50pct_PoC, Min_exp_conservative)
+  ) %>%
+  tab_spanner(
+    label = "Cases per 10,000 above 50% PoC in SYNERGY",
+    columns = c(Point_per_10k, Presumably_plausible_per_10k)
+  ) %>%
+  cols_align(align = "center") %>%
+  tab_header(
+    title = "Asbestos Exposure-Response in ECHA (Spline Model)"
+  ) %>%
+  tab_footnote(
+    footnote = "Probability of Causation (PoC)",
+    locations = cells_column_spanners(spanners = "Min Exposure for 50% PoC (fibre-years)")
+  ) %>%
+  tab_footnote(
+    footnote = "Not applicable for non-linear spline model",
+    locations = cells_column_spanners(spanners = "Risk Increase per Fibre-year")
+  ) %>% 
+  tab_footnote(
+    footnote = "Instantaneous slope at 1.5 fibre-years (median exposure in SYNERGY cases)",
+    locations = cells_column_spanners(spanners = "Risk Increase per Fibre-year")
+  ) 
+
+# Save table
+beta_coefficients_spline %>%  
+  gtsave(filename = "rtf/PoC_spline_model_cum0_count_plus50.rtf", path = tabfolder)
+
+beta_coefficients_spline %>% 
+  cols_width(
+    everything() ~ pct(15) 
+  )
+```
+
+
+\pagebreak
+
+
+# References
+
+::: {#refs}
+:::
+
+\pagebreak
+
+```{r}
+#| label: session
+# remove clutter
+session <- sessionInfo()
+session$BLAS <- NULL
+session$LAPACK <- NULL
+session$loadedOnly <- NULL
+# write log file
+writeLines(
+  capture.output(print(session, locale = FALSE)),
+  paste0("sessions/",lubridate::today(), "_PoC_Asbestos_spline.txt")
+)                                   
+```
+
+# Package References
+
+For specific information on the operating system, R version, and R package versions used, please refer to the **R/session** folder in the GitHub repository.
+
+```{r}
+#| output: asis
+report::cite_packages(session)
+```
+
+```{r}
+#| include: false
+
+# Run this chunk if you wish to clear your environment and unload packages.
+
+pacman::p_unload(negate = TRUE)
+
+rm(list = ls())
+```

@@ -1,7 +1,0 @@
-"Scenario"	"Cases"	"Cases per 10,000"	"Min cum exp"
-"1"	"PoC"	0	0	NA
-"2"	"PoC_UB"	1	1	62
-"3"	"PoC_scenario_b1.5"	58	34	50
-"4"	"PoC_scenario_b2"	1013	599	38
-"5"	"PoC_scenario_UB1.5"	517	306	42
-"6"	"PoC_scenario_UB2"	1913	1132	31

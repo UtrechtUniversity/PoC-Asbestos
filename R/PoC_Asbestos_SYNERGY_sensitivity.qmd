@@ -1,0 +1,541 @@
+---
+title: "Probability of Causation: SYNERGY sensitivity analysis"
+subtitle: "Lung cancer due to occupational asbestos exposure"
+author:
+  - name: Javier Mancilla-Galindo
+    affiliations:
+      - ref: iras
+  - name: Susan Peters
+    affiliations:
+      - ref: iras
+  - name: Jenny Deng
+    affiliations:
+      - ref: iras
+  - name: Henk van der Molen
+    affiliations:
+      - ref: amc
+  - name: Hans Kromhout
+    affiliations:
+      - ref: iras
+  - name: Lützen Portengen
+    affiliations:
+      - ref: iras
+  - name: Roel Vermeulen
+    affiliations:
+      - ref: iras
+  - name: Dick Heederik
+    affiliations:
+      - ref: iras
+      - ref: lexces
+affiliations:
+  - id: iras
+    name: Institute for Risk Assessment Sciences, Utrecht University
+    city: Utrecht
+    country: the Netherlands
+  - id: amc
+    name: Department of Public and Occupational Health, Amsterdam UMC
+    city: Amsterdam
+    country: the Netherlands
+  - id: lexces
+    name: National Expertise Centre for Substance-related Occupational Diseases (Lexces)
+    city: Utrecht
+    country: the Netherlands
+date: today
+execute: 
+  echo: false
+  warning: false
+format:
+  pdf: 
+    toc: false
+    documentclass: scrartcl
+bibliography: ../docs/manuscript/PoC-Asbestos.bib
+csl: ../docs/manuscript/european-respiratory-journal.csl
+editor: source
+---
+
+```{r}
+#| label: directories
+#| include: false
+
+# Create directories for sub-folders  
+inputfolder <- "../data/raw"
+psfolder <- "../data/processed"
+tempfolder <- "../data/temp"
+figfolder <- "../results/output_figures"
+tabfolder <- "../results/output_tables"
+manuscript_images <- "../docs/manuscript/images"
+manuscript_tables <- "../docs/manuscript/tables"
+
+dir.create(inputfolder, showWarnings = FALSE)
+dir.create(psfolder, showWarnings = FALSE)
+dir.create(tempfolder, showWarnings = FALSE)
+dir.create(figfolder, showWarnings = FALSE)
+dir.create(tabfolder, showWarnings = FALSE)
+dir.create(manuscript_images, showWarnings = FALSE)
+dir.create(manuscript_tables, showWarnings = FALSE)
+```
+
+```{r}
+#| label: install packages
+#| include: false 
+
+if (!require("pak", quietly = TRUE)) {
+  install.packages("pak")
+}
+
+pak::pkg_install(c(
+  "tidyverse",        # Used for basic data handling and visualization.
+  "conflicted",       # Resolve conflicts between packages.
+  "table1",           # Create table of descriptive characteristics. 
+  "flextable",        # Used to render and save table 1. 
+  "lme4",             # Linear mixed-effects models.
+  "sjPlot",           # Print results of statistical models in html.
+  "car",              # Companion to applied regression, used for variance inflation factor.
+  "mixmeta",          # Derive exposure-response function based on meta-analysis.
+  "splines",          # Natural spline to model exposure-response function.
+  "DHARMa",           # Residual diagnostics for mixed models.
+  "MASS",             # Functions and datasets for statistical methods.
+  "gridExtra",        # Arrange multiple ggplot2 plots.
+  "gt",               # Used to print html tables.  
+  "report"            # Used to cite packages used in this session.   
+))
+```
+
+```{r}
+#| label: load packages
+#| include: false 
+
+if (!require("pacman", quietly = TRUE)) {
+  install.packages("pacman")
+}
+
+pacman::p_load(
+  tidyverse, 
+  conflicted, 
+  table1, 
+  flextable, 
+  lme4, 
+  sjPlot, 
+  car,
+  mixmeta, 
+  splines, 
+  DHARMa, 
+  MASS, 
+  gridExtra,
+  gt,
+  report
+)
+
+conflicts_prefer(dplyr::filter, dplyr::select)
+```
+
+```{r}
+#| label: load data
+#| include: false  
+
+source("scripts/load_data.R")
+```
+
+```{r}
+exposed <- df %>% filter(ever_asbestos0 == 1) %>% count %>% pull
+cases <- df %>% filter(status == 1) %>% count %>% pull
+
+cases_male <- df %>% filter(status == 1 & sex == "Male") %>% count %>% pull
+cases_female <- df %>% filter(status == 1 & sex == "Female") %>% count %>% pull
+```
+
+## Asbestos Exposure accross studies 
+
+```{r}
+exposure_summary <- df %>%
+  group_by(source_controls, study_name) %>%
+  summarize(
+    median_exposure = median(asbestos_cum0, na.rm=T),
+    IQR = paste(
+      round(quantile(asbestos_cum0, 0.25),3), "-", 
+      round(quantile(asbestos_cum0, 0.75),3)
+    ),
+    range = paste(
+      round(min(asbestos_cum0),3), "-", 
+      round(max(asbestos_cum0),3)
+    ),
+    n_cases = sum(status == 1),
+    n_total = n(),
+    .groups = 'drop'
+  )
+
+# Create gt table
+exposure_summary %>%
+  gt() %>%
+  cols_label(
+    source_controls = "Source of controls",
+    study_name = "Study name",
+    median_exposure = "Median exposure (ff/ml-years)",
+    IQR = "IQR (ff/ml-years)",
+    range = "Range (ff/ml-years)",
+    n_cases = "Cases",
+    n_total = "Total"
+  ) %>%
+  tab_header(
+    title = "Asbestos exposure summary by study and control source"
+  ) %>%
+  cols_align(align = "center") %>%
+  fmt_number(
+    columns = c(median_exposure, IQR, range),
+    decimals = 3
+  ) %>% 
+  cols_width(
+    everything() ~ pct(15) 
+  ) 
+```
+
+```{r}
+PoCfun <- function(logor) {
+  OR <- exp(logor)
+  pmax((OR-1)/OR,0)
+}
+```
+
+{{< pagebreak >}}
+
+## Mixed effects model - cum0 with interaction term
+
+A mixed-effects logistic regression model is used to estimate the PoC, with `asbestos_cum0` as the main explanatory variable, and adjusted for:
+
+-   The study source of participants (`study_name`)
+-   Age category (`agegroup`). The age groups are: \<45, 45–49, 50–54, 55–59, 60–64, 65–69, 70–74, and \> 74 years.
+-   Sex (`sex`), female and male.
+-   Smoking (`packyrs`), cigarette pack-years.
+-   Time since smoking cessation (`time_quit`). The categories are: current smokers; stopping smoking 2–7, 8–15, 16–25, and \>= 26 years before interview/diagnosis; and never-smokers.
+
+Adding random effects with a random intercept for each study source (`study_name`) and random slopes for the exposure (`asbestos_cum0`) within each study source.
+
+An interaction term between `asbestos_cum0` and `source_controls` is included to assess whether the exposure-response relationship differs between hospital and population control studies.
+
+
+```{r}
+#| echo: true  
+
+mod_int <- glmer(status ~ asbestos_cum0 * source_controls + agegroup + sex + 
+                   packyrs + time_quit  + (1 + asbestos_cum0 | study_name),
+  data    = df,
+  family  = binomial,
+  nAGQ    = 0,
+  control = glmerControl(optimizer = "bobyqa")
+)
+```
+
+```{r}
+#| eval: false
+
+summary(mod_int)
+```
+
+```{r}
+sim_res <- simulateResiduals(fittedModel = mod_int, n = 1000)
+
+plot(sim_res)
+```
+
+```{r}
+car::vif(mod_int)
+```
+
+```{r}
+source("scripts/calculate_i_squared.R")
+
+# Calculate I² 
+i_squared <- calculate_i_squared(mod_int)
+
+print(paste("I² for mod_int (intercept):", round(i_squared$intercept_i_squared, 2), "%"))
+print(paste("I² for asbestos slopes per study:", round(i_squared$slope_i_squared, 2), "%"))
+```
+
+{{< pagebreak >}}
+
+```{r}
+## Fixed-effect coefficients
+beta1  <- fixef(mod_int)["asbestos_cum0"] # hospital controls
+beta3  <- fixef(mod_int)["asbestos_cum0:source_controlsP"] # diff for population controls
+
+b_H    <- beta1
+b_P    <- beta1 + beta3 # hospital + diff for population controls
+
+## Variance–covariance 
+V      <- vcov(mod_int)
+var_b1 <- V["asbestos_cum0","asbestos_cum0"]
+var_b3 <- V["asbestos_cum0:source_controlsP","asbestos_cum0:source_controlsP"]
+cov_1_3 <- V["asbestos_cum0","asbestos_cum0:source_controlsP"]
+
+## Random-slope variance (same for both control types)
+ran_eff_var <- VarCorr(mod_int)$study_name["asbestos_cum0","asbestos_cum0"]
+
+## total SE for each slope 
+SE_H <- sqrt(ran_eff_var + var_b1)                               
+SE_P <- sqrt(ran_eff_var + var_b1 + var_b3 + 2*cov_1_3)             
+
+# Calculate prediction interval bounds for each stratum
+LB_H <- b_H - 1.96 * SE_H  # hospital lower bound
+UB_H <- b_H + 1.96 * SE_H  # hospital upper bound
+LB_P <- b_P - 1.96 * SE_P  # population lower bound  
+UB_P <- b_P + 1.96 * SE_P  # population upper bound
+```
+
+
+```{r}
+source("scripts/add_case_counts.R")
+
+# Create stratified table
+beta_coefficients_stratified <- data.frame(
+  Model = c("Population controls", "Hospital controls"),
+  Risk_per_ffyr_est = c(
+    paste0(round((exp(b_P) - 1) * 100, 1), "%"),
+    paste0(round((exp(b_H) - 1) * 100, 1), "%")
+  ),
+  Risk_per_ffyr_PI = c(
+    paste0(round((exp(LB_P) - 1) * 100, 1), "% ; ", 
+           round((exp(UB_P) - 1) * 100, 1), "%"),
+    paste0(round((exp(LB_H) - 1) * 100, 1), "% ; ", 
+           round((exp(UB_H) - 1) * 100, 1), "%")
+  ),
+  Min_exp_50pct_PoC = c(
+    round(log(2) / b_P, 2),
+    round(log(2) / b_H, 2)
+  ),
+  Min_exp_conservative = c(
+    round(log(2) / UB_P, 2),
+    round(log(2) / UB_H, 2)
+  )
+)
+
+beta_coefficients_stratified <- add_case_counts(
+  beta_table = beta_coefficients_stratified,
+  data = df, 
+  cases_total = cases,
+  stratify_by = "source_controls",
+  strata_mapping = c("Hospital controls" = "H", "Population controls" = "P")
+)
+
+beta_coefficients_stratified %>% 
+  write.table(., paste0(tabfolder, "/PoC_stratified_count_plus50.txt"), sep = "\t")
+```
+
+
+```{r}
+beta_coefficients_stratified <- beta_coefficients_stratified %>% 
+  gt() %>%
+  cols_label(
+    Model = "Model",
+    Risk_per_ffyr_est = "Estimate",
+    Risk_per_ffyr_PI = "95% Prediction Interval", 
+    Min_exp_50pct_PoC = "Point Estimate",
+    Min_exp_conservative = "Presumably Plausible",
+    Point_per_10k = "Point Estimate", 
+    Presumably_plausible_per_10k = "Presumably Plausible"
+  ) %>%
+  tab_spanner(
+    label = "Risk Increase per Fibre-year",
+    columns = c(Risk_per_ffyr_est, Risk_per_ffyr_PI)
+  ) %>%
+  tab_spanner(
+    label = "Min Exposure for 50% PoC (fibre-years)",
+    columns = c(Min_exp_50pct_PoC, Min_exp_conservative)
+  ) %>%
+  tab_spanner(
+    label = "Cases per 10,000 above 50% PoC in SYNERGY",
+    columns = c(Point_per_10k, Presumably_plausible_per_10k)
+  ) %>%
+  cols_align(align = "center") %>%
+  tab_header(
+    title = "Asbestos Exposure-Response by Control Source in SYNERGY population"
+  ) %>%
+  tab_footnote(
+    footnote = "Probability of Causation (PoC)",
+    locations = cells_column_spanners(spanners = "Min Exposure for 50% PoC (fibre-years)")
+  ) 
+
+beta_coefficients_stratified %>%  
+  gtsave(filename = "rtf/PoC_interaction_count_plus50.rtf", path = tabfolder)
+
+beta_coefficients_stratified  %>% 
+  cols_width(
+    everything() ~ pct(15) 
+  ) 
+```
+
+```{r}
+df <- df %>% 
+  mutate(
+    ## choose the correct slope & SE for every record
+    beta = if_else(source_controls == "P", b_P, b_H),
+    SE   = if_else(source_controls == "P", SE_P, SE_H),
+    
+    ## PoC and its CI
+    PoC     = PoCfun(beta * asbestos_cum0),
+    PoC_LB  = PoCfun((beta - 1.96*SE) * asbestos_cum0),
+    PoC_UB  = PoCfun((beta + 1.96*SE) * asbestos_cum0)
+  )
+```
+
+```{r}
+expo_grid <- expand.grid(
+  asbestos_cum0   = seq(0, 65, by = 0.1),          
+  source_controls = factor(c("P", "H")) %>% relevel(ref = "P")        
+)
+
+## attach slope & SE that belong to each source type
+expo_grid <- expo_grid %>% 
+  mutate(
+    beta = if_else(source_controls == "P", b_P, b_H),
+    SE   = if_else(source_controls == "P", SE_P, SE_H),
+    
+    PoC    = PoCfun(beta * asbestos_cum0),
+    PoC_LB = PoCfun((beta - 1.96*SE) * asbestos_cum0),
+    PoC_UB = PoCfun((beta + 1.96*SE) * asbestos_cum0)
+  )
+
+# Add RR 
+expo_grid <- expo_grid %>% 
+  mutate(
+    # RR calculations (OR ≈ RR for rare outcomes)
+    RR = exp(beta * asbestos_cum0),
+    RR_LB = exp((beta - 1.96*SE) * asbestos_cum0),
+    RR_UB = exp((beta + 1.96*SE) * asbestos_cum0),
+    
+    # Cap RR_UB for plotting if needed (adjust threshold as needed)
+    RR_UB = case_when(RR_UB >= 6 ~ 6, TRUE ~ RR_UB),
+    RR_LB = case_when(RR_LB <= 1 ~ 1, TRUE ~ RR_LB),
+    
+    # Create labels for plotting
+    Study_type = case_when(
+      source_controls == "H" ~ "Hospital controls",
+      source_controls == "P" ~ "Population controls"
+    )
+  )
+
+# Save data 
+expo_grid %>% 
+  write.table(., paste0(tempfolder, "/sensitivity_grid.txt"), sep = "\t")
+```
+
+Refer to the ***save_plots.R*** script in the **R/scripts** directory for the relevant code used to generate the plots from this sensitivity analysis. 
+
+{{< pagebreak >}}
+
+# Summary of coefficients
+
+Coefficients from both the ECHA and the SYNERGY study are summarized with the following code. 
+
+```{r}
+# Load the saved data tables 
+beta_coefficients_mixed <- read.table(paste0(tabfolder, "/PoC_mixed_model_cum0_count_plus50.txt"), sep = "\t", header = TRUE, stringsAsFactors = FALSE)
+beta_coefficients_stratified <- read.table(paste0(tabfolder, "/PoC_stratified_count_plus50.txt"), sep = "\t", header = TRUE, stringsAsFactors = FALSE)
+beta_coefficients_spline <- read.table(paste0(tabfolder, "/PoC_spline_model_cum0_count_plus50.txt"), sep = "\t", header = TRUE, stringsAsFactors = FALSE)
+
+# Combine all tables with analysis grouping
+beta_coefficients_combined <- bind_rows(
+  beta_coefficients_spline %>% mutate(Analysis = "Meta-regression of published studies (ECHA)", .before = 1),
+  beta_coefficients_mixed %>% mutate(Analysis = "Meta-analysis of individual participant data (SYNERGY)", .before = 1),
+  beta_coefficients_stratified %>% mutate(Analysis = "Sensitivity analysis stratified by source of controls (SYNERGY)", .before = 1)
+) %>%
+  mutate(
+    Risk_per_ffyr_PI = ifelse(
+      str_detect(Risk_per_ffyr_PI, "–"),
+      Risk_per_ffyr_PI,  # Keep "–" unchanged
+      {
+        # Extract numbers, replace negatives with 0, due to the assumed model monotonicity for PoC
+        lower <- as.numeric(str_extract(Risk_per_ffyr_PI, "^[^%]+"))
+        upper <- as.numeric(str_extract(Risk_per_ffyr_PI, "(?<=; )[^%]+"))
+        paste0(round(pmax(0, lower), 1), "% ; ", round(pmax(0, upper), 1), "%")
+      }
+    )
+  )
+
+# Create comprehensive combined table
+beta_coefficients_combined_gt <- beta_coefficients_combined %>% 
+  gt(groupname_col = "Analysis") %>%
+  cols_label(
+    Model = "Model",
+    Risk_per_ffyr_est = "Estimate",
+    Risk_per_ffyr_PI = "95% Prediction Interval", 
+    Min_exp_50pct_PoC = "Point Estimate",
+    Min_exp_conservative = "Presumably Plausible",
+    Point_per_10k = "Point Estimate", 
+    Presumably_plausible_per_10k = "Presumably Plausible"
+  ) %>%
+  tab_spanner(
+    label = "Risk Increase per Fibre-year",
+    columns = c(Risk_per_ffyr_est, Risk_per_ffyr_PI)
+  ) %>%
+  tab_spanner(
+    label = "Min Exposure for 50% PoC (fibre-years)",
+    columns = c(Min_exp_50pct_PoC, Min_exp_conservative)
+  ) %>%
+  tab_spanner(
+    label = "Cases per 10,000 above 50% PoC in SYNERGY",
+    columns = c(Point_per_10k, Presumably_plausible_per_10k)
+  ) %>%
+  cols_align(align = "center") %>%
+  tab_footnote(
+    footnote = "Probability of Causation (PoC) of 50% corresponds to a doubling in lung cancer risk (i.e., RR = 2) for the point estimate and the upper 95% prediction interval for the presumably plausible threshold.",
+    locations = cells_column_spanners(spanners = "Min Exposure for 50% PoC (fibre-years)")
+  ) %>%
+  tab_footnote(
+    footnote = "Negative values truncated to 0 due to monotonicity assumption. For spline models: instantaneous slope at 1.5 fibre-years (median exposure in cases). ",
+    locations = cells_column_spanners(spanners = "Risk Increase per Fibre-year")
+  ) %>%
+  tab_style(
+    style = cell_fill(color = "lightgray"),
+    locations = cells_row_groups()
+  ) %>%
+  tab_style(
+    style = cell_text(weight = "bold"),
+    locations = cells_row_groups()
+  ) %>% 
+  opt_footnote_marks(marks = "letters")
+
+
+gtsave(beta_coefficients_combined_gt, file = file.path(manuscript_tables, "Table2.html"))
+```
+
+```{r}
+beta_coefficients_combined_gt %>% 
+  cols_width(
+    everything() ~ pct(15) 
+  ) 
+```
+
+{{< pagebreak >}}
+
+# Package References
+
+For specific information on the operating system, R version, and R package versions used, please refer to the **R/session** folder in the GitHub repository.
+
+```{r}
+#| label: session
+# remove clutter
+session <- sessionInfo()
+session$BLAS <- NULL
+session$LAPACK <- NULL
+session$loadedOnly <- NULL
+# write log file
+writeLines(
+  capture.output(print(session, locale = FALSE)),
+  paste0("sessions/",lubridate::today(), "_PoC_Asbestos_SYNERGY_sensitivity.txt")
+)                                   
+```
+
+```{r}
+#| output: asis
+report::cite_packages(session)
+```
+
+```{r}
+#| include: false
+
+# Run this chunk if you wish to clear your environment and unload packages.
+
+pacman::p_unload(negate = TRUE)
+
+rm(list = ls())
+```

@@ -45,13 +45,22 @@ vignettes/*.pdf
 .Renviron
 
 # Manuscript and related documentation
-# docs/
+docs/manuscript/*docx
+docs/manuscript/*html
+docs/manuscript/*pdf
+docs/manuscript/*csl
 
-# TIFF figures to avoid large putting up large files
+# TIFF figures to avoid putting up large files
 results/output_figures/*.tiff
 
-# Manuscript template 
-docs/manuscript/template.docx
+# Analysis files in progress
+R/PoC_Asbestos_SYNERGY_duration.qmd
+R/PoC_Asbestos_DAG.qmd
+
+# Other R scripts 
+R/scripts/incidence_rates.R
+R/scripts/offsets.R
+R/scripts/weights.R
 
 # translation temp files
 po/*~
