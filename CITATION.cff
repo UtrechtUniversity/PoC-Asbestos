@@ -1,10 +1,6 @@
 cff-version: 1.2.0
-title: >-
-  Probability of Causation: Lung cancer due to occupational
-  exposure to asbestos
-message: >-
-  If you use this software, please cite it using the
-  metadata from this file.
+title: "Probability of Causation: Lung cancer due to occupational exposure to asbestos"
+message: "If you use this software, please cite it using the metadata from this file."
 type: software
 authors:
   - given-names: Javier
@@ -24,9 +20,7 @@ authors:
     orcid: 'https://orcid.org/0000-0002-4880-760X'
   - given-names: Henk F.
     family-names: van der Molen
-    affiliation: >-
-      Department of Public and Occupational Health,
-      Amsterdam UMC
+    affiliation: "Department of Public and Occupational Health, Amsterdam UMC"
     orcid: 'https://orcid.org/0000-0002-0719-2020'
   - given-names: Hans
     family-names: Kromhout
@@ -45,9 +39,7 @@ authors:
   - given-names: Dick
     family-names: Heederik
     email: d.heederik@uu.nl
-    affiliation: >-
-      National Expertise Centre for Substance-related
-      Occupational Diseases (Lexces)
+    affiliation: "National Expertise Centre for Substance-related Occupational Diseases (Lexces)"
     orcid: 'https://orcid.org/0000-0002-4550-1437'
 repository-code: 'https://github.com/UtrechtUniversity/PoC-Asbestos'
 keywords:
@@ -60,9 +52,7 @@ keywords:
 license: MIT
 preferred-citation:
   type: article
-  title: >-
-    Probability of causation in individual workers: Lung cancer due to
-    occupational exposure to asbestos
+  title: "Probability of causation in individual workers: Lung cancer due to occupational exposure to asbestos"
   authors:
     - given-names: Javier
       family-names: Mancilla Galindo
@@ -81,9 +71,7 @@ preferred-citation:
       orcid: 'https://orcid.org/0000-0002-4880-760X'
     - given-names: Henk F.
       family-names: van der Molen
-      affiliation: >-
-        Department of Public and Occupational Health,
-        Amsterdam UMC
+      affiliation: "Department of Public and Occupational Health, Amsterdam UMC"
       orcid: 'https://orcid.org/0000-0002-0719-2020'
     - given-names: Hans
       family-names: Kromhout
@@ -102,9 +90,7 @@ preferred-citation:
     - given-names: Dick
       family-names: Heederik
       email: d.heederik@uu.nl
-      affiliation: >-
-        National Expertise Centre for Substance-related
-        Occupational Diseases (Lexces)
+      affiliation: "National Expertise Centre for Substance-related Occupational Diseases (Lexces)"
       orcid: 'https://orcid.org/0000-0002-4550-1437'
   journal: medRxiv
   year: 2026
