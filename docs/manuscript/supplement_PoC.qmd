@@ -1,5 +1,5 @@
 ---
-title: "Probability of causation in individual workers with disease: Lung cancer due to occupational exposure to asbestos"
+title: "Probability of causation in individual workers: Lung cancer due to occupational exposure to asbestos"
 subtitle: "Supplementary Materials"
 author: 
   - "Javier Mancilla-Galindo¹, Susan Peters¹, Jenny Deng¹, Henk van der Molen², Hans Kromhout¹, Lützen Portengen¹, Roel Vermeulen¹, Dick Heederik¹˒³"
@@ -19,7 +19,7 @@ format:
   html:
     embed-resources: true
 bibliography: PoC-Asbestos.bib
-csl: european-respiratory-journal.csl
+csl: bmj.csl
 editor: visual
 ---
 
@@ -37,99 +37,75 @@ pacman::p_load(
   )
 ```
 
-### Supplementary Methods 
+### Supplementary Methods
 
 #### Causal Model
 
-A causal model of the effect of cumulative exposure to asbestos (fibre-years) on lung cancer risk was stipulated and represented in a directed acyclic graph (DAG) (**Supplementary Figure 1**). The diagram was updated by testing implied conditional independencies as described by Ankan et al.[@ankan2021] Co-exposure to other occupational carcinogens is represented with RCS as a motivating example. True exposure is unmeasured and estimated with SYN-JEM, resulting in loss of individual variation (Epsilon), and exposure error terms (U) that are independent of outcome status (Berkson-type error).[@ArmstrongMeasurementError1998] Age, sex, smoking status and intensity, and time since quitting act as confounders. Study centre is considered a proxy for other study-level covariates. Occupational lung carcinogens are assumed to be associated through the common cause industry which serves as a proxy for shared working environment conditions. This backdoor pathway was intentionally not closed as co-exposure to occupational lung carcinogens is frequent.[@olsson2024] Estimating conditional effects by setting such co-exposures to zero could violate positivity (if certain covariate combinations never occur for a given job title) and consistency (counterfactual scenarios such as high asbestos exposure with zero RCS are implausible in some industries). The model assumes monotonicity, implying that asbestos cannot prevent lung cancer through any causal mechanism, and no-interference (only individual exposure is relevant for the effect and not affected by others' exposures).
+A causal model of the effect of cumulative exposure to asbestos (fibre-years) on lung cancer risk was represented in a directed acyclic graph (DAG) (**Supplementary Figure 1**) and deposited in OpenCausal.org.[@Mancilla2025Causal] The diagram was updated by testing implied conditional independencies as described by Ankan et al.[@ankan2021] Co-exposure to other occupational carcinogens is represented with RCS as a motivating example. True exposure is unmeasured and estimated with SYN-JEM, resulting in loss of individual variation (Epsilon), and exposure error terms (U) that are independent of outcome status (Berkson-type error).[@ArmstrongMeasurementError1998] Age, sex, smoking status and intensity, and time since quitting act as confounders. Study centre is considered a proxy for other study-level covariates. Occupational lung carcinogens are assumed to be associated through the common cause industry which serves as a proxy for shared working environment conditions. This backdoor pathway was intentionally not closed as co-exposure to occupational lung carcinogens is frequent.[@olsson2024] Estimating conditional effects by setting such co-exposures to zero could violate positivity (if certain covariate combinations never occur for a given job title) and consistency (counterfactual scenarios such as high asbestos exposure with zero RCS are implausible in some industries). The model assumes monotonicity, implying that asbestos cannot prevent lung cancer through any causal mechanism, and no-interference (only individual exposure is relevant for the effect and not affected by others' exposures). Lastly, both age and sex are matching factors potentially causing selection bias (not shown in this DAG for simplicity). Adjustment for these matching variables through unconditional logistic regression results in unbiased estimates under the rare disease assumption.[@kamenetsky2025]
 
-{{< pagebreak >}}
+#### Exposure-response estimation
 
-### Supplementary Table 1
+For the 22 occupational asbestos studies, four different combinations of modelling assumptions were examined (linear and natural splines, allowing for differences or no differences in background lung cancer risk) as described in van der Bij, et al.[@vanderbij2013] Exposure-response meta-regression models were fitted using restricted maximum likelihood (REML) estimation with random effects to account for between-study heterogeneity. Study-specific log-transformed relative risks (logRR) were modeled as a function of the mean exposure level within each reported category. Relative risk estimates with 95% confidence and prediction intervals were generated for exposure levels ranging from 0 to 200 fibre-years to compare the four models (**Supplementary Figure 5**). The spline meta-regression model with fixed intercept was used for further analysis due to reasons explained elsewhere,[@vanderbij2013] for the estimation of $RR(x)$ using the natural spline (NS) basis functions estimated using third-order polynomials (Equation 1).
 
-**Supplementary Table 1**. Studies included in the systematic review by Lenters, et al.[@Lenters2011] and van der Bij, et al.[@vanderbij2013], updated in 2021 for the European Chemicals Agency report on occupational exposure limits for asbestos.[@ECHA2021]
+$$
+RR(x) = \exp\left(\beta_1 \cdot NS_1(x) + \beta_2 \cdot NS_2(x)\right)
+\quad (1)
+$$
 
-| Study | Asbestos Exposure Period | Study design | N | Type of risk estimate | Fibre type | Lowest–highest exposure category (f–y/cm³) | Exposure quality | Lagged CE |
-|--------|--------|--------|--------|--------|--------|--------|--------|--------|
-| Quebec, Canada, mines and mills [@Liddell1997] | \~ 1904–1976 | Cohort | ∼11,000 | SMR | Chrysotile | 4.7–4,710 | Low | CE to age 55 |
-| Italy, Balangero, mine and mill [@Pira2017] | 1916–1990 | Cohort | 1,056 | SMR | Chrysotile | 50–667 | Low | CE |
-| Connecticut, friction product plant [@McDonald1984] | 1913–1977 | Cohort | 3,513 | SMR | Chrysotile | 15–400 | Low | CE |
-| South Carolina, textile plant [@Hein2007] | 1896–1977 | Cohort | 3,072 | SMR | Chrysotile | 0.75–200 | High | CE10 |
-| North Carolina, textile plant [@Loomis2009] | 1925–1994 | Cohort | 5,770 | RR adj ᵃ | Chrysotile | 5.7–408 ᶜ | Low | CE10 |
-| Wittenoom, Australia, mine [@Berry2004] | 1937–1966 | Cohort | 6,358 | SMR | Amphibole, crocidolite | 0.11–220 | Low | CE |
-| Patterson, NJ, insulation manufacture [@Seidman1986] | 1941–1954 | Cohort | 820 | SMR | Amphibole, amosite | 3–417 | Low | CE |
-| Tyler, TX, insulation manufacture [@Levin1998] | 1954–1972 | Cohort | 1,121 | SMR | Amphibole, amosite | 11–375 | High | CE |
-| Libby, MT, mines and mills [@Larson2010] | 1935–1990 | Cohort | 1,862 | RR | Amphibole, tremolite b | 0.7–73 | High | CE20 |
-| UK, friction products factory [@Berry1983] | 1910–1979 | Nested case-control | 13,460 | OR | Mixed | 29.5–228 ᶜ | Low | CE |
-| Ontario, asbestos cement plant [@Finkelstein1984] | 1948–1977 | Cohort | 740 | SMR | Mixed | 15–250 | Low | CE |
-| New Orleans, LA, asbestos cement plants [@Hughes1987] | 1937–1972 | Cohort | 6,931 | SMR | Mixed | 4.2–256 | Low | CE10 |
-| Sweden, asbestos cement plant [@Albin1990] | 1907–1977 | Cohort (external reference) | 2,898 | RR adj ᵃ | Mixed | 3.1–88 | Low | CE |
-| Belgium, asbestos cement plant [@lacquet1980] | 1928–1977 | Cohort | 1,973 | SMR | Mixed | 25–2,000 | Low | CE |
-| US factory retirees (Johns Manville) [@enterline1987] | 1890–1980 | Cohort | 1,074 | SMR | Mixed | 186–2,928 | High | CE |
-| US and Canada, insulation workers [@Selikoff1991] | \~ 1920–1986 | Cohort | 17,800 | SMR | Mixed | 38–375 | Low | CE10 |
-| Pennsylvania, textile plant [@McDonald1983] | \~ 1900–1967 | Cohort | 4,024 | SMR | Mixed | 15–330 | High | CE10 |
-| Rochdale, UK, textile plant [@Peto1985] | 1933–1978 | Cohort | 3,211 | SMR | Mixed | 5.9–257 | High | CE5 |
-| Calvados, France, textile and friction product plant [@Clin2011] | 1978–2004 | Cohort | 2,024 | HR adj ᵃ | Mixed | 90–500 ᶜ | Low | CE10 |
-| China, textile, rubber product and cement plant [@Courtice2016] | 1972–2008 | Cohort | 577 | HR adj ᵃ | Chrysotile | 156–913 ᶜ | Low | CE10 |
-| China, mine [@Wang2013] | 1981–2006 | Cohort | 1,539 | SMR | Chrysotile | 10–750 | Low | CE10 |
-| Europe and Canada pooled case-control study, women [@Olsson2017] | 1922–2009 | Case-control | 3,296 cases, 4,514 controls | OR adj ᵃ | Mixed | 0.25–4.7 | High | CE |
+For the SYNERGY studies, two different individual participant data (IPD) meta-analyses were conducted.[@Debray2013] Motivation for each meta-analysis is given below alongside its description.
 
-ᵃ In the North Carolina textile plants study, results were adjusted for age, gender, race, calendar year, and birth cohort; In the Swedish cement plant study, results were adjusted for age and calendar year; In the Calvados plant study, results were adjusted for age and gender; In the Chinese textile, rubber product and cement plant study, results were adjusted for age and smoking (ever/never); In the Europe/Canada pooled case-control study, results were adjusted for study, age, smoking (pack-years, time-since-quitting smoking), and ever-employment in jobs with known increased lung cancer risk due to factors other than asbestos (Yes/No).
+##### **1. Two-stage univariate meta-analysis**
 
-ᵇ Exposure in the Libby cohort is for the so-called Libby amphibole that includes tremolite and closely related fibrous amphiboles (winchite and richterite).
+The two-stage univariate random-effects meta-analysis estimates the effect of exposure on outcome per study with IPD in the first stage, and the resulting pooled effects are synthesized in the second stage. This process is equivalent to a traditional random-effects meta-analysis, ignoring within-study and between-study covariance in parameter estimates, which can be problematic and lead to bias.[@Debray2013] Conventional measures of heterogeneity (I²) can be estimated with this approach and most readers are familiar with the presentation of this type of meta-analysis.
 
-ᶜ The lowest exposure category (corresponding to 0.383 f–y/cm³ in the North Carolina textile plant and 4.5 f–y/cm³ in the British friction factory, 20 f–y/cm³ in the Calvados plant and 44.5 f–y/cm³ in the Chinese textile, rubber product and cement plant) was excluded as no risk estimate could be calculated because it was used as the reference category.
+In the first stage, each study was analysed separately by fitting unconditional multivariable logistic regression models of the effect of cumulative exposure to asbestos (fibre-years) on lung cancer risk (relative risk per fibre-year), adjusted for confounders (Equation 2). Study-specific maximum likelihood models accounted for differences in eligibility criteria and the available contrast in confounders per study, as two included men only (LUCA[@stucker2002] and LUCAS[@ilar2017]), one oversampled never-smokers (Toronto[@brenner2010]), and one collected smoker and never-smoker status but not time since quitting smoking (MORGEN[@beulens2009]).
 
-{{< pagebreak >}}
+$$y_i \sim \text{Bernoulli}(p_i)$$
 
-### Supplementary Table 2
+$$
+\text{logit}(p_i) = \alpha + \beta x_i + \sum_{k=1}^{K} \theta_k z_{ik}
+\quad (2)
+$$
 
-**Supplementary Table 2**. Description of studies included in the SYNERGY project.
+where:
 
-| Study | Country | Period of recruitment | Sampling ᵃ | Source of Controls ᵇ | Interviewee ᶜ | Cases (N) | Response cases (%) | Controls (N) | Response controls (%) | Female (N) | Male (N) |
-|------|------|------|------|------|------|------|------|------|------|------|------|
-| AUT [@bruske-hohlfeld2000] | Germany | 1990–1995 | C | P | S | 3180 | 77 | 3249 | 41 | 1068 | 5361 |
-| HdA [@jockel1998] | Germany | 1988–1993 | C | P | S | 1004 | 69 | 1002 | 68 | 330 | 1676 |
-| EAGLE [@consonni2010] | Italy | 2002–2005 | C | P | S | 1908 | 87 | 2065 | 72 | 875 | 3098 |
-| TURIN [@richiardi2004] | Italy | 1990–1994 | C | P | S | 1086 | 79 | 1489 | 80 | 404 | 2171 |
-| ROME [@fortes2003] | Italy | 1993–1996 | C | H | S | 326 | 74 | 321 | 63 | 99 | 548 |
-| LUCA [@stucker2002] | France | 1989–1992 | D | H | S | 280 | 98 | 282 | 98 | NA | 562 |
-| PARIS [@kazma2012] | France | 1988–1992 | C | H | S | 169 | 95 | 227 | 95 | 19 | 377 |
-| ICARE [@papadopoulos2011] | France | 2001–2007 | D | P | S & NOK | 2739 | 87 | 3449 | 81 | 1331 | 4857 |
-| CAPUA [@felicitaslópez-cima2007] | Spain | 2000–2010 | C | H | S | 559 | 91 | 512 | 96 | 102 | 969 |
-| MORGEN ᵈ [@beulens2009] | Netherlands | 1993–1997 | D (nested) | P | S | 43 | NA | 115 | NA | 78 | 80 |
-| INCO_Czech Republic [@brennan2006; @carel2006] | Czech Republic | 1999–2002 | C | H | S | 304 | 94 | 452 | 80 | 228 | 528 |
-| INCO_Hungary [@brennan2006; @carel2006] | Hungary | 1998–2001 | C | H | S | 391 | 90 | 305 | 100 | 139 | 557 |
-| INCO_Poland [@brennan2006; @carel2006] | Poland | 1998–2002 | C | P & H | S | 793 | 88 | 835 | 88 | 793 | 835 |
-| INCO_Slovakia [@brennan2006; @carel2006] | Slovakia | 1998–2002 | C | H | S | 345 | 90 | 285 | 84 | 107 | 523 |
-| INCO_Romania [@brennan2006; @carel2006] | Romania | 1998–2002 | C | H | S | 179 | 90 | 225 | 99 | 113 | 291 |
-| INCO_Russia [@brennan2006; @carel2006] | Russia | 1998–2001 | C | H | S | 599 | 96 | 580 | 90 | 156 | 1023 |
-| INCO_UK [@carel2006] | United Kingdom | 1998–2005 | C | P | S | 441 | 78 | 916 | 84 | 504 | 853 |
-| LUCAS [@ilar2017] | Sweden | 1985–1990 | C | P | S & NOK | 1014 | 87 | 2307 | 85 | NA | 3321 |
-| MONTREAL [@ramanakumar2007] | Canada | 1996–2002 | C | P | S & NOK | 1176 | 85 | 1505 | 69 | 1073 | 1608 |
-| Toronto [@brenner2010] | Canada | 1997–2002 | C | P & H | S | 365 | 62 | 844 | 71 | 679 | 530 |
+-   $y_i$ = Lung cancer status for individual $i$
+-   $x_i$ = Cumulative asbestos exposure in fibre-years (primary exposure of interest) for individual $i$
+-   $z_{i1}$ = Age group (always included as categories \<45, 45–49, 50–54, 55–59, 60–64, 65–69, 70–74, and \>74 years)
+-   $z_{i2}$ = Sex (included if both men and women included in the study)
+-   $z_{i3}$ = Cigarette pack-years (always included, as \[log (cigarette pack-years +1)\])
+-   $z_{i4}$ = Time since quitting smoking cigarettes (included if more than one category contrast present: current smokers; stopping smoking 2–7, 8–15, 16–25, ≥26 years before interview/diagnosis; and never-smokers)
+-   $\alpha$ = intercept
+-   $\beta$ = log odds ratio per asbestos fibre-year (parameter of primary interest)
+-   $\theta_k$ = log odds ratios for covariates
+-   $K$ varies from 2 to 4 depending on the available covariates with contrasting levels per study.
 
-Frequencies of participants included for analysis are presented.
+Fully adjusted models were obtained for 18 out of the 20 substudies, whereas two studies were not adjusted for sex due to the lack of contrast (LUCA[@stucker2002] and LUCAS[@ilar2017]). For the second stage, we fitted REML random-effects meta-analysis of the pooled effect estimates obtained in the first stage. Study-specific estimates and pooled measures of effect are presented in a forest plot (**Supplementary Figure 2**).
 
-ᵃ C = Cumulative, D = Density.
+##### **2. One-stage meta-analysis**
 
-ᵇ P = Population, H = Hospital.
+One-stage meta-analysis allows for the simultaneous analysis of all IPD with a mixed-effects model in a flexible framework, which can improve preciseness of the estimates. We attempted to fit the extended one-stage models described by Debray, et al.[@Debray2013] using mixed-effects logistic regression models with adaptive Gauss-Hermite Quadrature with 1 quadrature point (Laplacian approximation), including cumulative asbestos as the main explanatory variable, accounting for clustering within each study, allowing for random slopes for cumulative asbestos within study in all model specifications, and adjusting for age group, sex, cigarette pack-years, and time since quitting smoking. A fully-random effects model where all parameters (including intercepts) have random effects with potential correlations, and a reduced random-effects model with independent random effects for all variables failed to converge. A simplified model with random slopes per study for the main variable of interest (cumulative asbestos), random intercepts per study, and fixed effects for all other covariates is thus presented as the main meta-analysis.
 
-ᶜ S = Subject, NOK = Next-of-kin.
+For frequency-matched case-control studies, intercepts are not expected to represent baseline disease risk, and are largely reflective of sampling ratios per study. However, differential participation rates across studies can also alter the intercepts, reason why intercepts cannot be considered completely uninformative. Currently, there is not definitive guidance on the best way to analyse case-control IPD regarding the impact of assuming random or stratified intercepts. Nonetheless, guidance for IPD meta-analysis of randomized controlled trials suggests that non-parametric modelling of intercepts avoids potentially strong assumptions on the distribution of intercepts and their influence on the estimated effect. [@riley2021] Therefore, we fitted the same model as described before, but including stratified intercepts per study instead of random intercepts as a sensitivity analysis.
 
-ᵈ Nested case-control study: 45% of invited participants to the original cohort completed the baseline questionnaire.
+For both models, the $RR(x)$ was obtained from the main cumulative asbestos exposure effect $\beta$ (Equation 3). A comparison of the analysis of SYNERGY data under different meta-analyses and assumptions is presented in **Supplementary Table 5**.
+
+$$
+RR(x) = \exp\left(\beta \cdot x\right)
+\quad (3)
+$$
 
 {{< pagebreak >}}
 
 ### Supplementary Figure 1
 
-![**Supplementary Figure 1**. Directed acyclic graph (DAG) depicting the causal relationship between two occupational lung carcinogens and lung cancer. Each circle (node) represents a variable, while arrows represent the hypothesized relationships between variables. Unobserved variables are coloured in grey, whereas observed variables are green (exposures), blue (outcome) and white (adjusted). The minimal set of adjustment for this model consists of age (agegroup), sex, smoking status and time since quitting (time_quit), lifetime smoking intensity (packyears), and study (study_name). The true value of exposure (X_asb_true and X_rcs_true) are unobserved and thus estimated with a job exposure matrix (asbestos_cum0 and silica_cum0), resulting in loss of individual variation (Epsilon), and exposure error terms (U) that are independent of outcome status (Berkson-type error). This DAG and its associated model code can be accessed at: <https://dagitty.net/mjsrVdmjg>.](images/Figure_S1.png){fig-align="center"}
+![**Supplementary Figure 1**. Directed acyclic graph (DAG) depicting the causal relationship between two occupational lung carcinogens and lung cancer. Each circle (node) represents a variable, while arrows represent the hypothesized relationships between variables. Unobserved variables are coloured in grey, whereas observed variables are green (exposures), blue (outcome) and white (adjusted). The minimal set of adjustment for this model consists of age (agegroup), sex, smoking status and time since quitting (time_quit), lifetime smoking intensity (packyears), and study (study_name). The true value of exposure (X_asb_true and X_rcs_true) are unobserved and thus estimated with a job exposure matrix (asbestos_cum0 and silica_cum0), resulting in loss of individual variation (Epsilon), and exposure error terms (U) that are independent of outcome status (Berkson-type error). This DAG and its associated model code can be accessed through OpenCausal.org <https://opencausal.org/graph/bwoy9fng> and dagitty <https://dagitty.net/mjsrVdmjg>.](images/Figure_S1.png){fig-align="center"}
 
 {{< pagebreak >}}
 
 ### Supplementary Figure 2
 
-![**Supplementary Figure 2**. Exposure-response relations under different model assumptions: (1) linear model, assumes difference in background rate of outcome; (2) linear model, assumes no difference in background rate of outcome; (3) spline model, assumes difference in background rate of outcome; (4) spline model, assumes no difference in background rate of outcome. The models were fitted using logRR estimates from the studies reviewed by Lenters, et al. @Lenters2011 and van der Bij, et al. @vanderbij2013, updated in 2021 for the European Chemicals Agency report on occupational exposure limits for asbestos. @ECHA2021 The grey-shaded area represents the range of exposure values observed in SYNERGY. The horizontal red dashed line marks the relative risk threshold at which RR = 2. Vertical tick marks (bottom) represent average exposure values for the reported pooled estimates per exposure catgory in ECHA. Abbreviations: Relative risk (RR), 95% prediction interval (PI).](images/Figure_S2.png){fig-align="center"}
+![**Supplementary Figure 2**. Forest plot of study-specific and pooled effect estimates of the relative risk of lung cancer per asbestos fibre-year in SYNERGY. The INCO Poland and Toronto studies included both population and hospital-based controls, and are considered as hospital-based controlled studies for this analysis for consistency with prior SYNERGY meta-analyses.](images/Figure_S2.png){fig-align="center"}
 
 {{< pagebreak >}}
 
@@ -145,5 +121,119 @@ Frequencies of participants included for analysis are presented.
 
 {{< pagebreak >}}
 
+### Supplementary Figure 5
+
+![**Supplementary Figure 5**. Exposure-response relations under different model assumptions: (1) linear model, assumes difference in background rate of outcome; (2) linear model, assumes no difference in background rate of outcome; (3) spline model, assumes difference in background rate of outcome; (4) spline model, assumes no difference in background rate of outcome. The models were fitted using logRR estimates from the studies reviewed by Lenters, et al. @Lenters2011 and van der Bij, et al. @vanderbij2013, updated in 2021 for the European Chemicals Agency report on occupational exposure limits for asbestos. @ECHA2021 The grey-shaded area represents the range of exposure values observed in SYNERGY. The horizontal red dashed line marks the relative risk threshold at which RR = 2. Vertical tick marks (bottom) represent average exposure values for the reported pooled estimates per exposure catgory in ECHA. Abbreviations: Relative risk (RR), 95% prediction interval (PI).](images/Figure_S5.png){fig-align="center"}
+
+{{< pagebreak >}}
+
+::: landscape
+### Supplementary Table 1
+
+| **Study** | **Cumulative asbestos estimation method** | **Measurement Method (Period)** | **Coverage, %** ᵃ | **Conversion factor** ᵇ | **JEM assignment level** | **Job History completeness** ᶜ |
+|-----------|-----------|-----------|-----------|-----------|-----------|-----------|
+| Quebec, Canada, mines and mills[@Liddell1997] | JEM | Impinger (1948-1966), PCM (1969-1976) | 25 | Internal | Job, 1-year | Insufficient |
+| Italy, Balangero, mine and mill[@Pira2017] | JEM | PCM (1969-1990) | 24 | N/A | Job, time resolution not reported | Sufficient |
+| Connecticut, friction product plant[@McDonald1984] | JEM | Impinger (1930,35,36,39), PCM (1970-1977) | 30 | External | Department, 10-year | Insufficient |
+| South Carolina, textile plant[@Hein2007] | JEM | Impinger (1930-1971), PCM (1965-1977) | 58 | Internal | Operation, department, 1-year | Sufficient |
+| North Carolina, textile plant[@Loomis2009] | JEM | Impinger (1935-1971), PCM (1964-1986) | 74 | Internal | Job, department, plant, \>10-year periods | Insufficient |
+| Wittenoom, Australia, mine[@Berry2004] | JEM | Coniometer (1948-1958), PCM (1966) | 5 | N/A | Job/work-area, time resolution not reported | Sufficient |
+| Patterson, NJ, insulation manufacture[@Seidman1986] | JEM (external reference) | None | 0 | N/A | Job, single external exposure estimate (no time resolution) | Sufficient |
+| Tyler, TX, insulation manufacture[@Levin1998] | Years of exposure x 45 fibres/ml (plant average) | PCM (1967,70,71) | 25 | N/A | N/A | Sufficient |
+| Libby, MT, mines and mills[@Larson2010] | JEM | Impinger (1956-1969), PCM (1867-1982) | 47 | Internal | Job, 10-year (pre-1970, not reported thereafter) | Sufficient |
+| UK, friction products factory[@Berry1983] | JEM | PCM (1967-1979) | 19 | N/A | Cost-centre, time resolution not reported | Sufficient |
+| Ontario, asbestos cement plant[@Finkelstein1984] | JEM | Impinger (1949,54-57), PCM (1969-1977) | 80 | External | Job, time resolution not reported | Insufficient |
+| New Orleans, LA, asbestos cement plants[@Hughes1987] | JEM | Impinger (1952-1969), PCM (1969-1972) | 61 | Internal | Job, time resolution not reported | Insufficient |
+| Sweden, asbestos cement plant[@Albin1990] | JEM | Impinger/gravimetric (1956-1969), PCM (1969-1977) | 30 | Internal | Job, 5-year | Insufficient |
+| Belgium, asbestos cement plant[@lacquet1980] | JEM | PCM (1970-1976) | 12 | N/A | Work area, time resolution not reported | Sufficient |
+| US factory retirees (Johns Manville)[@enterline1987] | JEM | Impinger (Mid-1950s-1980) | 30 | External | Job, time resolution not reported | Sufficient |
+| US and Canada, insulation workers[@Selikoff1991] | Years from exposure onset x 15 fibres/ml | None | 0 | External | N/A | Sufficient |
+| Pennsylvania, textile plant[@McDonald1983] | JEM | Impinger (1930-39,56-67), PCM (1967) | 55 | External | Department, 10-year | Sufficient |
+| Rochdale, UK, textile plant[@Peto1985] | JEM | Impinger (1951-1964), PCM (1965-1978) | 60 | Internal | Job exposure category (low, medium, high, very high), 5-year | Sufficient |
+| Calvados, France, textile and friction product plant[@Clin2011] | JEM | Gravimetric (1959-1973), PCM (1973-1997) | 60 | Internal | Workshop, plant, 1-year | Sufficient |
+| China, textile, rubber product and cement plant[@Courtice2016] | JEM | Gravimetric (1955–1990), PCM (1999,2002,2006), EM (2006) | 77 | Internal | Job, work area, 5-year | Sufficient |
+| China, mine[@Wang2013] | JEM | Gravimetric (1984-1995,2006), PCM (1991,2006) | 40 | Internal | Job, workshop, study duration-averaged | Sufficient |
+| Europe and Canada pooled case-controlstudy[@Olsson2017] | JEM (SYN-JEM) | \>95% PCM and \<5% EM (1971-2009) | 49 | N/A | Job, region, 1-year | Sufficient |
+
+Abbreviations: electron microscopy (EM), job exposure matrix (JEM), phase contrast microscopy (PCM).
+
+ᵃ Coverage as evaluated by Lenters, et al.[@Lenters2011]: "Percentage of the accumulated work history years temporally covered by exposure measurement data provides an indication of the extent temporal back-extrapolation or reconstruction approaches were used in the exposure estimation process"
+
+ᵇ Numerical factors used to convert particles measured with older methods (e.g. impinger) to fibres measured with microscopy (e.g, PCM and EM). Internal factors were obtained in validation subsets of the same cohort, whereas external conversion factors used those obtained in different study populations.
+
+ᶜ Job history completeness as evaluated by Lenters, et al.[@Lenters2011]: "We considered whether the job history information was sufficiently complete and detailed to capture changes in job titles or tasks over time and between companies, and sufficiently refined or appropriately used in a way that captured differences in exposure between jobs."
+
+{{< pagebreak >}}
+
+### Supplementary Table 2
+
+| Source Controls | Study Name | Exposed (%) |   | Median exposure (ff/ml-years) (among exposed) |   | IQR (ff/ml-years) (among exposed) |   | Range (ff/ml-years) (among exposed) |   |
+|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|
+|  |  | Cases | Controls | Cases | Controls | Cases | Controls | Cases | Controls |
+| H | CAPUA [@felicitaslópez-cima2007] | 42.0 | 39.3 | 1.493 | 1.595 | 0.691 - 2.685 | 0.871 - 2.587 | 0.013 - 16.913 | 0.018 - 10.055 |
+| H | INCO Czech Republic [@brennan2006; @carel2006] | 44.4 | 34.3 | 3.800 | 4.328 | 1.713 - 6.611 | 1.746 - 6.852 | 0.101 - 35.432 | 0.112 - 15.412 |
+| H | INCO Hungary [@brennan2006; @carel2006] | 50.4 | 45.2 | 3.866 | 4.182 | 1.43 - 7.867 | 1.946 - 7.19 | 0.042 - 21.661 | 0.107 - 64.6 |
+| H | INCO Poland [@brennan2006; @carel2006] | 35.1 | 29.3 | 2.850 | 2.364 | 1.195 - 5.947 | 1.06 - 5.535 | 0.018 - 21.593 | 0.025 - 24.183 |
+| H | INCO Romania [@brennan2006; @carel2006] | 33.0 | 24.4 | 3.287 | 3.076 | 1.809 - 6.82 | 1.432 - 5.554 | 0.141 - 15.954 | 0.053 - 15.853 |
+| H | INCO Russia [@brennan2006; @carel2006] | 55.4 | 54.1 | 3.400 | 3.839 | 1.926 - 6.962 | 1.766 - 7.307 | 0.048 - 26.571 | 0.03 - 26.55 |
+| H | INCO Slovakia [@brennan2006; @carel2006] | 43.5 | 34.7 | 3.631 | 3.570 | 1.442 - 7.323 | 1.43 - 7.104 | 0.145 - 23.255 | 0.162 - 17.194 |
+| H | LUCA [@stucker2002] | 43.6 | 39.0 | 1.060 | 1.351 | 0.484 - 2.265 | 0.559 - 2.286 | 0.053 - 6.933 | 0.049 - 6.535 |
+| H | PARIS [@kazma2012] | 41.4 | 45.4 | 2.144 | 1.664 | 0.99 - 3.167 | 0.823 - 3.204 | 0.072 - 7.035 | 0.123 - 7.547 |
+| H | ROME [@fortes2003] | 46.3 | 38.0 | 2.744 | 2.502 | 1.12 - 3.732 | 0.908 - 3.736 | 0.131 - 7.673 | 0.022 - 9.367 |
+| H | Toronto [@brenner2010] | 21.4 | 10.5 | 0.466 | 0.196 | 0.23 - 1.008 | 0.071 - 0.555 | 0.033 - 2.378 | 0.006 - 2.27 |
+| P | AUT [@bruske-hohlfeld2000] | 53.2 | 41.2 | 2.576 | 1.979 | 1.028 - 5.049 | 0.975 - 4.512 | 0.007 - 24.758 | 0.035 - 59.509 |
+| P | EAGLE [@consonni2010] | 35.0 | 26.5 | 1.451 | 1.261 | 0.602 - 2.67 | 0.54 - 2.561 | 0.013 - 8.361 | 0.017 - 10.853 |
+| P | HdA [@jockel1998] | 56.5 | 45.6 | 2.618 | 2.389 | 1.034 - 5.09 | 1.058 - 4.909 | 0.104 - 32.909 | 0.045 - 21.454 |
+| P | ICARE [@papadopoulos2011] | 41.2 | 32.7 | 0.869 | 0.696 | 0.379 - 1.634 | 0.294 - 1.391 | 0.002 - 7.599 | 0.002 - 15.236 |
+| P | INCO UK [@carel2006] | 61.2 | 52.2 | 0.345 | 0.328 | 0.153 - 0.65 | 0.16 - 0.643 | 0.011 - 5.889 | 0.004 - 4.43 |
+| P | LUCAS [@ilar2017] | 28.9 | 26.6 | 0.628 | 0.549 | 0.324 - 0.858 | 0.242 - 0.859 | 0.021 - 2.117 | 0.003 - 1.803 |
+| P | MONTREAL [@ramanakumar2007] | 36.8 | 30.5 | 0.575 | 0.531 | 0.247 - 1.11 | 0.222 - 1.067 | 0.013 - 4.94 | 0.003 - 3.655 |
+| P | MORGEN [@beulens2009] | 27.9 | 10.4 | 1.913 | 2.509 | 1.265 - 2.674 | 1.546 - 4.141 | 0.471 - 4.617 | 0.404 - 6.942 |
+| P | TURIN [@richiardi2004] | 52.6 | 43.4 | 2.075 | 1.742 | 0.944 - 3.677 | 0.889 - 3.492 | 0.032 - 19.084 | 0.055 - 11.557 |
+
+Abbreviations: hospital-based controls (H), interquartile range (IQR), population-based controls (P), percentage (%).
+
+{{< pagebreak >}}
+
+### Supplementary Table 3
+
+| Source Controls | Study Name | Ever-smoker (%) |   | Median pack-years (among exposed) |   | IQR (among exposed) |   | Range (among exposed) |   |
+|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|
+|  |  | Cases | Controls | Cases | Controls | Cases | Controls | Cases | Controls |
+| H | CAPUA [@felicitaslópez-cima2007] | 95.0 | 68.4 | 54.0 | 31.5 | 39 - 76.2 | 13.2 - 52.8 | 0.7 - 240 | 0 - 170 |
+| H | INCO Czech Republic [@brennan2006; @carel2006] | 92.1 | 57.3 | 38.5 | 20.0 | 26.5 - 49.8 | 9.7 - 36.8 | 0.3 - 152 | 0 - 141.2 |
+| H | INCO Hungary [@brennan2006; @carel2006] | 91.0 | 65.2 | 35.0 | 29.5 | 24.5 - 46.6 | 15.2 - 41.5 | 2 - 115.5 | 0.3 - 144.4 |
+| H | INCO Poland [@brennan2006; @carel2006] | 94.7 | 70.8 | 37.2 | 27.2 | 28 - 48.9 | 15.5 - 38 | 2 - 127.6 | 0 - 120.7 |
+| H | INCO Romania [@brennan2006; @carel2006] | 88.8 | 54.7 | 34.5 | 20.9 | 22.1 - 46.7 | 10.6 - 32.5 | 1 - 138.2 | 0.7 - 129.4 |
+| H | INCO Russia [@brennan2006; @carel2006] | 88.0 | 73.6 | 31.5 | 23.4 | 22.3 - 40.5 | 13.2 - 34.2 | 0.3 - 99 | 0.3 - 90.9 |
+| H | INCO Slovakia [@brennan2006; @carel2006] | 93.0 | 60.4 | 36.0 | 25.6 | 25.8 - 47 | 14.1 - 39.1 | 0.8 - 131.8 | 0.3 - 141 |
+| H | LUCA [@stucker2002] | 99.6 | 81.9 | 37.0 | 26.5 | 25.8 - 49 | 11.4 - 40.2 | 1.5 - 111 | 0.1 - 140 |
+| H | PARIS [@kazma2012] | 99.4 | 97.8 | 19.0 | 43.6 | 11.6 - 32.2 | 30.6 - 63.8 | 1.6 - 58 | 3 - 232.7 |
+| H | ROME [@fortes2003] | 93.3 | 74.5 | 51.4 | 35.4 | 35 - 76.4 | 17.1 - 50.9 | 0.6 - 180 | 0.2 - 191 |
+| H | Toronto [@brenner2010] | 59.7 | 43.5 | 42.0 | 17.5 | 23 - 60 | 6.5 - 36.2 | 0.3 - 235 | 0.1 - 220 |
+| P | AUT [@bruske-hohlfeld2000] | 92.7 | 67.0 | 32.5 | 17.6 | 21.5 - 44.5 | 7.2 - 30.5 | 0 - 145.8 | 0 - 188.9 |
+| P | EAGLE [@consonni2010] | 93.2 | 67.9 | 44.8 | 23.5 | 30.8 - 60 | 9.6 - 40 | 0 - 315 | 0 - 211.5 |
+| P | HdA [@jockel1998] | 90.2 | 70.0 | 31.5 | 21.0 | 20.6 - 43.5 | 10 - 33.5 | 0.3 - 167.4 | 0 - 136 |
+| P | ICARE [@papadopoulos2011] | 91.6 | 61.0 | 36.2 | 16.1 | 24.2 - 50.2 | 6.6 - 28 | 0.1 - 161.8 | 0 - 140 |
+| P | INCO UK [@carel2006] | 93.9 | 71.7 | 38.4 | 24.0 | 25.4 - 52 | 11.8 - 38 | 0.3 - 252 | 0 - 117 |
+| P | LUCAS [@ilar2017] | 88.0 | 62.5 | 38.0 | 24.0 | 23.4 - 52 | 9.6 - 37.4 | 0.2 - 105 | 0.2 - 94.5 |
+| P | MONTREAL [@ramanakumar2007] | 95.6 | 68.5 | 58.8 | 38.8 | 45 - 85 | 18.8 - 60 | 0.8 - 285 | 0 - 318.8 |
+| P | MORGEN [@beulens2009] | 95.3 | 47.8 | 30.0 | 22.0 | 22 - 40 | 14 - 30.2 | 3.9 - 90.7 | 3.6 - 45.8 |
+| P | TURIN [@richiardi2004] | 94.7 | 71.5 | 36.8 | 25.0 | 24.8 - 48 | 13.5 - 39.2 | 0.2 - 182 | 0.1 - 139.8 |
+
+Abbreviations: hospital-based controls (H), interquartile range (IQR), population-based controls (P), percentage (%).
+
+{{< pagebreak >}}
+
+### Supplementary Table 4
+
+{{< pagebreak >}}
+
+### Supplementary Table 5
+
+```{r}
+includeHTML("tables/TableS5.html")
+```
+:::
 
 ### References

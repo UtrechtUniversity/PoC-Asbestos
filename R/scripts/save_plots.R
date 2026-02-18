@@ -21,10 +21,10 @@ dir.create(manuscript_images, showWarnings = FALSE)
 
 spline_plot <- readRDS(file.path(tempfolder, "spline_plot.RDS"))
 
-# Figure S2
+# Figure S5
 ggsave(
   spline_plot,
-  filename = file.path(manuscript_images, "Figure_S2.png"),
+  filename = file.path(manuscript_images, "Figure_S5.png"),
   width = 10, height = 5, dpi = 600, bg = "white"
 )
 
@@ -108,11 +108,76 @@ combined_RR_plot <- ggplot(combined_rr_data, aes(x = asbestos_cum0)) +
   ) + 
   coord_cartesian(expand = FALSE)
 
-# Figure 1 
 ggsave(
-  plot = combined_RR_plot,
+  plot = arrangeGrob(combined_RR_plot_tagged, combined_PoC_plot, nrow = 1),
   filename = file.path(manuscript_images, "Figure_1.png"),
-  width = 8, height = 5, dpi = 600, bg = "white"
+  width = 16, height = 5, dpi = 600, bg = "white"
+)
+
+#### Combined PoC plot (Figure 1, journal version) ####
+
+# Prepare PoC data for combined plot
+spline_poc_data <- df_grid_spline %>%
+  select(asbestos_cum0, PoC, PoC_PI_upper) %>% 
+  mutate(Study = "ECHA") %>% 
+  rename(PoC_UB = PoC_PI_upper)
+
+mixed_poc_data <- df_grid_mixed %>%
+  select(asbestos_cum0, PoC, PoC_UB) %>%
+  mutate(Study = "SYNERGY")
+
+# Combine the PoC datasets
+combined_poc_data <- bind_rows(spline_poc_data, mixed_poc_data)
+
+# Create the combined PoC plot (Panel B)
+combined_PoC_plot <- ggplot(combined_poc_data, aes(x = asbestos_cum0)) +
+  # Reference line at PoC = 0.5
+  geom_hline(yintercept = 0.5, linetype = "dotted", color = "royalblue2", linewidth = 0.5) +
+  # Upper 95% prediction interval for each study
+  geom_ribbon(aes(ymin = PoC, ymax = PoC_UB, fill = Study), alpha = 0.3) +
+  # Main PoC lines for each study
+  geom_line(aes(y = PoC, color = Study), linewidth = 0.8) +
+  ylim(0, 1) +
+  scale_x_continuous(breaks = seq(0, 70, by = 5), limits = c(0, 65)) +
+  # Add rug with actual observed asbestos values for lung cancer cases in SYNERGY
+  geom_rug(data = df_asbestos_SYNERGY %>% filter(status == "1"), 
+           aes(x = asbestos_cum0), color = "firebrick4",
+           alpha = 0.6, sides = "b", length = unit(0.02, "npc"), 
+           show.legend = TRUE) +
+  labs(
+    x = "Asbestos fibre-years (ff/ml-years)",
+    y = "Probability of Causation (PoC)",
+    tag = "B",
+    color = "Study",
+    fill = "Study"
+  ) +
+  # Set colors for the two studies (matching Figure 1)
+  scale_color_manual(values = c("ECHA" = "seagreen", "SYNERGY" = "midnightblue")) +
+  scale_fill_manual(values = c("ECHA" = "seagreen2", "SYNERGY" = "lightblue")) +
+  theme_minimal() +
+  theme(
+    axis.text = element_text(size = 10),
+    axis.title.x = element_text(margin = margin(t = 10)),
+    axis.title.y = element_text(margin = margin(r = 10)),
+    panel.grid.minor.y = element_blank(),
+    panel.grid.major.y = element_blank(),
+    axis.line = element_line(colour = "black"),
+    plot.margin = margin(5, 5, 5, 5, "mm"),
+    plot.tag = element_text(face = "bold"),
+    legend.title = element_text(face = "bold")
+  ) + 
+  coord_cartesian(expand = FALSE)
+
+# Add tag to the original combined_RR_plot (Panel A)
+combined_RR_plot_tagged <- combined_RR_plot +
+  labs(tag = "A") +
+  theme(plot.tag = element_text(face = "bold"))
+
+# New Figure 1: Combined RR (A) and PoC (B) panels
+ggsave(
+  plot = arrangeGrob(combined_RR_plot_tagged, combined_PoC_plot, nrow = 1),
+  filename = file.path(manuscript_images, "Figure_1_journal.png"),
+  width = 16, height = 5, dpi = 600, bg = "white"
 )
 
 #### Sensitivity Analysis RR plot #### 
@@ -161,8 +226,8 @@ population_RR_plot <- ggplot(population_rr_data, aes(x = asbestos_cum0)) +
     x = "Asbestos fibre-years (ff/ml-years)",
     y = "Relative Risk (RR)",
     tag = "A",
-    color = NULL,  # Remove legend title
-    fill = NULL    # Remove legend title
+    color = NULL,  
+    fill = NULL    
   ) +
   
   # Manually set colors

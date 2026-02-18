@@ -41,20 +41,22 @@ affiliations:
     city: Utrecht
     country: the Netherlands
 date: today
+abstract: "This report contains the main results from the SYNERGY pooled case-control study meta-analysis to estimate the exposure-response relation of lung cancer risk and cumulative exposure to asbestos. Three approaches are compared: univariate and bivariate two-stage individual participant data (IPD) meta-analysis, and one-stage IPD meta-analysis. Exposure-response relations are used to estimate the exposure threshold at which the likelihood of lung cancer is doubled, corresponding to a probability of causation of 0.5. The upper 95% prediction interval is used as to obtain the exposure thresholds at which it is presumably plausible that lung cancer was caused by asbestos."
 execute: 
   echo: false
   warning: false
 format:
   pdf: 
     toc: true
-    colorlinks: true
     documentclass: scrartcl
+    include-in-header:
+      text: |
+        \usepackage{float}
+        \floatplacement{table}{H}
 bibliography: ../docs/manuscript/PoC-Asbestos.bib
 csl: ../docs/manuscript/european-respiratory-journal.csl
 editor: source
 ---
-
-\pagebreak
 
 ```{r}
 #| label: directories
@@ -80,7 +82,7 @@ dir.create(manuscript_tables, showWarnings = FALSE)
 
 ```{r}
 #| label: install packages
-#| include: false 
+#| eval: false 
 
 if (!require("pak", quietly = TRUE)) {
   install.packages("pak")
@@ -95,6 +97,7 @@ pak::pkg_install(c(
   "sjPlot",           # Print results of statistical models in html.
   "car",              # Companion to applied regression, used for variance inflation factor.
   "mixmeta",          # Derive exposure-response function based on meta-analysis.
+  "metafor",          # Meta-analysis for two-stage MA.
   "splines",          # Natural spline to model exposure-response function.
   "DHARMa",           # Residual diagnostics for mixed models.
   "MASS",             # Functions and datasets for statistical methods.
@@ -120,7 +123,8 @@ pacman::p_load(
   lme4, 
   sjPlot, 
   car,
-  mixmeta, 
+  mixmeta,
+  metafor,
   splines, 
   DHARMa, 
   MASS, 
@@ -129,7 +133,7 @@ pacman::p_load(
   report
 )
 
-conflicts_prefer(dplyr::filter, dplyr::select)
+conflicts_prefer(dplyr::filter, dplyr::select, table1::label)
 ```
 
 ```{r}
@@ -139,7 +143,7 @@ conflicts_prefer(dplyr::filter, dplyr::select)
 source("scripts/load_data.R")
 ```
 
-\pagebreak
+{{< pagebreak >}}
 
 # Descriptive characteristics of the SYNERGY study population
 
@@ -152,11 +156,9 @@ table1 %>%
   cols_width(1:4 ~ pct(25)) 
 ```
 
-\pagebreak
+{{< pagebreak >}}
 
 # Exposure to asbestos (binary)
-
-## Contingency Table
 
 ```{r}
 exposed <- df %>% filter(ever_asbestos0 == 1) %>% count %>% pull
@@ -267,13 +269,9 @@ PoCfun <- function(logor) {
 rm(af, or, contingency_table, factor_cols)
 ```
 
-\pagebreak
+{{< pagebreak >}}
 
-# Exposure to asbestos as continuous variable
-
-Two exposure measures were used for modelling the continuous exposure to asbestos.
-
-## Lifetime cumulative exposure to asbestos (**`asbestos_cum0`**)
+Exposure to asbestos as continuous variable: Lifetime cumulative exposure to asbestos (**`asbestos_cum0`**)
 
 ```{r}
 summary(df$asbestos_cum0)
@@ -322,11 +320,34 @@ bind_rows(grouped_summary, overall_summary) %>%
   write.table(., paste0(tabfolder, "/summary_continuous_exposure.txt"), sep = "\t")
 ```
 
-\pagebreak
+{{< pagebreak >}}
 
-# Probability of Causation (PoC)
+# Two-Stage Meta-analysis
 
-## Mixed effects model - cum0
+```{r}
+source("scripts/add_case_counts.R")
+source("scripts/two_stage_metanalysis.R")
+```
+
+![Two-stage univariate individual participant data (IPD) meta-analysis of all studies included in the pooled case-control SYNERGY study. INCO included multiple centers in different countries, reason why each country is presented as an individual study.](images/Figure_S2.png){fig-align="center"}
+
+{{< pagebreak >}}
+
+
+```{r}
+beta_coefficients_two_stage_main_gt %>% 
+  cols_hide(columns = Model) %>% 
+  cols_width(
+    everything() ~ pct(15)
+  )
+```
+
+
+{{< pagebreak >}}
+
+# One-Stage Meta-Analysis
+
+## Selective-random effects
 
 A mixed-effects logistic regression model is used to estimate the PoC, with `asbestos_cum0` as the main explanatory variable, and adjusted for:
 
@@ -335,6 +356,8 @@ A mixed-effects logistic regression model is used to estimate the PoC, with `asb
 -   Sex (`sex`), female and male.
 -   Smoking (`packyrs`), cigarette pack-years.
 -   Time since smoking cessation (`time_quit`). The categories are: current smokers; stopping smoking 2–7, 8–15, 16–25, and \>= 26 years before interview/diagnosis; and never-smokers.
+
+A model with full random effects did not converge status \~ (1 + asbestos_cum0 + agegroup + sex + packyrs + time_quit \| study_name), therefore alternative models
 
 Adding random effects with a random intercept for each study source (`study_name`) and random slopes for the exposure (`asbestos_cum0`) within each study source.
 
@@ -346,9 +369,10 @@ mixed_model_cum0 <- glmer(
     (1 + asbestos_cum0 | study_name),
   data = df, 
   family = binomial,
-  control = glmerControl(optimizer = "bobyqa"), 
-  nAGQ = 0
+  nAGQ = 1
   )
+
+saveRDS(mixed_model_cum0, file = paste0(tempfolder,"/one-stage_selective-random_cum0_main.rds"))
 ```
 
 ```{r}
@@ -361,24 +385,22 @@ summary(mixed_model_cum0)
 sjPlot::tab_model(mixed_model_cum0)
 ```
 
+Variance inflation factor: 
+
 ```{r}
 car::vif(mixed_model_cum0)
 ```
 
 ```{r}
+#| fig-width: 7
+#| fig-height: 5
+#| fig-dpi: 300
+#| out-width: "100%"
+#| fig-cap: "Simulated residuals for the one-stage meta-analysis model (1000 iterations)"
+
 sim_res <- simulateResiduals(fittedModel = mixed_model_cum0, n = 1000)
 
 plot(sim_res)
-```
-
-```{r}
-source("scripts/calculate_i_squared.R")
-
-# Calculate I² 
-i_squared <- calculate_i_squared(mixed_model_cum0)
-
-print(paste("I² for mixed_model_cum0 (intercept):", round(i_squared$intercept_i_squared, 2), "%"))
-print(paste("I² for asbestos slopes per study:", round(i_squared$slope_i_squared, 2), "%"))
 ```
 
 ```{r}
@@ -401,11 +423,11 @@ LB <- b - 1.96*SE
 
 The coefficient for exposure (b) is `r round(b, 4)` which corresponds to an increase in lung cancer risk of `r round((exp(b)-1)*100, 2)`% per every additional fibre-years.
 
-```{r}
-source("scripts/add_case_counts.R")
+{{< pagebreak >}}
 
+```{r}
 beta_coefficients <- data.frame(
-  Model = "Population-average",
+  Model = "Main",
   Risk_per_ffyr_est = paste0(round((exp(b) - 1) * 100, 1),"%"),
   Risk_per_ffyr_PI = paste0(round((exp(LB) - 1) * 100, 1), "% ; ", 
                            round((exp(UB) - 1) * 100, 1), "%"),
@@ -415,13 +437,11 @@ beta_coefficients <- data.frame(
 
 beta_coefficients <- add_case_counts(
   beta_table = beta_coefficients,
-  data = df,
-  cases_total = cases,
-  stratify_by = NULL  # No stratification
+  data = df
 )
 
 beta_coefficients %>% 
-  write.table(., paste0(tabfolder, "/PoC_mixed_model_cum0_count_plus50.txt"), sep = "\t")
+  write.table(., paste0(tabfolder, "/PoC_one-stage-main_count_plus50.txt"), sep = "\t")
 ```
 
 ```{r}
@@ -507,7 +527,7 @@ summary_table %>%
 summary_table 
 ```
 
-\pagebreak
+{{< pagebreak >}}
 
 Plot of PoC values with the upper bound of the 95% prediction interval, according to cumulative asbestos exposure values.
 
@@ -517,23 +537,33 @@ source("scripts/plot_mixed_cum0.R")
 ```
 
 ```{r}
+#| fig-width: 7
+#| fig-height: 5
+#| fig-dpi: 300
+#| out-width: "100%"
+
 mixed_RR_plot
 ```
 
 ```{r}
+#| fig-width: 7
+#| fig-height: 5
+#| fig-dpi: 300
+#| out-width: "100%"
+
 mixed_PoC_plot
 ```
 
-\pagebreak
+{{< pagebreak >}}
 
 # References
 
 ::: {#refs}
 :::
 
-\pagebreak
+{{< pagebreak >}}
 
-# Package References
+## Package References
 
 For specific information on the operating system, R version, and R package versions used, please refer to the **R/session** folder in the GitHub repository.
 

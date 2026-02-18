@@ -4,9 +4,11 @@
   </a>
 </div>
 
-# Probability of causation in individual workers with disease: Lung cancer due to occupational exposure to asbestos
+[![Preprint DOI](https://img.shields.io/badge/preprint_DOI-10.64898%2F2026.02.06.26345596-%23000080?label=medRxiv&link=https%3A%2F%2Fwww.medrxiv.org%2Fcontent%2F10.64898%2F2026.02.06.26345596)](https://www.medrxiv.org/content/10.64898/2026.02.06.26345596)
 
-This repository contains the source code for the manuscript entitled *Probability of causation in individual workers with disease: Lung cancer due to occupational exposure to asbestos*, as well as the associated R code and documentation for the statistical analyses and results. The objective of this study was to investigate the process of deciding on compensation claims by lung cancer patients exposed occupationally to asbestos by calculating the probability of causation (PoC) threshold at which lung cancer is *more likely than not* due to asbestos. You may read more details in the associated [manuscript](docs/manuscript).
+# Probability of causation in individual workers: Lung cancer due to occupational exposure to asbestos
+
+This repository contains the source code for the manuscript entitled *Probability of causation in individual workers: Lung cancer due to occupational exposure to asbestos*, as well as the associated R code and documentation for the statistical analyses and results. The objective of this study was to estimate probability of causation (PoC) of asbestos-related lung cancer to evaluate exposure thresholds for compensation of lung cancer cases occupationally exposed to asbestos. The associated [working paper](https://www.medrxiv.org/content/10.64898/2026.02.06.26345596) is available as a preprint.
 
 ## How to use 
 
@@ -24,7 +26,7 @@ If you are not able to follow the prior steps, you may also consider reviewing t
 The following .qmd files document the analysis code, by directly incorporating the code in the document or by sourcing R scripts into the analyses. I recommend that these are reviewed in the following order: 
 
 -   [ECHA systematic review and meta-regression](R/PoC_Asbestos_ECHA.qmd). Link to the report: [PDF](docs/reports/PoC_Asbestos_ECHA.pdf)
--   [SYNERGY individual participant data meta-analysis](R/PoC_Asbestos_SYNERGY.qmd). Link to the report: [PDF](docs/reports/PoC_Asbestos_SYNERGY.pdf)
+-   [SYNERGY meta-analysis](R/PoC_Asbestos_SYNERGY.qmd). Link to the report: [PDF](docs/reports/PoC_Asbestos_SYNERGY.pdf)
 -   [SYNERGY: sensitivity analysis](R/PoC_Asbestos_SYNERGY_sensitivity.qmd). Link to the report: [PDF](docs/reports/PoC_Asbestos_SYNERGY_sensitivity.pdf)
 
 Although I have made significant efforts to ensure reproducibility of this project, I encourage you to [contact me](mailto:j.mancillagalindo@uu.nl) or post a request in this repository in case you encounter any issues.   

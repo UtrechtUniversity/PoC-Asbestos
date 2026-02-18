@@ -60,7 +60,7 @@ studies_SYNERGY <- studies_SYNERGY %>%
       # Both population & hospital controls (P & H)
       study_name %in% c(
         "INCO_Poland", "Toronto"
-      ) ~ "P", # Considered Hospital-based on prior SYNERGY studies
+      ) ~ "H", # Considered Hospital-based on prior SYNERGY studies
       
       # Nested case-control study.
       study_name == "MORGEN" ~ "P", 

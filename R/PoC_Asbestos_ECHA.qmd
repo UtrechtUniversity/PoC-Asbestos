@@ -199,7 +199,6 @@ ECHA_absestos_exposure %>%
   write.table(., paste0(tabfolder, "/ECHA_absestos_exposure.txt"), sep = "\t")
 ```
 
-
 The range of reported exposure values greater than 0 for the pooled estimates in ECHA is `r ECHA_absestos_exposure$Min` - `r ECHA_absestos_exposure$Max` fiber-years, with a median of `r ECHA_absestos_exposure$Median` (IQR: `r ECHA_absestos_exposure$Q1` - `r ECHA_absestos_exposure$Q3`)
 
 \pagebreak

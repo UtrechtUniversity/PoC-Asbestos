@@ -44,7 +44,7 @@ table1 %>%
 
 # Save in html format in manuscript folder
 table1 %>% 
-  gtsave(filename = "Table1.html", path = manuscript_tables)
+  gtsave(filename = "Table3.html", path = manuscript_tables)
 
 # Save as R object 
 save(table1, file = file.path(tabfolder, "table1.RDS"))

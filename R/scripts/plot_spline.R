@@ -35,6 +35,7 @@ spline_plot <- ggplot(spline_results, aes(x = Exposure)) +
            alpha = 0.6, sides = "b", length = unit(0.02, "npc"), 
            show.legend = TRUE) +
   xlim(NA, 200) +
+  ylim(NA, 8) +
   scale_linetype_manual(
     name = "Line",
     values = c("RR" = "solid", "95% PI" = "dashed", "RR = 2" = "dotted"),
@@ -71,7 +72,8 @@ df_grid <- data.frame(asbestos_cum0 = expo_grid) %>%
     ., 
     getPoC(x = expo_grid, mix = 4, MOD, scale_factor = 1) %>% 
       select(-Exposure)
-  )
+  ) %>% 
+  mutate(RR_PI_upper = case_when(RR_PI_upper >= 6 ~ 6, T ~ RR_PI_upper))
 
 # Create RR spline plot
 spline_RR <- ggplot(df_grid, aes(x = asbestos_cum0)) +

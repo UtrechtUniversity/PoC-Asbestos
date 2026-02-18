@@ -41,13 +41,19 @@ affiliations:
     city: Utrecht
     country: the Netherlands
 date: today
+abstract-title: About
+abstract: "This report describes sensitivity analyses of the SYNERGY pooled case-control study, by stratifying studies according to the source of controls (hospital-based or population-based), to to estimate the exposure-response relation of lung cancer risk and cumulative exposure to asbestos through meta-analysis of individual participant data (IPD). Three approaches are compared: univariate and bivariate two-stage IPD meta-analysis, and one-stage IPD meta-analysis. Exposure-response relations are used to estimate the exposure threshold at which the likelihood of lung cancer is doubled, corresponding to a probability of causation of 0.5. The upper 95% prediction interval is used as to obtain the exposure thresholds at which it is presumably plausible that lung cancer was caused by asbestos."
 execute: 
   echo: false
   warning: false
 format:
   pdf: 
-    toc: false
+    toc: true
     documentclass: scrartcl
+    include-in-header:
+      text: |
+        \usepackage{float}
+        \floatplacement{table}{H}
 bibliography: ../docs/manuscript/PoC-Asbestos.bib
 csl: ../docs/manuscript/european-respiratory-journal.csl
 editor: source
@@ -77,7 +83,9 @@ dir.create(manuscript_tables, showWarnings = FALSE)
 
 ```{r}
 #| label: install packages
-#| include: false 
+#| eval: false 
+
+options(cli.ignore_unknown_rstudio_theme = TRUE)
 
 if (!require("pak", quietly = TRUE)) {
   install.packages("pak")
@@ -92,6 +100,7 @@ pak::pkg_install(c(
   "sjPlot",           # Print results of statistical models in html.
   "car",              # Companion to applied regression, used for variance inflation factor.
   "mixmeta",          # Derive exposure-response function based on meta-analysis.
+  "metafor",          # Meta-analysis for two-stage MA.
   "splines",          # Natural spline to model exposure-response function.
   "DHARMa",           # Residual diagnostics for mixed models.
   "MASS",             # Functions and datasets for statistical methods.
@@ -118,6 +127,7 @@ pacman::p_load(
   sjPlot, 
   car,
   mixmeta, 
+  metafor,
   splines, 
   DHARMa, 
   MASS, 
@@ -144,51 +154,6 @@ cases_male <- df %>% filter(status == 1 & sex == "Male") %>% count %>% pull
 cases_female <- df %>% filter(status == 1 & sex == "Female") %>% count %>% pull
 ```
 
-## Asbestos Exposure accross studies 
-
-```{r}
-exposure_summary <- df %>%
-  group_by(source_controls, study_name) %>%
-  summarize(
-    median_exposure = median(asbestos_cum0, na.rm=T),
-    IQR = paste(
-      round(quantile(asbestos_cum0, 0.25),3), "-", 
-      round(quantile(asbestos_cum0, 0.75),3)
-    ),
-    range = paste(
-      round(min(asbestos_cum0),3), "-", 
-      round(max(asbestos_cum0),3)
-    ),
-    n_cases = sum(status == 1),
-    n_total = n(),
-    .groups = 'drop'
-  )
-
-# Create gt table
-exposure_summary %>%
-  gt() %>%
-  cols_label(
-    source_controls = "Source of controls",
-    study_name = "Study name",
-    median_exposure = "Median exposure (ff/ml-years)",
-    IQR = "IQR (ff/ml-years)",
-    range = "Range (ff/ml-years)",
-    n_cases = "Cases",
-    n_total = "Total"
-  ) %>%
-  tab_header(
-    title = "Asbestos exposure summary by study and control source"
-  ) %>%
-  cols_align(align = "center") %>%
-  fmt_number(
-    columns = c(median_exposure, IQR, range),
-    decimals = 3
-  ) %>% 
-  cols_width(
-    everything() ~ pct(15) 
-  ) 
-```
-
 ```{r}
 PoCfun <- function(logor) {
   OR <- exp(logor)
@@ -196,9 +161,221 @@ PoCfun <- function(logor) {
 }
 ```
 
+::: landscape
+
+# Age and sex accross studies 
+
+```{r}
+#| fig-pos: "H"
+#| fig-align: "center"
+
+source("scripts/create_exposure_summary.R")
+
+age_table <- create_exposure_summary(
+  data = df %>% mutate(sex_binary = case_when(sex == "Female" ~ 0, sex == "Male" ~ 1)),
+  group_vars = "source_controls",
+  binary_var = "sex_binary",
+  continuous_var = "age",
+  binary_var_label = "Male",
+  continuous_var_label = "age",
+  continuous_var_unit = "years",
+  filter_ever_exposed = FALSE,
+  title = "Age and sex by outcome status and source of controls",
+  continuous_decimals = 0,
+  include_range = FALSE
+)
+
+age_table
+```
+
+
+```{r}
+#| fig-pos: "H"
+#| fig-align: "center"
+
+age_table_study <- create_exposure_summary(
+  data = df %>% mutate(sex_binary = case_when(sex == "Female" ~ 0, sex == "Male" ~ 1)),
+  group_vars = c("source_controls", "study_name"),
+  binary_var = "sex_binary",
+  continuous_var = "age",
+  binary_var_label = "Male",
+  continuous_var_label = "age",
+  continuous_var_unit = "years",
+  filter_ever_exposed = FALSE,
+  title = NULL,
+  continuous_decimals = 0,
+  include_range = FALSE
+)
+
+gtsave(age_table_study, file = file.path(tabfolder, "SYNERGY_age_sex_study.html"))
+
+age_table_study 
+```
+
 {{< pagebreak >}}
 
-## Mixed effects model - cum0 with interaction term
+# Asbestos Exposure accross studies 
+
+```{r}
+#| fig-pos: "H"
+#| fig-align: "center"
+
+exposure_table <- create_exposure_summary(
+  data = df,
+  group_vars = "source_controls",
+  binary_var = "ever_asbestos0",
+  continuous_var = "asbestos_cum0",
+  binary_var_label = "Exposed",
+  continuous_var_label = "exposure",
+  continuous_var_unit = "ff/ml-years",
+  title = "Asbestos exposure summary by outcome status and source of controls",
+  filter_ever_exposed = TRUE,
+  continuous_decimals = 3,
+  include_range = TRUE
+)
+
+exposure_table
+```
+
+```{r}
+# Filter to exposed individuals only
+df_exposed <- df %>%
+  filter(asbestos_dur0 > 0)
+
+# Calculate first year of exposure for each individual
+df_exposed <- df_exposed %>%
+  mutate(
+    first_exp_year = asbestos_lastexp0 - asbestos_dur0,
+    last_exp_year = asbestos_lastexp0,
+    
+    # Measurement period boundaries
+    meas_start = 1971,
+    meas_end = 2009,
+    
+    # Calculate overlap with measurement period
+    overlap_start = pmax(first_exp_year, meas_start),
+    overlap_end = pmin(last_exp_year, meas_end),
+    
+    # Years of overlap (0 if no overlap)
+    years_covered = pmax(0, overlap_end - overlap_start),
+    
+    # Individual coverage proportion
+    individual_coverage = years_covered / asbestos_dur0
+  )
+
+# Overall coverage (weighted by duration)
+weighted_coverage <- sum(df_exposed$years_covered) / sum(df_exposed$asbestos_dur0) * 100
+
+```
+
+The weighted coverage of measurements (by person-years) was calculated for all asbestos-exposed individuals in SYNERGY. For each individual, the first year of exposure was derived by subtracting duration of exposure from the year of last exposure. The overlap between each individual's exposure period and the SYN-JEM measurement period (1971–2009) was then calculated. Weighted coverage was computed as the sum of all overlapping person-years divided by the total exposed person-years across all individuals, expressed as a percentage. The total weighted coverage in SYNERGY was: `r weighted_coverage %>% round(1)` %
+
+```{r}
+#| fig-pos: "H"
+#| fig-align: "center"
+
+exposure_table_study <- create_exposure_summary(
+  data = df,
+  group_vars = c("source_controls", "study_name"),
+  binary_var = "ever_asbestos0",
+  continuous_var = "asbestos_cum0",
+  binary_var_label = "Exposed",
+  continuous_var_label = "exposure",
+  continuous_var_unit = "ff/ml-years",
+  title = NULL,
+  filter_ever_exposed = TRUE,
+  continuous_decimals = 3,
+  include_range = TRUE
+)
+
+gtsave(exposure_table_study, file = file.path(manuscript_tables, "TableS2.html"))
+
+exposure_table_study %>% tab_options(
+    table.font.size = px(12) 
+  )
+```
+
+{{< pagebreak >}}
+
+# Smoking accross studies 
+
+```{r}
+#| fig-pos: "H"
+#| fig-align: "center"
+
+smoking_table <- create_exposure_summary(
+  data = df,
+  group_vars = "source_controls",
+  binary_var = "ever_smok",
+  continuous_var = "packyears",
+  binary_var_label = "Ever-smoker",
+  continuous_var_label = "pack-years",
+  continuous_var_unit = "",
+  title = "Smoking habits summary by study and outcome status",
+  filter_ever_exposed = TRUE,
+  continuous_decimals = 1,
+  include_range = FALSE
+)
+
+smoking_table
+```
+
+
+```{r}
+#| fig-pos: "H"
+#| fig-align: "center"
+
+smoking_table_study <- create_exposure_summary(
+  data = df,
+  group_vars = c("source_controls", "study_name"),
+  binary_var = "ever_smok",
+  continuous_var = "packyears",
+  binary_var_label = "Ever-smoker",
+  continuous_var_label = "pack-years",
+  continuous_var_unit = "",
+  title = NULL,
+  filter_ever_exposed = TRUE,
+  continuous_decimals = 1,
+  include_range = TRUE
+)
+
+gtsave(smoking_table_study, file = file.path(manuscript_tables, "TableS3.html"))
+
+smoking_table_study %>% tab_options(
+    table.font.size = px(12) 
+  )
+```
+
+:::
+
+{{< pagebreak >}}
+
+# Two-stage meta-analysis 
+
+```{r}
+source("scripts/add_case_counts.R")
+source("scripts/two_stage_metanalysis_stratified.R")
+```
+
+{{< pagebreak >}}
+
+::: landscape
+
+```{r}
+beta_coefficients_two_stage_gt %>% 
+  cols_hide(columns = Model) %>% 
+  cols_width(
+    everything() ~ pct(15)
+  )
+```
+
+:::
+
+{{< pagebreak >}}
+
+# One-stage meta-analysis 
+
+Mixed effects model - cum0 with interaction term:
 
 A mixed-effects logistic regression model is used to estimate the PoC, with `asbestos_cum0` as the main explanatory variable, and adjusted for:
 
@@ -216,13 +393,16 @@ An interaction term between `asbestos_cum0` and `source_controls` is included to
 ```{r}
 #| echo: true  
 
-mod_int <- glmer(status ~ asbestos_cum0 * source_controls + agegroup + sex + 
-                   packyrs + time_quit  + (1 + asbestos_cum0 | study_name),
+mod_int <- glmer(
+  status ~ asbestos_cum0 * source_controls + 
+    agegroup + sex + packyrs + time_quit + 
+    (1 + asbestos_cum0 | study_name),
   data    = df,
   family  = binomial,
-  nAGQ    = 0,
-  control = glmerControl(optimizer = "bobyqa")
+  nAGQ    = 1
 )
+
+saveRDS(mod_int, file = paste0(tempfolder,"/one-stage_selective-random_cum0_source-controls.rds"))
 ```
 
 ```{r}
@@ -232,23 +412,21 @@ summary(mod_int)
 ```
 
 ```{r}
+#| fig-width: 7
+#| fig-height: 5
+#| fig-dpi: 300
+#| out-width: "100%"
+#| fig-cap: "Simulated residuals for the one-stage meta-analysis model (1000 iterations)"
+
 sim_res <- simulateResiduals(fittedModel = mod_int, n = 1000)
 
 plot(sim_res)
 ```
 
+Variance inflation factor: 
+
 ```{r}
 car::vif(mod_int)
-```
-
-```{r}
-source("scripts/calculate_i_squared.R")
-
-# Calculate I² 
-i_squared <- calculate_i_squared(mod_int)
-
-print(paste("I² for mod_int (intercept):", round(i_squared$intercept_i_squared, 2), "%"))
-print(paste("I² for asbestos slopes per study:", round(i_squared$slope_i_squared, 2), "%"))
 ```
 
 {{< pagebreak >}}
@@ -310,18 +488,18 @@ beta_coefficients_stratified <- data.frame(
 
 beta_coefficients_stratified <- add_case_counts(
   beta_table = beta_coefficients_stratified,
-  data = df, 
-  cases_total = cases,
-  stratify_by = "source_controls",
-  strata_mapping = c("Hospital controls" = "H", "Population controls" = "P")
+  data = df
 )
 
 beta_coefficients_stratified %>% 
-  write.table(., paste0(tabfolder, "/PoC_stratified_count_plus50.txt"), sep = "\t")
+  write.table(., paste0(tabfolder, "/PoC_one-stage-stratified_count_plus50.txt"), sep = "\t")
 ```
 
 
 ```{r}
+#| fig-pos: "H"
+#| fig-align: "center"
+
 beta_coefficients_stratified <- beta_coefficients_stratified %>% 
   gt() %>%
   cols_label(
@@ -422,88 +600,38 @@ Refer to the ***save_plots.R*** script in the **R/scripts** directory for the re
 
 {{< pagebreak >}}
 
+::: landscape
+
 # Summary of coefficients
 
 Coefficients from both the ECHA and the SYNERGY study are summarized with the following code. 
 
 ```{r}
-# Load the saved data tables 
-beta_coefficients_mixed <- read.table(paste0(tabfolder, "/PoC_mixed_model_cum0_count_plus50.txt"), sep = "\t", header = TRUE, stringsAsFactors = FALSE)
-beta_coefficients_stratified <- read.table(paste0(tabfolder, "/PoC_stratified_count_plus50.txt"), sep = "\t", header = TRUE, stringsAsFactors = FALSE)
-beta_coefficients_spline <- read.table(paste0(tabfolder, "/PoC_spline_model_cum0_count_plus50.txt"), sep = "\t", header = TRUE, stringsAsFactors = FALSE)
-
-# Combine all tables with analysis grouping
-beta_coefficients_combined <- bind_rows(
-  beta_coefficients_spline %>% mutate(Analysis = "Meta-regression of published studies (ECHA)", .before = 1),
-  beta_coefficients_mixed %>% mutate(Analysis = "Meta-analysis of individual participant data (SYNERGY)", .before = 1),
-  beta_coefficients_stratified %>% mutate(Analysis = "Sensitivity analysis stratified by source of controls (SYNERGY)", .before = 1)
-) %>%
-  mutate(
-    Risk_per_ffyr_PI = ifelse(
-      str_detect(Risk_per_ffyr_PI, "–"),
-      Risk_per_ffyr_PI,  # Keep "–" unchanged
-      {
-        # Extract numbers, replace negatives with 0, due to the assumed model monotonicity for PoC
-        lower <- as.numeric(str_extract(Risk_per_ffyr_PI, "^[^%]+"))
-        upper <- as.numeric(str_extract(Risk_per_ffyr_PI, "(?<=; )[^%]+"))
-        paste0(round(pmax(0, lower), 1), "% ; ", round(pmax(0, upper), 1), "%")
-      }
-    )
-  )
-
-# Create comprehensive combined table
-beta_coefficients_combined_gt <- beta_coefficients_combined %>% 
-  gt(groupname_col = "Analysis") %>%
-  cols_label(
-    Model = "Model",
-    Risk_per_ffyr_est = "Estimate",
-    Risk_per_ffyr_PI = "95% Prediction Interval", 
-    Min_exp_50pct_PoC = "Point Estimate",
-    Min_exp_conservative = "Presumably Plausible",
-    Point_per_10k = "Point Estimate", 
-    Presumably_plausible_per_10k = "Presumably Plausible"
-  ) %>%
-  tab_spanner(
-    label = "Risk Increase per Fibre-year",
-    columns = c(Risk_per_ffyr_est, Risk_per_ffyr_PI)
-  ) %>%
-  tab_spanner(
-    label = "Min Exposure for 50% PoC (fibre-years)",
-    columns = c(Min_exp_50pct_PoC, Min_exp_conservative)
-  ) %>%
-  tab_spanner(
-    label = "Cases per 10,000 above 50% PoC in SYNERGY",
-    columns = c(Point_per_10k, Presumably_plausible_per_10k)
-  ) %>%
-  cols_align(align = "center") %>%
-  tab_footnote(
-    footnote = "Probability of Causation (PoC) of 50% corresponds to a doubling in lung cancer risk (i.e., RR = 2) for the point estimate and the upper 95% prediction interval for the presumably plausible threshold.",
-    locations = cells_column_spanners(spanners = "Min Exposure for 50% PoC (fibre-years)")
-  ) %>%
-  tab_footnote(
-    footnote = "Negative values truncated to 0 due to monotonicity assumption. For spline models: instantaneous slope at 1.5 fibre-years (median exposure in cases). ",
-    locations = cells_column_spanners(spanners = "Risk Increase per Fibre-year")
-  ) %>%
-  tab_style(
-    style = cell_fill(color = "lightgray"),
-    locations = cells_row_groups()
-  ) %>%
-  tab_style(
-    style = cell_text(weight = "bold"),
-    locations = cells_row_groups()
-  ) %>% 
-  opt_footnote_marks(marks = "letters")
-
-
-gtsave(beta_coefficients_combined_gt, file = file.path(manuscript_tables, "Table2.html"))
+#| echo: true
+source("scripts/summary_coefficients.R")
 ```
 
 ```{r}
+#| fig-pos: "H"
+#| fig-align: "center"
+
 beta_coefficients_combined_gt %>% 
   cols_width(
     everything() ~ pct(15) 
   ) 
 ```
+
+# Comparison of SYNERGY meta-analyses
+
+```{r}
+beta_coefficients_S3_combined_gt %>% 
+  cols_width(
+    everything() ~ pct(15) 
+  ) 
+```
+
+
+:::
 
 {{< pagebreak >}}
 

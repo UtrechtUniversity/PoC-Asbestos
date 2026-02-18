@@ -1,287 +1,707 @@
-<style type="text/css">
-.tg  {border-collapse:collapse;border-spacing:0;}
-.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
-  overflow:hidden;padding:10px 5px;word-break:normal;}
-.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
-  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
-.tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<style>body{background-color:white;}</style>
+
+
+</head>
+<body>
+<div id="mravrqogpv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+  <style>#mravrqogpv table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#mravrqogpv thead, #mravrqogpv tbody, #mravrqogpv tfoot, #mravrqogpv tr, #mravrqogpv td, #mravrqogpv th {
+  border-style: none;
+}
+
+#mravrqogpv p {
+  margin: 0;
+  padding: 0;
+}
+
+#mravrqogpv .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#mravrqogpv .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#mravrqogpv .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#mravrqogpv .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#mravrqogpv .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#mravrqogpv .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mravrqogpv .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#mravrqogpv .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#mravrqogpv .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#mravrqogpv .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#mravrqogpv .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#mravrqogpv .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#mravrqogpv .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#mravrqogpv .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#mravrqogpv .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#mravrqogpv .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#mravrqogpv .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#mravrqogpv .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#mravrqogpv .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mravrqogpv .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#mravrqogpv .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#mravrqogpv .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#mravrqogpv .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mravrqogpv .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#mravrqogpv .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#mravrqogpv .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mravrqogpv .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mravrqogpv .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#mravrqogpv .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mravrqogpv .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#mravrqogpv .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mravrqogpv .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#mravrqogpv .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mravrqogpv .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#mravrqogpv .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mravrqogpv .gt_left {
+  text-align: left;
+}
+
+#mravrqogpv .gt_center {
+  text-align: center;
+}
+
+#mravrqogpv .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#mravrqogpv .gt_font_normal {
+  font-weight: normal;
+}
+
+#mravrqogpv .gt_font_bold {
+  font-weight: bold;
+}
+
+#mravrqogpv .gt_font_italic {
+  font-style: italic;
+}
+
+#mravrqogpv .gt_super {
+  font-size: 65%;
+}
+
+#mravrqogpv .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#mravrqogpv .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#mravrqogpv .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#mravrqogpv .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#mravrqogpv .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#mravrqogpv .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#mravrqogpv .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#mravrqogpv .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#mravrqogpv div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
 </style>
-<table class="tg"><thead>
-  <tr>
-    <th class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Study&nbsp;&nbsp;&nbsp;</th>
-    <th class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Reference&nbsp;&nbsp;&nbsp;</th>
-    <th class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Asbestos Exposure Period&nbsp;&nbsp;&nbsp;</th>
-    <th class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Study design&nbsp;&nbsp;&nbsp;</th>
-    <th class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>N&nbsp;&nbsp;&nbsp;</th>
-    <th class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Type of risk estimate&nbsp;&nbsp;&nbsp;</th>
-    <th class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Fibre type&nbsp;&nbsp;&nbsp;</th>
-    <th class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Lowest–highest exposure category (f–y/cm³)&nbsp;&nbsp;&nbsp;</th>
-    <th class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Exposure quality&nbsp;&nbsp;&nbsp;</th>
-    <th class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Lagged CE&nbsp;&nbsp;&nbsp;</th>
-  </tr></thead>
-<tbody>
-  <tr>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Quebec, Canada, mines and mills&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Liddell et al. (1997)&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>~ 1904–1976&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Cohort&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>∼11,000&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>SMR&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Chrysotile&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>4.7–4,710&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Low&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>CE to age 55&nbsp;&nbsp;&nbsp;</td>
-  </tr>
-  <tr>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Italy, Balangero, mine and mill&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Pira et al. (2017)&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>1916–1990&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Cohort&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>1,056&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>SMR&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Chrysotile&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>50–667&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Low&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>CE&nbsp;&nbsp;&nbsp;</td>
-  </tr>
-  <tr>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Connecticut, friction product plant&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>McDonald et al. (1984)&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>1913–1977&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Cohort&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>3,513&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>SMR&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Chrysotile&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>15–400&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Low&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>CE&nbsp;&nbsp;&nbsp;</td>
-  </tr>
-  <tr>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>South Carolina, textile plant&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Hein et al. (2007)&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>1896–1977&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Cohort&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>3,072&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>SMR&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Chrysotile&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>0.75–200&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>High&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>CE10&nbsp;&nbsp;&nbsp;</td>
-  </tr>
-  <tr>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>North Carolina, textile plant&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Loomis et al. (2009)&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>1925–1994&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Cohort&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>5,770&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">   <br>RR adj ᵃ</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Chrysotile&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">   <br>5.7–408 ᶜ</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Low&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>CE10&nbsp;&nbsp;&nbsp;</td>
-  </tr>
-  <tr>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Wittenoom, Australia, mine&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Berry et al. (2004)&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>1937–1966&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Cohort&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>6,358&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>SMR&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Amphibole, crocidolite&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>0.11–220&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Low&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>CE&nbsp;&nbsp;&nbsp;</td>
-  </tr>
-  <tr>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Patterson, NJ, insulation manufacture&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Seidman et al. (1986)&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>1941–1954&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Cohort&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>820&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>SMR&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Amphibole, amosite&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>3–417&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Low&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>CE&nbsp;&nbsp;&nbsp;</td>
-  </tr>
-  <tr>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Tyler, TX, insulation manufacture&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Levin et al. (1998)&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>1954–1972&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Cohort&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>1,121&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>SMR&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Amphibole, amosite&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>11–375&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>High&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>CE&nbsp;&nbsp;&nbsp;</td>
-  </tr>
-  <tr>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Libby, MT, mines and mills&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Larson (2010)&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br> &nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Cohort&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>1,862&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>RR&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Amphibole, tremolite b&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>0.7–73&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>High&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>CE20&nbsp;&nbsp;&nbsp;</td>
-  </tr>
-  <tr>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>UK, friction products factory&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Berry and Newhouse (1983)&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>1910–1979&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Nested case-control&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>13,460&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>OR&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Mixed&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">   <br>29.5–228 ᶜ</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Low&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>CE&nbsp;&nbsp;&nbsp;</td>
-  </tr>
-  <tr>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Ontario, asbestos cement plant&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Finkelstein (1984)&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>1948–1977&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Cohort&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>740&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>SMR&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Mixed&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>15–250&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Low&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>CE&nbsp;&nbsp;&nbsp;</td>
-  </tr>
-  <tr>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>New Orleans, LA, asbestos cement plants&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Hughes et al. (1987)&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>1937–1972&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Cohort&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>6,931&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>SMR&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Mixed&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>4.2–256&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Low&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>CE10&nbsp;&nbsp;&nbsp;</td>
-  </tr>
-  <tr>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Sweden, asbestos cement plant&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Albin et al. (1990)&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>1907–1977&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Cohort (external reference)&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>2,898&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">   <br>RR adj ᵃ</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Mixed&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>3.1–88&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Low&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>CE&nbsp;&nbsp;&nbsp;</td>
-  </tr>
-  <tr>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Belgium, asbestos cement plant&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Lacquet et al. (1980)&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>1928–1977&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Cohort&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>1,973&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>SMR&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Mixed&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>25–2,000&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Low&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>CE&nbsp;&nbsp;&nbsp;</td>
-  </tr>
-  <tr>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>US factory retirees (Johns Manville)&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Enterline et al. (1987)&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>1890–1980&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Cohort&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>1,074&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>SMR&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Mixed&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>186–2,928&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>High&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>CE&nbsp;&nbsp;&nbsp;</td>
-  </tr>
-  <tr>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>US and Canada, insulation workers&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Selikoff and Seidman (1991)&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>~ 1920–1986&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Cohort&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>17,800&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>SMR&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Mixed&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>38–375&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Low&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>CE10&nbsp;&nbsp;&nbsp;</td>
-  </tr>
-  <tr>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Pennsylvania, textile plant&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>McDonald et al. (1983)&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>~ 1900–1967&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Cohort&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>4,024&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>SMR&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Mixed&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>15–330&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>High&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>CE10&nbsp;&nbsp;&nbsp;</td>
-  </tr>
-  <tr>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Rochdale, UK, textile plant&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Peto et al. (1985)&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>1933–1978&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Cohort&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>3,211&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>SMR&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Mixed&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>5.9–257&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>High&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>CE5&nbsp;&nbsp;&nbsp;</td>
-  </tr>
-  <tr>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Calvados, France, textile and friction product plant&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Clin et al. (2011a)&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>1978–2004&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Cohort&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>2,024&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">   <br>HR adj ᵃ</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Mixed&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">   <br>90–500 ᶜ</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Low&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>CE10&nbsp;&nbsp;&nbsp;</td>
-  </tr>
-  <tr>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>China, textile, rubber product and cement plant&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Courtice et al. (2016)&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>1972–2008&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Cohort&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>577&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">   <br>HR adj ᵃ</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Chrysotile&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">   <br>156–913 ᶜ   </td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Low&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>CE10&nbsp;&nbsp;&nbsp;</td>
-  </tr>
-  <tr>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>China, mine&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Wang et al. (2013b)&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>1981–2006&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Cohort&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>1,539&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>SMR&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Chrysotile&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>10–750&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Low&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>CE10&nbsp;&nbsp;&nbsp;</td>
-  </tr>
-  <tr>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Europe and Canada pooled case-control study, women&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Olsson et al. (2017)&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>1922–2009&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Case-control&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>3,296 cases, 4,514 controls&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">   <br>OR adj ᵃ</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>Mixed&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>0.25–4.7&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>High&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-0pky">&nbsp;&nbsp;&nbsp;<br>CE&nbsp;&nbsp;&nbsp;</td>
-  </tr>
-</tbody></table>
+  <table class="gt_table" style="table-layout:fixed;width:100%;" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <colgroup>
+    <col style="width:10%;"/>
+    <col style="width:10%;"/>
+    <col style="width:10%;"/>
+    <col style="width:10%;"/>
+    <col style="width:10%;"/>
+    <col style="width:10%;"/>
+    <col style="width:10%;"/>
+    <col style="width:10%;"/>
+    <col style="width:10%;"/>
+    <col style="width:10%;"/>
+  </colgroup>
+  <thead>
+    <tr class="gt_col_headings gt_spanner_row">
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="2" colspan="1" scope="col" id="source_controls">Source Controls</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="2" colspan="1" scope="col" id="study_name">Study Name</th>
+      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="2" scope="colgroup" id="Exposed (%)">
+        <div class="gt_column_spanner">Exposed (%)</div>
+      </th>
+      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="2" scope="colgroup" id="Median exposure (ff/ml-years) (among exposed)">
+        <div class="gt_column_spanner">Median exposure (ff/ml-years) (among exposed)</div>
+      </th>
+      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="2" scope="colgroup" id="IQR (ff/ml-years) (among exposed)">
+        <div class="gt_column_spanner">IQR (ff/ml-years) (among exposed)</div>
+      </th>
+      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="2" scope="colgroup" id="Range (ff/ml-years) (among exposed)">
+        <div class="gt_column_spanner">Range (ff/ml-years) (among exposed)</div>
+      </th>
+    </tr>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="percent_exposed_cases">Cases</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="percent_exposed_controls">Controls</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="median_continuous_cases">Cases</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="median_continuous_controls">Controls</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="IQR_cases">Cases</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="IQR_controls">Controls</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="range_cases">Cases</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="range_controls">Controls</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="source_controls" class="gt_row gt_center">H</td>
+<td headers="study_name" class="gt_row gt_center">CAPUA</td>
+<td headers="percent_exposed_cases" class="gt_row gt_center">42.0</td>
+<td headers="percent_exposed_controls" class="gt_row gt_center">39.3</td>
+<td headers="median_continuous_cases" class="gt_row gt_center">1.493</td>
+<td headers="median_continuous_controls" class="gt_row gt_center">1.595</td>
+<td headers="IQR_cases" class="gt_row gt_center">0.691 - 2.685</td>
+<td headers="IQR_controls" class="gt_row gt_center">0.871 - 2.587</td>
+<td headers="range_cases" class="gt_row gt_center">0.013 - 16.913</td>
+<td headers="range_controls" class="gt_row gt_center">0.018 - 10.055</td></tr>
+    <tr><td headers="source_controls" class="gt_row gt_center">H</td>
+<td headers="study_name" class="gt_row gt_center">INCO_Czech Republic</td>
+<td headers="percent_exposed_cases" class="gt_row gt_center">44.4</td>
+<td headers="percent_exposed_controls" class="gt_row gt_center">34.3</td>
+<td headers="median_continuous_cases" class="gt_row gt_center">3.800</td>
+<td headers="median_continuous_controls" class="gt_row gt_center">4.328</td>
+<td headers="IQR_cases" class="gt_row gt_center">1.713 - 6.611</td>
+<td headers="IQR_controls" class="gt_row gt_center">1.746 - 6.852</td>
+<td headers="range_cases" class="gt_row gt_center">0.101 - 35.432</td>
+<td headers="range_controls" class="gt_row gt_center">0.112 - 15.412</td></tr>
+    <tr><td headers="source_controls" class="gt_row gt_center">H</td>
+<td headers="study_name" class="gt_row gt_center">INCO_Hungary</td>
+<td headers="percent_exposed_cases" class="gt_row gt_center">50.4</td>
+<td headers="percent_exposed_controls" class="gt_row gt_center">45.2</td>
+<td headers="median_continuous_cases" class="gt_row gt_center">3.866</td>
+<td headers="median_continuous_controls" class="gt_row gt_center">4.182</td>
+<td headers="IQR_cases" class="gt_row gt_center">1.43 - 7.867</td>
+<td headers="IQR_controls" class="gt_row gt_center">1.946 - 7.19</td>
+<td headers="range_cases" class="gt_row gt_center">0.042 - 21.661</td>
+<td headers="range_controls" class="gt_row gt_center">0.107 - 64.6</td></tr>
+    <tr><td headers="source_controls" class="gt_row gt_center">H</td>
+<td headers="study_name" class="gt_row gt_center">INCO_Poland</td>
+<td headers="percent_exposed_cases" class="gt_row gt_center">35.1</td>
+<td headers="percent_exposed_controls" class="gt_row gt_center">29.3</td>
+<td headers="median_continuous_cases" class="gt_row gt_center">2.850</td>
+<td headers="median_continuous_controls" class="gt_row gt_center">2.364</td>
+<td headers="IQR_cases" class="gt_row gt_center">1.195 - 5.947</td>
+<td headers="IQR_controls" class="gt_row gt_center">1.06 - 5.535</td>
+<td headers="range_cases" class="gt_row gt_center">0.018 - 21.593</td>
+<td headers="range_controls" class="gt_row gt_center">0.025 - 24.183</td></tr>
+    <tr><td headers="source_controls" class="gt_row gt_center">H</td>
+<td headers="study_name" class="gt_row gt_center">INCO_Romania</td>
+<td headers="percent_exposed_cases" class="gt_row gt_center">33.0</td>
+<td headers="percent_exposed_controls" class="gt_row gt_center">24.4</td>
+<td headers="median_continuous_cases" class="gt_row gt_center">3.287</td>
+<td headers="median_continuous_controls" class="gt_row gt_center">3.076</td>
+<td headers="IQR_cases" class="gt_row gt_center">1.809 - 6.82</td>
+<td headers="IQR_controls" class="gt_row gt_center">1.432 - 5.554</td>
+<td headers="range_cases" class="gt_row gt_center">0.141 - 15.954</td>
+<td headers="range_controls" class="gt_row gt_center">0.053 - 15.853</td></tr>
+    <tr><td headers="source_controls" class="gt_row gt_center">H</td>
+<td headers="study_name" class="gt_row gt_center">INCO_Russia</td>
+<td headers="percent_exposed_cases" class="gt_row gt_center">55.4</td>
+<td headers="percent_exposed_controls" class="gt_row gt_center">54.1</td>
+<td headers="median_continuous_cases" class="gt_row gt_center">3.400</td>
+<td headers="median_continuous_controls" class="gt_row gt_center">3.839</td>
+<td headers="IQR_cases" class="gt_row gt_center">1.926 - 6.962</td>
+<td headers="IQR_controls" class="gt_row gt_center">1.766 - 7.307</td>
+<td headers="range_cases" class="gt_row gt_center">0.048 - 26.571</td>
+<td headers="range_controls" class="gt_row gt_center">0.03 - 26.55</td></tr>
+    <tr><td headers="source_controls" class="gt_row gt_center">H</td>
+<td headers="study_name" class="gt_row gt_center">INCO_Slovakia</td>
+<td headers="percent_exposed_cases" class="gt_row gt_center">43.5</td>
+<td headers="percent_exposed_controls" class="gt_row gt_center">34.7</td>
+<td headers="median_continuous_cases" class="gt_row gt_center">3.631</td>
+<td headers="median_continuous_controls" class="gt_row gt_center">3.570</td>
+<td headers="IQR_cases" class="gt_row gt_center">1.442 - 7.323</td>
+<td headers="IQR_controls" class="gt_row gt_center">1.43 - 7.104</td>
+<td headers="range_cases" class="gt_row gt_center">0.145 - 23.255</td>
+<td headers="range_controls" class="gt_row gt_center">0.162 - 17.194</td></tr>
+    <tr><td headers="source_controls" class="gt_row gt_center">H</td>
+<td headers="study_name" class="gt_row gt_center">LUCA</td>
+<td headers="percent_exposed_cases" class="gt_row gt_center">43.6</td>
+<td headers="percent_exposed_controls" class="gt_row gt_center">39.0</td>
+<td headers="median_continuous_cases" class="gt_row gt_center">1.060</td>
+<td headers="median_continuous_controls" class="gt_row gt_center">1.351</td>
+<td headers="IQR_cases" class="gt_row gt_center">0.484 - 2.265</td>
+<td headers="IQR_controls" class="gt_row gt_center">0.559 - 2.286</td>
+<td headers="range_cases" class="gt_row gt_center">0.053 - 6.933</td>
+<td headers="range_controls" class="gt_row gt_center">0.049 - 6.535</td></tr>
+    <tr><td headers="source_controls" class="gt_row gt_center">H</td>
+<td headers="study_name" class="gt_row gt_center">PARIS</td>
+<td headers="percent_exposed_cases" class="gt_row gt_center">41.4</td>
+<td headers="percent_exposed_controls" class="gt_row gt_center">45.4</td>
+<td headers="median_continuous_cases" class="gt_row gt_center">2.144</td>
+<td headers="median_continuous_controls" class="gt_row gt_center">1.664</td>
+<td headers="IQR_cases" class="gt_row gt_center">0.99 - 3.167</td>
+<td headers="IQR_controls" class="gt_row gt_center">0.823 - 3.204</td>
+<td headers="range_cases" class="gt_row gt_center">0.072 - 7.035</td>
+<td headers="range_controls" class="gt_row gt_center">0.123 - 7.547</td></tr>
+    <tr><td headers="source_controls" class="gt_row gt_center">H</td>
+<td headers="study_name" class="gt_row gt_center">ROME</td>
+<td headers="percent_exposed_cases" class="gt_row gt_center">46.3</td>
+<td headers="percent_exposed_controls" class="gt_row gt_center">38.0</td>
+<td headers="median_continuous_cases" class="gt_row gt_center">2.744</td>
+<td headers="median_continuous_controls" class="gt_row gt_center">2.502</td>
+<td headers="IQR_cases" class="gt_row gt_center">1.12 - 3.732</td>
+<td headers="IQR_controls" class="gt_row gt_center">0.908 - 3.736</td>
+<td headers="range_cases" class="gt_row gt_center">0.131 - 7.673</td>
+<td headers="range_controls" class="gt_row gt_center">0.022 - 9.367</td></tr>
+    <tr><td headers="source_controls" class="gt_row gt_center">H</td>
+<td headers="study_name" class="gt_row gt_center">Toronto</td>
+<td headers="percent_exposed_cases" class="gt_row gt_center">21.4</td>
+<td headers="percent_exposed_controls" class="gt_row gt_center">10.5</td>
+<td headers="median_continuous_cases" class="gt_row gt_center">0.466</td>
+<td headers="median_continuous_controls" class="gt_row gt_center">0.196</td>
+<td headers="IQR_cases" class="gt_row gt_center">0.23 - 1.008</td>
+<td headers="IQR_controls" class="gt_row gt_center">0.071 - 0.555</td>
+<td headers="range_cases" class="gt_row gt_center">0.033 - 2.378</td>
+<td headers="range_controls" class="gt_row gt_center">0.006 - 2.27</td></tr>
+    <tr><td headers="source_controls" class="gt_row gt_center">P</td>
+<td headers="study_name" class="gt_row gt_center">AUT</td>
+<td headers="percent_exposed_cases" class="gt_row gt_center">53.2</td>
+<td headers="percent_exposed_controls" class="gt_row gt_center">41.2</td>
+<td headers="median_continuous_cases" class="gt_row gt_center">2.576</td>
+<td headers="median_continuous_controls" class="gt_row gt_center">1.979</td>
+<td headers="IQR_cases" class="gt_row gt_center">1.028 - 5.049</td>
+<td headers="IQR_controls" class="gt_row gt_center">0.975 - 4.512</td>
+<td headers="range_cases" class="gt_row gt_center">0.007 - 24.758</td>
+<td headers="range_controls" class="gt_row gt_center">0.035 - 59.509</td></tr>
+    <tr><td headers="source_controls" class="gt_row gt_center">P</td>
+<td headers="study_name" class="gt_row gt_center">EAGLE</td>
+<td headers="percent_exposed_cases" class="gt_row gt_center">35.0</td>
+<td headers="percent_exposed_controls" class="gt_row gt_center">26.5</td>
+<td headers="median_continuous_cases" class="gt_row gt_center">1.451</td>
+<td headers="median_continuous_controls" class="gt_row gt_center">1.261</td>
+<td headers="IQR_cases" class="gt_row gt_center">0.602 - 2.67</td>
+<td headers="IQR_controls" class="gt_row gt_center">0.54 - 2.561</td>
+<td headers="range_cases" class="gt_row gt_center">0.013 - 8.361</td>
+<td headers="range_controls" class="gt_row gt_center">0.017 - 10.853</td></tr>
+    <tr><td headers="source_controls" class="gt_row gt_center">P</td>
+<td headers="study_name" class="gt_row gt_center">HdA</td>
+<td headers="percent_exposed_cases" class="gt_row gt_center">56.5</td>
+<td headers="percent_exposed_controls" class="gt_row gt_center">45.6</td>
+<td headers="median_continuous_cases" class="gt_row gt_center">2.618</td>
+<td headers="median_continuous_controls" class="gt_row gt_center">2.389</td>
+<td headers="IQR_cases" class="gt_row gt_center">1.034 - 5.09</td>
+<td headers="IQR_controls" class="gt_row gt_center">1.058 - 4.909</td>
+<td headers="range_cases" class="gt_row gt_center">0.104 - 32.909</td>
+<td headers="range_controls" class="gt_row gt_center">0.045 - 21.454</td></tr>
+    <tr><td headers="source_controls" class="gt_row gt_center">P</td>
+<td headers="study_name" class="gt_row gt_center">ICARE</td>
+<td headers="percent_exposed_cases" class="gt_row gt_center">41.2</td>
+<td headers="percent_exposed_controls" class="gt_row gt_center">32.7</td>
+<td headers="median_continuous_cases" class="gt_row gt_center">0.869</td>
+<td headers="median_continuous_controls" class="gt_row gt_center">0.696</td>
+<td headers="IQR_cases" class="gt_row gt_center">0.379 - 1.634</td>
+<td headers="IQR_controls" class="gt_row gt_center">0.294 - 1.391</td>
+<td headers="range_cases" class="gt_row gt_center">0.002 - 7.599</td>
+<td headers="range_controls" class="gt_row gt_center">0.002 - 15.236</td></tr>
+    <tr><td headers="source_controls" class="gt_row gt_center">P</td>
+<td headers="study_name" class="gt_row gt_center">INCO_UK</td>
+<td headers="percent_exposed_cases" class="gt_row gt_center">61.2</td>
+<td headers="percent_exposed_controls" class="gt_row gt_center">52.2</td>
+<td headers="median_continuous_cases" class="gt_row gt_center">0.345</td>
+<td headers="median_continuous_controls" class="gt_row gt_center">0.328</td>
+<td headers="IQR_cases" class="gt_row gt_center">0.153 - 0.65</td>
+<td headers="IQR_controls" class="gt_row gt_center">0.16 - 0.643</td>
+<td headers="range_cases" class="gt_row gt_center">0.011 - 5.889</td>
+<td headers="range_controls" class="gt_row gt_center">0.004 - 4.43</td></tr>
+    <tr><td headers="source_controls" class="gt_row gt_center">P</td>
+<td headers="study_name" class="gt_row gt_center">LUCAS</td>
+<td headers="percent_exposed_cases" class="gt_row gt_center">28.9</td>
+<td headers="percent_exposed_controls" class="gt_row gt_center">26.6</td>
+<td headers="median_continuous_cases" class="gt_row gt_center">0.628</td>
+<td headers="median_continuous_controls" class="gt_row gt_center">0.549</td>
+<td headers="IQR_cases" class="gt_row gt_center">0.324 - 0.858</td>
+<td headers="IQR_controls" class="gt_row gt_center">0.242 - 0.859</td>
+<td headers="range_cases" class="gt_row gt_center">0.021 - 2.117</td>
+<td headers="range_controls" class="gt_row gt_center">0.003 - 1.803</td></tr>
+    <tr><td headers="source_controls" class="gt_row gt_center">P</td>
+<td headers="study_name" class="gt_row gt_center">MONTREAL</td>
+<td headers="percent_exposed_cases" class="gt_row gt_center">36.8</td>
+<td headers="percent_exposed_controls" class="gt_row gt_center">30.5</td>
+<td headers="median_continuous_cases" class="gt_row gt_center">0.575</td>
+<td headers="median_continuous_controls" class="gt_row gt_center">0.531</td>
+<td headers="IQR_cases" class="gt_row gt_center">0.247 - 1.11</td>
+<td headers="IQR_controls" class="gt_row gt_center">0.222 - 1.067</td>
+<td headers="range_cases" class="gt_row gt_center">0.013 - 4.94</td>
+<td headers="range_controls" class="gt_row gt_center">0.003 - 3.655</td></tr>
+    <tr><td headers="source_controls" class="gt_row gt_center">P</td>
+<td headers="study_name" class="gt_row gt_center">MORGEN</td>
+<td headers="percent_exposed_cases" class="gt_row gt_center">27.9</td>
+<td headers="percent_exposed_controls" class="gt_row gt_center">10.4</td>
+<td headers="median_continuous_cases" class="gt_row gt_center">1.913</td>
+<td headers="median_continuous_controls" class="gt_row gt_center">2.509</td>
+<td headers="IQR_cases" class="gt_row gt_center">1.265 - 2.674</td>
+<td headers="IQR_controls" class="gt_row gt_center">1.546 - 4.141</td>
+<td headers="range_cases" class="gt_row gt_center">0.471 - 4.617</td>
+<td headers="range_controls" class="gt_row gt_center">0.404 - 6.942</td></tr>
+    <tr><td headers="source_controls" class="gt_row gt_center">P</td>
+<td headers="study_name" class="gt_row gt_center">TURIN</td>
+<td headers="percent_exposed_cases" class="gt_row gt_center">52.6</td>
+<td headers="percent_exposed_controls" class="gt_row gt_center">43.4</td>
+<td headers="median_continuous_cases" class="gt_row gt_center">2.075</td>
+<td headers="median_continuous_controls" class="gt_row gt_center">1.742</td>
+<td headers="IQR_cases" class="gt_row gt_center">0.944 - 3.677</td>
+<td headers="IQR_controls" class="gt_row gt_center">0.889 - 3.492</td>
+<td headers="range_cases" class="gt_row gt_center">0.032 - 19.084</td>
+<td headers="range_controls" class="gt_row gt_center">0.055 - 11.557</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+</body>
+</html>

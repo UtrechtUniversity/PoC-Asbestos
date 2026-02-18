@@ -20,16 +20,21 @@ authors:
     email: s.peters@uu.nl
     affiliation: Utrecht University
     orcid: 'https://orcid.org/0000-0001-5662-1971'
-  - given-names: Jenny
+  - given-names: Huifang
     family-names: Deng
     email: h.deng@uu.nl
     affiliation: Utrecht University
-  - given-names: Henk van der Molen
+    orcid: 'https://orcid.org/0000-0002-4880-760X'
+  - given-names: Henk F.
     family-names: van der Molen
-    affiliation: Department of Public and Occupational Health, Amsterdam UMC
+    affiliation: >-
+      Department of Public and Occupational Health,
+      Amsterdam UMC
+    orcid: 'https://orcid.org/0000-0002-0719-2020'
   - given-names: Hans
     family-names: Kromhout
     affiliation: Utrecht University
+    orcid: 'https://orcid.org/0000-0002-4233-1890'
   - given-names: Lützen
     family-names: Portengen
     email: l.portengen@uu.nl
@@ -46,6 +51,7 @@ authors:
     affiliation: >-
       National Expertise Centre for Substance-related
       Occupational Diseases (Lexces)
+    orcid: 'https://orcid.org/0000-0002-4550-1437'
 repository-code: 'https://github.com/UtrechtUniversity/PoC-Asbestos'
 keywords:
   - Asbestos
@@ -55,3 +61,55 @@ keywords:
   - Assigned share
   - Worker's compensation
 license: MIT
+preferred-citation:
+  type: article
+  title: >-
+    Probability of causation in individual workers: Lung cancer due to
+    occupational exposure to asbestos
+  authors:
+  - given-names: Javier
+    family-names: Mancilla Galindo
+    email: j.mancillagalindo@uu.nl
+    affiliation: Utrecht University
+    orcid: 'https://orcid.org/0000-0002-0718-467X'
+  - given-names: Susan
+    family-names: Peters
+    email: s.peters@uu.nl
+    affiliation: Utrecht University
+    orcid: 'https://orcid.org/0000-0001-5662-1971'
+  - given-names: Huifang
+    family-names: Deng
+    email: h.deng@uu.nl
+    affiliation: Utrecht University
+    orcid: 'https://orcid.org/0000-0002-4880-760X'
+  - given-names: Henk F.
+    family-names: van der Molen
+    affiliation: >-
+      Department of Public and Occupational Health,
+      Amsterdam UMC
+    orcid: 'https://orcid.org/0000-0002-0719-2020'
+  - given-names: Hans
+    family-names: Kromhout
+    affiliation: Utrecht University
+    orcid: 'https://orcid.org/0000-0002-4233-1890'
+  - given-names: Lützen
+    family-names: Portengen
+    email: l.portengen@uu.nl
+    affiliation: Utrecht Unviersity
+    orcid: 'https://orcid.org/0000-0003-1537-1843'
+  - given-names: Roel C.H.
+    family-names: Vermeulen
+    email: r.c.h.vermeulen@uu.nl
+    affiliation: Utrecht University
+    orcid: 'https://orcid.org/0000-0003-4082-8163'
+  - given-names: Dick
+    family-names: Heederik
+    email: d.heederik@uu.nl
+    affiliation: >-
+      National Expertise Centre for Substance-related
+      Occupational Diseases (Lexces)
+    orcid: 'https://orcid.org/0000-0002-4550-1437'
+  journal: medRxiv
+  year: 2026
+  doi: 10.64898/2026.02.06.26345596
+  url: 'https://www.medrxiv.org/content/early/2026/02/09/2026.02.06.26345596'

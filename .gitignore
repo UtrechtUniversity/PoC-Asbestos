@@ -49,6 +49,8 @@ docs/manuscript/*docx
 docs/manuscript/*html
 docs/manuscript/*pdf
 docs/manuscript/*csl
+docs/manuscript/tables/*v1*
+docs/manuscript/tables/*v2*
 
 # TIFF figures to avoid putting up large files
 results/output_figures/*.tiff
@@ -56,11 +58,15 @@ results/output_figures/*.tiff
 # Analysis files in progress
 R/PoC_Asbestos_SYNERGY_duration.qmd
 R/PoC_Asbestos_DAG.qmd
+R/*v1*
+R/*v2*
+R/*v3*
 
 # Other R scripts 
 R/scripts/incidence_rates.R
 R/scripts/offsets.R
 R/scripts/weights.R
+R/scripts/AsbestMR.v6.R
 
 # translation temp files
 po/*~

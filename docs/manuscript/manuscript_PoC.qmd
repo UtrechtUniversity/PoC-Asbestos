@@ -1,16 +1,10 @@
 ---
-title: "Probability of causation in individual workers with disease: Lung cancer due to occupational exposure to asbestos"
+title: "Probability of causation in individual workers: Lung cancer due to occupational exposure to asbestos"
 author: 
-  - "Javier Mancilla-Galindo¹, Susan Peters¹, Jenny Deng¹, Henk van der Molen², Hans Kromhout¹, Lützen Portengen¹, Roel Vermeulen¹, Dick Heederik¹˒³"
+  - "Javier Mancilla-Galindo¹, Susan Peters¹, Huifang Deng¹, Henk van der Molen², Hans Kromhout¹, Lützen Portengen¹, Roel Vermeulen¹, Dick Heederik¹˒³"
   - "1.	Institute for Risk Assessment Sciences, Utrecht University, Utrecht, the Netherlands"
   - "2.	Department of Public and Occupational Health, Amsterdam UMC, Amsterdam, the Netherlands"
   - "3.	National Expertise Centre for Substance-related Occupational Diseases (Lexces), Utrecht, the Netherlands"
-abstract: |
-  <b>Background:</b> A lifetime cumulative exposure to asbestos of 25 fibre-years (4% risk increase per fibre-year) is used as the threshold at which lung cancer risk is twice as large in the Helsinki criteria, but studies have found steeper exposure-response at lower exposures. We aimed to determine occupational exposure thresholds where lung cancer is more likely than not caused by asbestos for workers’ compensation.  
-  <b>Methods:</b> We estimated the relative risk (RR) of asbestos-related lung cancer by two approaches: spline meta-regression (spline-MR) of pooled RR estimates from systematic reviews (22 studies, 98633 participants), and meta-analysis of individual participant data of the SYNERGY pooled case-control study (14 studies, 37866 participants) with mixed-effects logistic regression adjusted for age, sex, smoking, and study. PoC was calculated as (RR-1)/RR for point estimates and upper 95% prediction intervals (PI), where PoC of 0.5 corresponds to doubling of lung cancer risk.
-  <b>Results:</b> There was a 6.8% (PI: 0%–17.5%) lung cancer risk increase per fibre-year with minimal between-study heterogeneity (I² = 0.07%) in SYNERGY; 9.3% (PI: 2.7%–16.2%) in studies with population-based controls. Exposure-response was lower in spline-MR with substantial heterogeneity (I² = 92.7%). PoC equaled 0.5 at 81.7 (point estimate) and 26.1 fibre-years (upper PI) in spline-MR, compared to 10.6 and 4.3, respectively, in SYNERGY.
-  <b>Conclusions:</b> The Netherlands adopted a 4.31 fibre-years threshold for asbestos-related lung cancer compensation, incorporating uncertainties in favor of claimants. SYNERGY estimates provided more consistent exposure-response estimates than meta-analysis of published aggregate data, supporting lower compensation thresholds than traditional Helsinki criteria.
-keywords: ["Asbestos", "Lung cancer", "Probability of causation", "Causality", "Workers' compensation"]
 execute: 
   echo: false
   warning: false
@@ -44,43 +38,78 @@ pacman::p_load(
 
 {{< pagebreak >}}
 
-### Keywords
+::: {custom-style="Abstract Title"}
+**Abstract**
+:::
 
--   [**Asbestos**](https://www.ncbi.nlm.nih.gov/mesh/68001194)
+::: {custom-style="Abstract"}
+**Background:** Lung cancer compensation systems for occupational exposure to asbestos commonly apply Helsinki criteria, which assume 4% excess lung cancer risk per fibre-year of asbestos exposure. This results in a ‘Probability of Causation (PoC)’ ≥50% at 25 fibre-years (risk doubling threshold). Large recent case-control studies have suggested steeper exposure-response relations at lower exposures. We aimed to estimate PoC of asbestos-related lung cancer to evaluate exposure thresholds for compensation of lung cancer cases occupationally exposed to asbestos.
 
--   [**Lung cancer**](https://www.ncbi.nlm.nih.gov/mesh/68008175)
+**Methods:** Relative risk of asbestos-related lung cancer was estimated using two approaches:
 
--   **Probability of Causation**
+-   A meta-regression of 22 occupational studies forming the core evidence on cumulative asbestos exposure and lung cancer since the 1980s (130,341 participants).
+-   A meta-analysis of the recently conducted SYNERGY pooled case-control study (14 studies, 37,866 participants), adjusted for age, sex, smoking, and study.
 
--   [**Causality**](https://www.ncbi.nlm.nih.gov/mesh/68015984)
+The likelihood that lung cancer was caused by asbestos was estimated as the PoC with 95% prediction intervals (95%PI).
 
--   [**Workers' Compensation**](https://www.ncbi.nlm.nih.gov/mesh/68014942)
+**Results:** Occupational cohort studies produced a shallow exposure-response relation with substantial heterogeneity (I² = 92.7%). SYNERGY showed a steeper relation with 6.8% (95%PI: 0%–17.7%) lung cancer risk increase per fibre-year and lower heterogeneity (I² = 63.4%). PoC ≥50% occurred at 62.93 (point estimate) and 18.2 fibre-years (upper 95%PI) for occupational asbestos studies, compared to 10.5 and 4.3, respectively, in SYNERGY.
 
-------------------------------------------------------------------------
+**Conclusions:** The SYNERGY pooled case-control study provided exposure-response estimates that are more representative of current exposure to lower mixed asbestos fibres in the Netherlands, supporting lower exposure thresholds than the existing Helsinki criteria when estimating PoC in compensation contexts.
 
-### About this manuscript
+<br> <br>
 
-Target journal: [*European Respiratory Journal (ERJ)*](https://publications.ersnet.org/content/erj)
+**Keywords:** [*Asbestos*](https://www.ncbi.nlm.nih.gov/mesh/68001194)*, [Lung cancer](https://www.ncbi.nlm.nih.gov/mesh/68008175), Probability of Causation, [Causality](https://www.ncbi.nlm.nih.gov/mesh/68015984), [Workers' Compensation](https://www.ncbi.nlm.nih.gov/mesh/68014942)*
 
-Word count: 3119 (limit 3000)
+{{< pagebreak >}}
 
-Tables/Illustrations: 2 figures, 2 tables (max. 8 combined)
+# Key Messages
 
-References: 36 (limit 40)
+**What is already known on this topic**
+
+-   Probability of causation (PoC) is applied in workers' compensation with a PoC ≥0.5 as criterion, typically corresponding to a doubling in baseline disease risk;
+
+-   An exposure threshold of 25 fibre-years is used as the doubling in risk criterion for lung cancer attribution (2014 Helsinki criteria) in compensation systems worldwide;
+
+-   Upper confidence intervals (statistical uncertainty) of the PoC have been suggested as eligibility thresholds for compensation to weigh uncertainties in favour of workers.
+
+**What this study adds**
+
+-   This study uses recent and transparent quantitative meta-analyses for the relation between lung cancer and asbestos exposure instead of the Helsinki criterion of 25 fibre-years (4% extra risk per fibre year);
+
+-   This study applies upper 95% prediction intervals of PoC that reflect uncertainty because of between study differences in risk and is a more appropriate measure than statistical uncertainty of the meta-risk-estimate alone;
+
+-   Together with the use of recent general population studies a lower exposure thresholds (4.3 fibre-years) was obtained than when the Helsinki criterion was applied (25 fibre-years);
+
+-   In contrast, historical occupational cohort studies resulted in a threshold of 18.2 fibre-years.
+
+**How this study might affect research, practice or policy**
+
+-   Prediction intervals are a useful tool to account for uncertainty arising from meta-analyses in compensation processes;
+
+-   Use of the prediction interval should be considered when the aim is to weigh uncertainties in favour of workers;
+
+-   Based on the results, 4.3 fibre-years are used as the threshold for compensation in The Netherlands.
+:::
 
 {{< pagebreak >}}
 
 # Introduction
 
-Determining whether an association between occupational exposure and disease is causal requires the integration of evidence from epidemiological studies, experimental animal data, and mechanistic research, including toxicological findings.[@Samet2020] Epidemiological information from population studies plays an important role because human evidence is critical for classification of causal agents as proven human carcinogens. Lung cancer has multiple known causes, with cigarette smoking being the leading risk factor.[@Leiter2023] There are various occupational exposures that increase the risk of lung cancer, including asbestos, respirable crystalline silica, diesel engine exhaust, arsenic, nickel, and chromium which have been classified as respiratory carcinogens.[@Leiter2023; @IARCChemicalAgentsOccupations2012] Different causal factors result in similar types of lung cancer, limiting the ability to conclude what caused lung cancer in an individual, for instance on the basis of tumour histology. Thus, assessment of individual causality is complicated for multi-causal diseases.
+Assessing whether diseases are caused by occupational exposures often occurs within national workers’ compensation systems. Determining causality between occupational exposure and disease requires integrating epidemiological, experimental animal, and mechanistic evidence, including toxicological findings.[@Samet2020] Population-based epidemiological studies are particularly important as human evidence is critical for classifying agents as proven human carcinogens. Lung cancer, a high impact disease with individual and societal burden, has multiple causes, with cigarette smoking being the leading risk factor.[@Leiter2023] However, various occupational exposures also substantially increase lung cancer risk, including asbestos, respirable crystalline silica, diesel engine exhaust, arsenic, nickel, and chromium, which are classified as respiratory carcinogens.[@Leiter2023; @IARCChemicalAgentsOccupations2012] Individual causality assessment is complicated for multi-causal diseases like lung cancer because different causal factors produce indistinguishable lung cancer clinical presentations, making it impossible to determine causation determine individual causation based on tumour histology. Despite this limitation, proof of causality at the individual level is often required for workers’ compensation.
 
-The only approach is to calculate the likelihood that in a lung cancer case, a certain determinant (chemical exposure) caused the disease. A commonly applied concept is the probability of causation (PoC).[@Dawid2017; @Tian2000] When PoC in an individual is greater than 0.5 (or 50%), the disease is “more likely than not” caused by the exposure of interest, as this corresponds mathematically to a doubling in the risk of the disease, meaning that the excess risk equals baseline risk (i.e., risk in non-exposed). This method has been applied in tort law and cancer compensation due to radiation,[@ProZES2020; @Wakeford2006] coal tar pitch volatiles,[@Armstrong1996] smoking,[@Siemiatycki2014] among others. While early critiques focused on its omission of accelerated outcome occurrence and non-identifiability from observational data,[@GreenlandPoC1999] later work showed that the PoC is identifiable under a causal model, monotonicity (no outcome prevention), and exogeneity (no confounding).[@Tian2000; @Li2024]
+One common approach is estimating the likelihood that a certain determinant (occupational exposure) caused lung cancer in a case, often applied as the probability of causation (PoC).[@Dawid2017; @Tian2000] When PoC ≥0.5 (or 50%), the disease is “more likely than not” caused by the exposure, as excess risk equals or exceeds baseline risk (i.e., unexposed). This approach has been applied in various societal contexts including tort law and cancer compensation due to radiation,[@ProZES2020; @Wakeford2006] coal tar pitch volatiles,[@Armstrong1996] smoking,[@Siemiatycki2014] among others. While early critiques focused on its omission of accelerated outcome occurrence and non-identifiability from observational data,[@GreenlandPoC1999] later work showed that PoC is identifiable under certain causal assumptions, mainly no outcome prevention and no confounding.[@Tian2000; @Kawakami2024]
 
-The PoC can be estimated from the exposure-response relation as observed in epidemiological studies or obtained from meta-analyses.[@Siemiatycki2014] However, it is sensitive to estimation errors arising from limitations in study design, conduct and analysis, such as exposure or disease measurement error and misclassification, confounding, causal model misspecification, and estimate imprecision, which may act to the detriment of the claimant. Therefore, it has been argued that uncertainties should be considered to the benefit of the claimant when applying the PoC.[@Wakeford2006; @Armstrong1996] Sources of error in asbestos exposure assessment include limited detection capability when sampling and analysis of fibres was not yet fully developed, difficulty in applying consistent fibre-to-mass or fibre-type conversion factors in case of exposure studies conducted using different measurement techniques,[@Franken2025] and incomplete or imprecise job histories, together generally resulting in underestimated or attenuated exposure-response, which has been estimated to be as large as a factor of 1.5 to 2.[@Lenters2011; @ECHA2021]
+PoC can be estimated from exposure-response relations observed in epidemiological studies or from meta-analyses.[@Siemiatycki2014] However, it is sensitive to estimation errors arising from limitations in study design, conduct and analysis, such as exposure or disease measurement error and misclassification, confounding, causal model misspecification, and estimation imprecision. Therefore, it has been argued that uncertainties should benefit the claimant when applying the PoC.[@Wakeford2006; @Armstrong1996; @Merwin2008] Sources of error in asbestos exposure assessment include limited detection capability when sampling and analysis of fibres was not yet fully developed, difficulty applying consistent fibre-to-mass or fibre-type conversion factors in case of exposure studies conducted using different measurement techniques,[@Franken2025] and incomplete or imprecise job histories, together generally resulting in underestimated or attenuated exposure-response, which has been estimated to be as large as a factor of 1.5 to 2.[@Lenters2011; @ECHA2021]
 
-In the Netherlands, a compensation scheme for occupational diseases is in place since 2022, which adopts the *presumably plausible principle (‘voorshands aannemelijk principe’)*, operationalised by considering uncertainties in individual causality in favor of the worker, for a one-time compensation (all or none).[@Coenen2024] Lung cancer due to asbestos was one of the first occupational diseases included in the scheme in January 2022.
+In the Netherlands, a compensation scheme for occupational diseases is in place since 2022, adopting the *presumably plausible principle (‘voorshands aannemelijk principe’)*, operationalised by considering uncertainties in favour of workers,[@vanZandwijk2005] for a one-time (all or none) compensation.[@Coenen2024] Two main sources of uncertainty are considered: (1) uncertainties in reconstructing individual cumulative exposure when applying job-exposure matrices,[@Kromhout2026] and (2) uncertainties in exposure-response.[@Coenen2024] Asbestos-related lung cancer was among the first occupational diseases included in January 2022.
 
-Asbestos was banned in the Netherlands in 1993; however, it was projected that 6,800 to 17,500 cases of asbestos-related lung cancer would occur from 2011 to 2030.[@vanderbij2016] The 2014 Helsinki report uses a lifetime cumulative exposure to asbestos of 25 fibre-years as the value of a doubling in the risk of lung cancer, which assumes an increase in risk of 4% per fibre-year of exposure.[@HelsinkiAsbestos2015] However, this estimate has been criticized for its lack of methodological transparency.[@Baur2017] For instance, the value of 4% has not been based on a formal meta-analysis of the available evidence. The Helsinki approach also assumes a linear exposure response relation which is inconsistent with more recent studies that indicate that the exposure-response may be steeper at lower exposure and levels off at higher exposure. Moreover, the slope of the exposure-response relation is significantly affected by the quality of the exposure assessment component of a study.[@Lenters2011; @vanderbij2013; @ECHA2021] In this study, we compare two approaches for estimating the level of occupational asbestos exposure associated with a doubling in the risk of lung cancer (PoC = 0.5): A meta-regression of pooled estimates obtained through a recently published systematic literature review and used in occupational standard setting in Europe, and data from a large meta-analysis of a multi-country case-control study with individual participant data which included workers who have been more recently exposed to asbestos and has a high-quality occupational exposure assessment component.
+Asbestos was completely banned in the Netherlands in 1993 following earlier bans on crocidolite in 1977 and asbestos spraying in 1978. Between 6,800 and 17,500 cases of asbestos-related lung cancer from pre-1993 exposures were projected for 2011 to 2030,[@vanderbij2016] with \~600 new cases occurring in 2023.[@Gezondheidsraad2023] In many countries, lifetime cumulative asbestos exposure of 25 fibre-years is considered the threshold for a doubling in lung cancer risk and compensation eligibility, resulting from the 4% excess risk per fibre-year as proposed in the 2014 Helsinki report.[@HelsinkiAsbestos2015] However, this estimate has been criticized for lacking methodological transparency.[@Baur2017] Specifically, the 4% value was not based on formal meta-analysis of all available evidence and assumes a linear exposure-response relation, inconsistent with recent studies indicating that exposure-response may be steeper at lower exposure and levels off at higher exposure.[@vanderbij2013] Moreover, the exposure-response slope is significantly affected by study exposure assessment quality.[@Lenters2011; @vanderbij2013; @ECHA2021]
+
+In this study, we aimed to estimate the PoC of asbestos-related lung cancer, to evaluate exposure thresholds for financial compensation of lung cancer cases occupationally exposed to asbestos. We estimated exposure levels associated with a doubling in lung cancer risk (PoC ≥ 0.5) based on two series of studies:
+
+-   A meta-regression of studies with quantitative exposure-response relations, recently conducted as part of a systematic review for occupational standard setting in Europe by the European Chemicals Agency (ECHA). The study base consisted of 20 occupational cohorts and two case-control studies providing excess risk estimates for asbestos cumulative exposure categories to different types of asbestos in mining and production industries, including cohorts with mixed exposure. In most studies, information on cigarette smoking was not available.
+
+-   The study base created by ECHA contained a meta-analysis of a multi-country general population pooled case-control study, the SYNERGY study, which was also analysed separately as the only study with homogeneous exposure assessment across individual studies, covering populations exposed more recently, from a wide range of different occupational settings, to lower levels of mixed asbestos fibres, and data on important confounders (e.g., smoking).
 
 {{< pagebreak >}}
 
@@ -88,99 +117,134 @@ Asbestos was banned in the Netherlands in 1993; however, it was projected that 6
 
 ## Study design and setting
 
-### European Chemicals Agency (ECHA) study
+### Occupational asbestos studies
 
-```{r}
-N_ECHA <- c(11000, 1056, 3513, 3072, 5770, 6358, 820, 1121, 1862, 13460, 740, 6931,
-            2898, 1973, 1074, 17800, 4024, 3211, 2024, 577, 1539, 3296, 4514)
-
-ECHA_absestos_exposure <- read.table("../../results/output_tables/ECHA_absestos_exposure.txt")
-```
-
-The ECHA evaluation made use of the systematic review by Lenters, et al.[@Lenters2011] (19 studies) which was updated by van der Bij, et al.[@vanderbij2013] and subsequently by ECHA for the so called Annex 1 connected to the Opinion of the Risk Assessment Committee on the occupational exposure limits for asbestos[@ECHA2021] (22 studies, N = `r sum(N_ECHA) %>% as.character` participants). Most studies (**Supplementary Table 1**) are occupational cohorts estimating standardised mortality ratios and only two estimated smoking-adjusted relative risks. The asbestos exposure period ranges from 1890 to 2009 (16 studies with exposure starting before World War II). Reported risk estimates correspond to cumulative asbestos exposures up to `r ECHA_absestos_exposure$Max` fibre-years (median `r ECHA_absestos_exposure$Median`, IQR: `r ECHA_absestos_exposure$Q1` – `r ECHA_absestos_exposure$Q3`). Exposure quality was rated high in 7 of the studies used by ECHA and low in 15 due to poor documentation, low exposure contrast, use of external fibre conversion factors, incomplete job history, or incomplete exposure coverage.[@Lenters2011]
+Occupational asbestos studies were most recently evaluated by the European Chemicals Agency (ECHA) using the systematic review by van der Bij, et al.,[@vanderbij2013] an update of the initial review by Lenters, et al.,[@Lenters2011] which considered 19 epidemiological studies. ECHA updated risk assessment to derive an occupational exposure standard in 2021 by updating[@Pira2017; @Larson2010; @Olsson2017] or adding studies,[@Clin2011; @Courtice2016; @Wang2013] including SYNERGY,[@Olsson2017] a pooled case-control study described below. Characteristics of the occupational studies are presented in **Table 1**. The occupational cohort studies were conducted in different countries, in earlier periods than SYNERGY, and mainly involve mining and specific asbestos production industries, using different asbestos types depending on product requirements. Each study had its exposure assessment component (**Supplementary Table 1**), with most estimating workers’ lifetime cumulative asbestos exposure using job exposure matrixes (JEM), and further categorizing by cumulative exposure to estimate excess lung cancer risk. Because these studies started in different periods and exposed populations were followed over several decades, different techniques were used between and within studies to measure asbestos: counting dust particles (e.g., impinger) in earlier periods and, more recently, quantifying fibres (e.g., phase contrast microscopy). This often required applying particle-to-fibre conversion factors between and within studies. Accordingly, studies were rated by Lenters, et al.[@Lenters2011] and ECHA[@ECHA2021] for exposure assessment quality (low/high) based on documentation, exposure contrast, conversion factors (internal/external), measurement period coverage relative to population exposure, and job history sufficiency.
 
 ### SYNERGY study
 
-```{r}
-#| include: false
-summary_table <- read.table("../../results/output_tables/summary_continuous_exposure.txt")
+The SYNERGY study was also analysed separately as the only study with homogeneous exposure assessment and data on important confounders (e.g., smoking habits). SYNERGY is a pooled case-control study on occupational carcinogen risk for lung cancer development, collecting data from 14 case-control studies conducted across Europe and Canada (1985–2010), comprising 17,705 lung cancer cases and 21,813 controls (**Table 2**). Lung cancer cases with histological or cytological confirmation were included with overall response rate of 83% (range: 62–98%). Controls were mostly recruited from general population (79% vs 21% hospitals), with response rate of 70% (range: 41–100%), and were frequency-matched on age and sex. A nested case-control study within MORGEN, and studies LUCA and ICARE used density sampling, while the remaining employed cumulative incidence sampling. Odds ratios can thus be interpreted as rate and risk ratios, respectively, which converge[@kerr2023] because lung cancer is relatively rare and asbestos exposure prevalence remains stable over short recruitment windows relative to the long latency of asbestos.
 
-median_cum0_overall <- summary_table$asbestos_cum0_median[3] %>% round(2)
-q1_cum0_overall <- summary_table$asbestos_cum0_q1[3] %>% round(2)
-q3_cum0_overall <- summary_table$asbestos_cum0_q3[3] %>% round(2)
-min_cum0_overall <- summary_table$asbestos_cum0_min[3] 
-max_cum0_overall <- summary_table$asbestos_cum0_max[3] %>% round(2)
-```
+Cumulative occupational asbestos exposure was estimated using the quantitative *SYN-JEM*,[@Peters2016SYNJEM] developed using 27,958 asbestos exposure measurements. SYN-JEM estimates annual average job (ISCO-68), year and region-specific asbestos exposure in fibre-year (ff/ml-year) which were consequently summed to yield cumulative exposure in fibre-years. The SYN-JEM model incorporated effects of country-specific asbestos bans and has been applied in studies on occupational asbestos exposure and asbestos-related diseases: peritoneal mesothelioma,[@consonni2019] asbestosis,[@iversen2024] and lung cancer.[@Olsson2017]
 
-The SYNERGY project is a pooled case-control study on the risk of different occupational carcinogens for the development of lung cancer. SYNERGY collected data from 14 case-control studies conducted across Europe and in Canada (1985–2010), comprising a total of 17,705 lung cancer cases and 21,813 matched controls (**Supplementary Table 2**). Lung cancer cases with histological or cytological confirmation were included in the individual case-control studies with an overall response rate of 83% (range: 62–98%). Controls are mostly recruited from the general population (79% vs 21% hospitals), with a response rate of 70% (range: 41–100%). A nested case-control study within MORGEN, and the LUCA and ICARE studies used density sampling, while the remaining studies employed cumulative incidence sampling with frequency matching on age and sex. Odds ratios can thus be interpreted as rate and risk ratios, respectively, which converge[@kerr2023] because lung cancer is relatively rare and asbestos exposure prevalence stays stable over the short recruitment windows relative to the long latency of asbestos.
+::: landscape
+**Table 1**. Studies included in the study base for occupational standard setting in Europe by the European Chemicals Agency (ECHA) on quantitative asbestos exposure and lung cancer.
 
-Cumulative occupational exposure to asbestos was estimated using the quantitative job exposure matrix (JEM) *SYN-JEM*,[@Peters2016SYNJEM] which uses the region, duration, and period of exposure within an ISCO-68 job title to estimate exposure to asbestos in fibre-years (ff/ml-years). The model used to create the JEM incorporated the effect of any country-specific asbestos bans and it was applied in a large epidemiological study of the relationship between asbestos and lung cancer.[@Olsson2017] Cumulative asbestos exposure in SYNERGY ranges from `r min_cum0_overall` to `r max_cum0_overall` fibre-years (median `r median_cum0_overall`, IQR: `r q1_cum0_overall` – `r q3_cum0_overall`).
+| Study | Asbestos Exposure Period | Study design | N | Type of risk estimate | Fibre type | Lowest–highest exposure category (f–y/cm³) | Exposure quality ^d^ | Lagged CE |
+|--------|--------|--------|--------|--------|--------|--------|--------|--------|
+| Quebec, Canada, mines and mills | \~ 1904–1976 | Cohort | ∼11,000 | SMR | Chrysotile | 4.7–4,710 | Low | CE to age 55 |
+| Italy, Balangero, mine and mill | 1916–1990 | Cohort | 1,056 | SMR | Chrysotile | 50–667 | Low | CE |
+| Connecticut, friction product plant | 1913–1977 | Cohort | 3,513 | SMR | Chrysotile | 15–400 | Low | CE |
+| South Carolina, textile plant | 1896–1977 | Cohort | 3,072 | SMR | Chrysotile | 0.75–200 | High | CE10 |
+| North Carolina, textile plant | 1925–1994 | Cohort | 5,770 | RR adj ^a^ | Chrysotile | 5.7–408 ^c^ | Low | CE10 |
+| Wittenoom, Australia, mine | 1937–1966 | Cohort | 6,358 | SMR | Amphibole, crocidolite | 0.11–220 | Low | CE |
+| Patterson, NJ, insulation manufacture | 1941–1954 | Cohort | 820 | SMR | Amphibole, amosite | 3–417 | Low | CE |
+| Tyler, TX, insulation manufacture | 1954–1972 | Cohort | 1,121 | SMR | Amphibole, amosite | 11–375 | High | CE |
+| Libby, MT, mines and mills | 1935–1990 | Cohort | 1,862 | RR | Amphibole, tremolite ^b^ | 0.7–73 | High | CE20 |
+| UK, friction products factory | 1910–1979 | Nested case-control | 13,460 | OR | Mixed | 29.5–228 ^c^ | Low | CE |
+| Ontario, asbestos cement plant | 1948–1977 | Cohort | 740 | SMR | Mixed | 15–250 | Low | CE |
+| New Orleans, LA, asbestos cement plants | 1937–1972 | Cohort | 6,931 | SMR | Mixed | 4.2–256 | Low | CE10 |
+| Sweden, asbestos cement plant | 1907–1977 | Cohort (external reference) | 2,898 | RR adj ^a^ | Mixed | 3.1–88 | Low | CE |
+| Belgium, asbestos cement plant | 1928–1977 | Cohort | 1,973 | SMR | Mixed | 25–2,000 | Low | CE |
+| US factory retirees (Johns Manville) | 1890–1980 | Cohort | 1,074 | SMR | Mixed | 186–2,928 | High | CE |
+| US and Canada, insulation workers | \~ 1920–1986 | Cohort | 17,800 | SMR | Mixed | 38–375 | Low | CE10 |
+| Pennsylvania, textile plant | \~ 1900–1967 | Cohort | 4,024 | SMR | Mixed | 15–330 | High | CE10 |
+| Rochdale, UK, textile plant | 1933–1978 | Cohort | 3,211 | SMR | Mixed | 5.9–257 | High | CE5 |
+| Calvados, France, textile and friction product plant | 1978–2004 | Cohort | 2,024 | HR adj ^a^ | Mixed | 90–500 ᶜ | Low | CE10 |
+| China, textile, rubber product and cement plant | 1972–2008 | Cohort | 577 | HR adj ^a^ | Chrysotile | 156–913 ^c^ | Low | CE10 |
+| China, mine | 1981–2006 | Cohort | 1,539 | SMR | Chrysotile | 10–750 | Low | CE10 |
+| Europe and Canada pooled case-control study | 1922–2009 | Case-control | 17,705 cases, 21,813 controls | OR adj ^a^ | Mixed | 0.25–4.7 | High | CE |
 
-The SYNERGY study was approved by the IARC Ethics Committee in addition to the individual study ethics approval.
+These studies are described in detail in the documentation connected to the Opinion of the Risk Assessment Committee of the European Chemicals Agency (in total 22 studies, N = 130341 participants).[@ECHA2021] References for the individual studies are provided in the supplementary materials.
+
+Abbreviations: Adjusted (adj), cumulative exposure (CE), hazard ratio (HR), odds ratio (OR), risk ratio (RR), standardised mortality ratio (SMR).
+
+^a^ In the North Carolina textile plants study, results were adjusted for age, gender, race, calendar year, and birth cohort; In the Swedish cement plant study, results were adjusted for age and calendar year; In the Calvados plant study, results were adjusted for age and gender; In the Chinese textile, rubber product and cement plant study, results were adjusted for age and smoking (ever/never); In the Europe/Canada pooled case-control study, results were adjusted for study, age, smoking (pack-years, time-since-quitting smoking), and ever-employment in jobs with known increased lung cancer risk due to factors other than asbestos (Yes/No).
+
+^b^ Exposure in the Libby cohort is for the so-called Libby amphibole that includes tremolite and closely related fibrous amphiboles (winchite and richterite).
+
+^c^ The lowest exposure category (corresponding to 0.383 f–y/cm³ in the North Carolina textile plant and 4.5 f–y/cm³ in the British friction factory, 20 f–y/cm³ in the Calvados plant and 44.5 f–y/cm³ in the Chinese textile, rubber product and cement plant) was excluded as no risk estimate could be calculated because it was used as the reference category.
+
+^d^ Additional details on the exposure assessment and references per study are provided in **supplementary table 1**.
+
+{{< pagebreak >}}
+
+**Table 2**. Description of studies included in the SYNERGY project.
+
+| Study | Country | Period of recruitment | Sampling ^a^ | Source of Controls ^b^ | Interviewee ^c^ | Cases (N) | Response cases (%) | Controls (N) | Response controls (%) | Female (N) | Male (N) |
+|------|------|------|------|------|------|------|------|------|------|------|------|
+| AUT | Germany | 1990–1995 | C | P | S | 3180 | 77 | 3249 | 41 | 1068 | 5361 |
+| HdA | Germany | 1988–1993 | C | P | S | 1004 | 69 | 1002 | 68 | 330 | 1676 |
+| EAGLE | Italy | 2002–2005 | C | P | S | 1908 | 87 | 2065 | 72 | 875 | 3098 |
+| TURIN | Italy | 1990–1994 | C | P | S | 1086 | 79 | 1489 | 80 | 404 | 2171 |
+| ROME | Italy | 1993–1996 | C | H | S | 326 | 74 | 321 | 63 | 99 | 548 |
+| LUCA | France | 1989–1992 | D | H | S | 280 | 98 | 282 | 98 | NA | 562 |
+| PARIS | France | 1988–1992 | C | H | S | 169 | 95 | 227 | 95 | 19 | 377 |
+| ICARE | France | 2001–2007 | D | P | S & NOK | 2739 | 87 | 3449 | 81 | 1331 | 4857 |
+| CAPUA | Spain | 2000–2010 | C | H | S | 559 | 91 | 512 | 96 | 102 | 969 |
+| MORGEN ^d^ | Netherlands | 1993–1997 | D (nested) | P | S | 43 | NA | 115 | NA | 78 | 80 |
+| INCO Czech Republic | Czech Republic | 1999–2002 | C | H | S | 304 | 94 | 452 | 80 | 228 | 528 |
+| INCO Hungary | Hungary | 1998–2001 | C | H | S | 391 | 90 | 305 | 100 | 139 | 557 |
+| INCO Poland | Poland | 1998–2002 | C | P & H | S | 793 | 88 | 835 | 88 | 793 | 835 |
+| INCO Slovakia | Slovakia | 1998–2002 | C | H | S | 345 | 90 | 285 | 84 | 107 | 523 |
+| INCO Romania | Romania | 1998–2002 | C | H | S | 179 | 90 | 225 | 99 | 113 | 291 |
+| INCO Russia | Russia | 1998–2001 | C | H | S | 599 | 96 | 580 | 90 | 156 | 1023 |
+| INCO UK | United Kingdom | 1998–2005 | C | P | S | 441 | 78 | 916 | 84 | 504 | 853 |
+| LUCAS | Sweden | 1985–1990 | C | P | S & NOK | 1014 | 87 | 2307 | 85 | NA | 3321 |
+| MONTREAL | Canada | 1996–2002 | C | P | S & NOK | 1176 | 85 | 1505 | 69 | 1073 | 1608 |
+| Toronto | Canada | 1997–2002 | C | P & H | S | 365 | 62 | 844 | 71 | 679 | 530 |
+
+Frequencies of participants included for analysis are presented. References for the individual studies are provided in the supplementary materials.
+
+^a^ C = Cumulative, D = Density.
+
+^b^ P = Population, H = Hospital.
+
+^c^ S = Subject, NOK = Next-of-kin.
+
+^d^ Nested case-control study: 45% of invited participants to the original cohort completed the baseline questionnaire.
+:::
 
 ## Statistical Analysis
 
 ### Exposure-response estimation
 
-The exposure-response relation in the ECHA report was estimated with random-effects meta-regression of the study-level logRR and average exposure level per exposure category reported. Four models were examined (linear and natural splines, allowing for differences or no differences in background lung cancer risk). Predictions were computed over a range of 0–200 fibre-years and plotted. The RR was calculated from meta-regression fixed-effects estimates. The spline meta-regression model with fixed intercept was used for further analysis due to reasons explained elsewhere,[@vanderbij2013] for the estimation of $RR(x)$ using the natural spline (NS) basis functions (Equation 1).
+Exposure-response relations in the 22 occupational asbestos studies were estimated with random-effects meta-regression of study-level logRR and average exposure level per category reported. A meta-RR was estimated from meta-regression of fixed-effects estimates (**Supplementary Methods**).[@vanderbij2013]
 
-$$
-RR(x) = \exp\left(\beta_1 \cdot NS_1(x) + \beta_2 \cdot NS_2(x)\right)
-\quad (1)
-$$
-
-A meta-analysis of SYNERGY with individual participant data was used to estimate the RR of lung cancer due to lifetime cumulative asbestos based on the posited causal model described in the **Supplementary Methods** and represented in a directed acyclic graph (**Supplementary Figure 1**, <https://dagitty.net/mjsrVdmjg>). Meta-estimates were obtained with a generalized linear mixed model (logit link) with study-specific random intercepts and random slopes for exposure to account for potential between-study heterogeneity based on the different SYNERGY study results. The model was adjusted for sex, study, age group (\<45, 45–49, 50–54, 55–59, 60–64, 65–69, 70–74, and \>74 years), smoking (cigarette pack-years \[log (cigarette pack-years +1)\] and time-since-quitting smoking cigarettes (current smokers; stopping smoking 2–7, 8–15, 16–25, ≥26 years before interview/diagnosis; and never-smokers). $RR(x)$ was obtained from the model population-level fixed effect $\gamma$ (Equation 2).
-
-$$
-RR(x) = \exp\left(\gamma \cdot x\right)
-\quad (2)
-$$
+A one-stage meta-analysis [@Debray2013] of SYNERGY was used to estimate the relation between lung cancer RR and lifetime cumulative asbestos (**Supplementary Methods**). Meta-estimates were obtained with a generalized linear mixed model (logit link) with study-specific random intercepts and random slopes for cumulative asbestos exposure in fibre-years to account for between-study heterogeneity. The model was adjusted by including fixed effects for sex, study, age group (\<45, 45–49, 50–54, 55–59, 60–64, 65–69, 70–74, and \>74 years), smoking (cigarette pack-years \[log (cigarette pack-years +1)\] and time-since-quitting smoking cigarettes (current smokers; stopping smoking 2–7, 8–15, 16–25, ≥26 years before interview/diagnosis; and never-smokers).
 
 ### Heterogeneity and prediction intervals
 
-Between-study heterogeneity was quantified using the I² statistic, representing the proportion of total variation attributable to genuine differences between studies rather than sampling error. In ECHA, I² reflected heterogeneity in reported logRR. In SYNERGY, heterogeneity in the exposure-response slope was expressed as $I^2 = \tau^2_{\text{slope}} / (\tau^2_{\text{slope}} + \pi^2 / 3) \times 100\%$, where $\tau^2_{\text{slope}}$ is the between-study variance in slopes and $\pi^2 / 3$ approximates within-study variance.[@Nakagawa2017] Higher I² values indicate greater inconsistency in estimated effects across studies beyond what would be expected by chance.
+Between-study heterogeneity was quantified using the I² statistic, representing the proportion of variation attributable to genuine differences between studies rather than sampling error.[@Borenstein2017] In SYNERGY, exposure-response heterogeneity was obtained from two-stage univariate meta-analysis (**Supplementary Methods**). Higher I² values indicate greater inconsistency in estimated effects across studies beyond expected by chance.
 
-For both the ECHA meta-regression and SYNERGY analysis, 95% prediction intervals (PI) were calculated using Higgins, et al.[@HigginsMetanalysis2009] method, which combines the squared standard error of the target effect with its estimated between-study variance. In ECHA, the target was the pooled logRR and in SYNERGY, the asbestos exposure-response slope coefficient. PI represent the range in which the true effect estimate from a new study would be expected to fall, accounting for both sampling uncertainty and between-study heterogeneity.
+For both meta-analyses, 95% prediction intervals (PI) were calculated using the approach described by Higgins, et al.[@HigginsMetanalysis2009] assuming normally distributed effects. This method combines squared standard error of the target effect with estimated between-study variance. For occupational studies, the target was the pooled logRR and in SYNERGY, the asbestos exposure-response slope coefficient. The prediction interval represents the range where the true effect estimate from a new study would be expected to fall, accounting for both sampling uncertainty and between-study heterogeneity as uncertainty measure.
 
 ### Probability of Causation
 
-PoC for an individual case is equal to the difference between risk under exposure ($\text{Risk}_{\text{exp}}$) minus baseline risk ($\text{Risk}_{\text{unexp}}$), divided by $\text{Risk}_{\text{exp}}$ (Equation 3), which can be re-expressed as relative risks (RR) (Equation 4).[@Tian2000]
-
-<!-- PoC expressed in absolute risks -->
+PoC for individual cases was estimated as the lower bound of the probability of necessity,[@Tian2000] using the difference between risk under exposure ($\text{Risk}_{\text{exp}}$) and baseline risk ($\text{Risk}_{\text{unexp}}$), divided by $\text{Risk}_{\text{exp}}$. For quantitative exposures, PoC can be estimated using RR at exposure value ($x$) from the exposure-response relation:[@Armstrong1996; @Siemiatycki2014]
 
 $$
-PoC = \frac{Risk_{exp} - Risk_{unexp}}{Risk_{exp}}
-\quad (3)
+{PoC}(x) \;≥\; \frac{RR(x)\;-\;1}{RR(x)}
 $$
 
-<!-- PoC expressed as relative risk -->
-
-$$
-PoC = \frac{RR - 1}{RR}
-\quad (4)
-$$
-
-For quantitative exposures, PoC can be estimated using the RR at any given exposure value ($x$) from the exposure-response relation (Equation 5).[@Armstrong1996; @Siemiatycki2014]
-
-<!-- PoC for quantitative exposure -->
-
-$$
-{PoC}(x) \;=\; \frac{RR(x)\;-\;1}{RR(x)} \quad (5)
-$$
-
-We estimated the PoC across the range of cumulative asbestos exposure in SYNERGY. Equation 5 was solved for $PoC(x) = 0.5$ for both exposure-response relations to obtain exposure thresholds for compensation. The frequency of lung cancer cases with a calculated PoC ≥ 0.5 is reported as the total count of compensated cases and the rate of compensated cases per 10,000 lung cancer cases using the SYNERGY population as reference.
-
-Besides PoC calculated with the $RR(x)$ point estimates, upper limits of the 95% PI were also used in the calculation of PoC to account for uncertainties in the exposure-response relations (*presumably plausible* threshold).
+This equation was solved for $PoC(x) ≥ 0.5$ for both exposure-response relations to obtain exposure compensation thresholds. Lung cancer cases with PoC ≥ 0.5 are reported as total count of compensated cases and rate per 10,000 cases using the SYNERGY population as reference. Besides PoC point estimates, upper limits of 95% PI were estimated to account for uncertainties in exposure-response relations (*presumably plausible* threshold).
 
 ### Sensitivity Analysis
 
-The exposure-response relations in SYNERGY were re-estimated stratifying by source of controls (hospital-based and population-based), since hospital-based controls are known to have greater baseline disease risk than population-based controls, resulting in potential underestimation of the effect. Exposure-response and PoC thresholds are presented as previously described.
+The exposure-response in occupational asbestos studies was re-estimated by excluding SYNERGY. SYNERGY exposure-response relations were re-estimated stratifying by control source (hospital-based and population-based), since hospital-based controls have greater baseline disease risk than population-based controls, resulting in potential effect underestimation. Additional sensitivity analyses considered alternative meta-analysis configurations (**Supplementary Methods**).
 
-All analyses and visualizations were performed in R v.4.4.0 through RStudio v.2024.12.1. The analysis code and documentation are available through <https://github.com/UtrechtUniversity/PoC-Asbestos>.
+Analyses and visualizations were performed in R v.4.5.1 through RStudio v.2025.05.1. Code and documentation are available at <https://github.com/UtrechtUniversity/PoC-Asbestos>.
 
 {{< pagebreak >}}
 
 # Results
+
+```{r}
+N_ECHA <- sum(c(11000, 1056, 3513, 3072, 5770, 6358, 820, 1121, 1862, 13460, 740, 6931,
+            2898, 1973, 1074, 17800, 4024, 3211, 2024, 577, 1539, 17705, 21813))
+
+ECHA_absestos_exposure <- read.table("../../results/output_tables/ECHA_absestos_exposure.txt")
+```
 
 ```{r}
 #| include: false
@@ -202,17 +266,16 @@ or <- (exposed_cases/exposed_controls)/(nonexposed_cases/nonexposed_controls)
 af <- (or-1)/or
 ```
 
-A summary of the characteristics of the SYNERGY study population (N = `r total_population`) is provided in **Table 1**. Ever exposure to asbestos was reported in `r round((total_exposed/total_population*100), 1)`% (n = `r total_exposed`) of the participating individuals. The percentage of exposure to asbestos in lung cancer cases and controls was `r round((exposed_cases/cases*100), 1)`% (n = `r exposed_cases`/`r cases`) and `r round((exposed_controls/controls*100), 1)`% (n = `r exposed_controls`/`r controls`), respectively.
-
-**Table 1**. Descriptive characteristics of SYNERGY study participants.
-
 ```{r}
-includeHTML("tables/Table1.html")
+#| include: false
+summary_table <- read.table("../../results/output_tables/summary_continuous_exposure.txt")
+
+median_cum0_overall <- summary_table$asbestos_cum0_median[3] %>% round(2)
+q1_cum0_overall <- summary_table$asbestos_cum0_q1[3] %>% round(2)
+q3_cum0_overall <- summary_table$asbestos_cum0_q3[3] %>% round(2)
+min_cum0_overall <- summary_table$asbestos_cum0_min[3] 
+max_cum0_overall <- summary_table$asbestos_cum0_max[3] %>% round(2)
 ```
-
-> Abbreviations: fibre-years (ff/ml-years), maximum (Max), minimum (Min), 25th percentile (Q1), 75th percentile (Q3), standard deviation (SD).
-
-{{< pagebreak >}}
 
 ```{r}
 #| include: false
@@ -242,11 +305,31 @@ min_dur0_controls <- summary_table$asbestos_dur0_min[1]
 max_dur0_controls <- summary_table$asbestos_dur0_max[1] 
 ```
 
-The median lifetime cumulative exposure to asbestos in ever-exposed was `r median_cum0_cases` (IQR: `r q1_cum0_cases` – `r q3_cum0_cases`, range: `r min_cum0_cases` – `r max_cum0_cases`) fibre-years in cases and `r median_cum0_controls` (IQR: `r q1_cum0_controls` – `r q3_cum0_controls`, range: `r min_cum0_controls` – `r max_cum0_controls`) fibre-years in controls. Total duration of exposure in the cases and controls was `r median_dur0_cases` (IQR: `r q1_dur0_cases` – `r q3_dur0_cases`, range: `r min_dur0_cases` – `r max_dur0_cases`) years and `r median_dur0_controls` (IQR: `r q1_dur0_controls` – `r q3_dur0_controls`, range: `r min_dur0_controls` – `r max_dur0_controls`) years, respectively.
+Most occupational studies (in total 22 studies, N = `r as.integer(N_ECHA)` participants) are cohorts estimating standardised mortality ratios for a range of exposure categories (**Table 1**). Only two studies[@Courtice2016; @Olsson2017] estimated smoking-adjusted relative risks. Asbestos exposure periods range from 1890 to 2009 (16 studies with exposure starting before World War II). Risk estimates correspond to cumulative asbestos exposures up to 4710 fibre-years (median 79.9, IQR 17.5 – 250.3; excluding SYNERGY: median 90, IQR 25.5 – 256.3). Exposure assessment quality was rated high in 7 studies and low in 15 due to poor documentation, low exposure contrast, use of external instead of study-specific fibre conversion factors, incomplete job histories, or incomplete exposure coverage during follow-up.[@Lenters2011]
 
-### Exposure-response and PoC in ECHA
+A summary of the fourteen studies included in SYNERGY is shown in **Table 2**, and characteristics of the study population (N = `r total_population`) in **Table 3**. Exposure to asbestos for the SYNERGY participants had to be estimated from 1922 to 2009. Ever exposure to asbestos was reported in `r round((total_exposed/total_population*100), 1)`% (n = `r total_exposed`) participants. Cumulative asbestos exposure in SYNERGY ranged from `r min_cum0_overall` to `r max_cum0_overall` fibre-years (median `r median_cum0_overall`, IQR: `r q1_cum0_overall` – `r q3_cum0_overall`). The percentage of asbestos exposure in lung cancer cases and controls was `r round((exposed_cases/cases*100), 1)`% (n = `r exposed_cases`/`r cases`) and `r round((exposed_controls/controls*100), 1)`% (n = `r exposed_controls`/`r controls`), respectively. Median lifetime cumulative exposure to asbestos in ever-exposed was `r median_cum0_cases` (IQR: `r q1_cum0_cases` – `r q3_cum0_cases`, range: `r min_cum0_cases` – `r max_cum0_cases`) fibre-years in cases and `r median_cum0_controls` (IQR: `r q1_cum0_controls` – `r q3_cum0_controls`, range: `r min_cum0_controls` – `r max_cum0_controls`) fibre-years in controls. Total exposure duration in the cases and controls was `r median_dur0_cases` (IQR: `r q1_dur0_cases` – `r q3_dur0_cases`, range: `r min_dur0_cases` – `r max_dur0_cases`) years and `r median_dur0_controls` (IQR: `r q1_dur0_controls` – `r q3_dur0_controls`, range: `r min_dur0_controls` – `r max_dur0_controls`) years, respectively.
 
-Exposure-response relations of RR of lung cancer with increasing level of asbestos exposure, highlighting the range of exposure values (0 to 65 fibre-years) observed in SYNERGY, are shown in **Supplementary Figure 2**. Using the spline model with no intercept (I² = 92.7%), lung cancer RR is not doubled below 65 fibre-years with the point estimate, while the upper limit of the 95% PI does (**Figure 1**). PoC of 0.5 occurs at 81.7 and 26.1 fibre-years, respectively (**Figure 2A**). Zero and three lung cancer cases per 10,000 would be entitled to compensation under the point estimate and presumably plausible thresholds based on ECHA (**Table 2**).
+Cumulative exposure in studies with hospital-based controls had comparable exposure on average in cases and controls (median 2.39 fibre-years in cases and 2.27 in controls) while in studies with population-based controls the cases had a higher median cumulative exposure than controls (1.31 vs 0.98 fibre-years, **Supplementary Table 2**). Similarly, smoking intensity among ever-smokers was comparable in hospital-based control studies (37.8 pack-years in cases vs 27.0 in controls) but higher in cases than controls in population-based studies (37.9 vs 21.6 pack-years, **Supplementary Table 3**).
+
+{{< pagebreak >}}
+
+**Table 3**. Descriptive characteristics of SYNERGY study participants.
+
+```{r}
+includeHTML("tables/Table3.html")
+```
+
+> Abbreviations: fibre-years (ff/ml-years), maximum (Max), minimum (Min), 25th percentile (Q1), 75th percentile (Q3), standard deviation (SD).
+
+{{< pagebreak >}}
+
+### Exposure-response and PoC
+
+In the meta-analysis of the 22 occupational studies (I² = 92.7%), lung cancer RR doubled at 62.9 fibre-years, and 18.2 fibre-years when using the upper limit of the 95% PI (**Figure 1A**). If these thresholds were to be applied to the lung cancer cases and their cumulative asbestos exposure estimate from the SYNERGY population, 0 and 17 lung cancer cases per 10,000 would be entitled to compensation under the point estimate and presumably plausible threshold, respectively (**Table 4**). Exclusion of SYNERGY from the database yielded an exposure-response relation with similar heterogeneity (I² = 92.9%) and lung cancer risk doubling threshold of 84.1 fibre-years and 26.6 with the upper 95% PI (**Supplementary Table 4**).
+
+The exposure-response relation in SYNERGY (I² = 63.4%) modelled as a linear function of cumulative asbestos exposure (fibre-years) yielded a 6.8% lung cancer risk increase per fibre-year, with upper PI of 17.7% (**Figure 1A**). Study-specific estimates and results of the two-stage meta-analysis are presented in **Supplementary Figure 2** and **Supplementary Table 5**. In the one-stage meta-analysis, lung cancer risk is doubled at 10.5 fibre-years for the point estimate and 4.3 fibre-years under the presumably plausible threshold (**Figure 1B**), resulting in 117 and 857 compensated cases per 10,000, respectively (**Table 4**).
+
+In the sensitivity analysis, a steeper exposure-response (**Supplementary Figure 3**) was observed for studies with population-based controls (10.2% risk increase per fibre-year) compared to studies with hospital controls (2.3% risk increase per fibre-year), with large shifts in PoC ≥ 0.5 thresholds (**Supplementary Figure 4**) for the point estimates, but limited impact in the presumably plausible threshold for population controls compared to the average SYNERGY effect (**Table 4**).
 
 ```{r}
 counts_spline <- read.table("../../results/output_tables/PoC_spline_model_cum0_count_plus50.txt")
@@ -256,51 +339,55 @@ spline_upper_bound_rate <- counts_spline %>% pull(Presumably_plausible_per_10k)
 spline_upper_bound_min.cum.exp <- counts_spline %>% pull(Min_exp_conservative)
 ```
 
-![**Figure 1**. Exposure response relations of lung cancer risk increase at low cumulative asbestos exposure. Solid lines represent the average meta-estimates; shaded areas, the upper 95% prediction intervals, and the dotted red line, the doubling in increase of risk threshold (RR = 2). Vertical tick marks represent individual participant exposure values in SYNERGY (blue, top) and average exposure values for the reported pooled estimates per exposure catgory in ECHA (green, bottom).](images/Figure_1.png){fig-align="center"}
+::: landscape
+![**Figure 1**. Exposure response relations of lung cancer risk increase (**A**), and Probability of Causation of lung cancer (**B**) across the range of lifetime cumulative exposure to asbestos (fibre-years) values in SYNERGY. Solid lines represent the average meta-estimates; shaded areas, the upper 95% prediction intervals, and the dotted lines, the doubling in increase of risk threshold (red) and PoC 0.5 threshold (blue). Vertical tick marks represent average exposure values for the reported pooled estimates per exposure category in the study base by ECHA (green, bottom), individual participant exposure values in the total SYNERGY population (blue, top), and lung cancer cases in SYNERGY (red, bottom).](images/Figure_1.png){fig-align="center"}
+:::
 
-{{< pagebreak >}}
-
-**Table 2**. Number of compensated cases per 10,000 lung cancer cases according to various scenarios applied to the lung cancer cases (n = 16901) within the SYNERGY population, for the probability of causation (PoC) due to lifetime cumulative exposure to asbestos (fibre-years). It was estimated at what cumulative exposure the PoC is equal or larger than 50%.
+**Table 4**. Number of compensated cases per 10,000 lung cancer cases according to various scenarios applied to the lung cancer cases (n = 16901) within the SYNERGY population. It was estimated at what cumulative asbestos exposure (fibre-years) the probability of causation (PoC) is equal or larger than 50%.
 
 ```{r}
-includeHTML("tables/Table2.html") 
+includeHTML("tables/Table4.html") 
 ```
-
-{{< pagebreak >}}
-
-### Exposure-response and PoC in SYNERGY
-
-The exposure-response relation in SYNERGY (I² = 0.07%) estimates a 6.8% lung cancer risk increase per fibre-year, with an upper PI of 17.5% (**Figure 1**). This corresponds to a PoC of 0.5 (**Figure 2B**) at 10.6 fibre-years for the point estimate and 4.3 under the presumably plausible threshold (**Table 2**), for 115 and 845 compensated cases per 10,000, respectively. In sensitivity analysis, a steeper exposure-response (**Supplementary Figure 3**) was observed for studies with population-based controls (9.3% risk increase per fibre-year) compared to studies with hospital controls (1.9% risk increase per fibre-year), with large shifts in the PoC = 0.5 thresholds (**Supplementary Figure 4**) for the point estimates, but limited impact in the presumably plausible threshold for population controls compared to the average SYNERGY population effect (**Table 2**).
-
-{{< pagebreak >}}
-
-![**Figure 2**. Probability of causation of lung cancer across the range of lifetime cumulative exposure to asbestos (fibre-years) values in SYNERGY, based on **A)** exposure-response relation in the ECHA study and **B)** the SYNERGY study. Solid lines represent the average meta-estimates; shaded areas, the upper 95% prediction interval (Upper PI), and the dotted blue line, the PoC = 0.5 threshold. SYNERGY estimates were adjusted for age, sex, smoking (pack-years), and time since quitting smoking.](images/Figure_2.png){fig-align="center"}
 
 {{< pagebreak >}}
 
 # Discussion
 
-In this study, we applied two approaches for the calculation of the probability of causation of lung cancer due to exposure to asbestos, to determine exposure thresholds for the financial compensation of lung cancer cases occupationally exposed to asbestos. We used a widely applied method for the calculation of PoC[@Armstrong1996; @Wakeford1998; @Siemiatycki2014] from the exposure-response relation of lung cancer risk due to lifetime cumulative exposure to asbestos of (1) a systematic review with spline meta-regression [@Lenters2011; @vanderbij2013; @ECHA2021] and (2) a large pooled case-control study of lung cancer and occupational carcinogens (SYNERGY).[@Olsson2017] Our scenario analyses explore and incorporate uncertainties to the benefit of the claimant through the use of a presumably plausible principle.[@Coenen2024] These findings show that the lifetime cumulative exposure threshold of 4.3 fibre-years based on SYNERGY to compensate workers occupationally exposed to asbestos is defensible, as it incorporates uncertainties to the benefit of the claimant.
+In this study, we analysed two large datasets for the Probability of Causation estimation of asbestos-related lung cancer, to determine exposure thresholds for financial compensation of lung cancer cases occupationally exposed to asbestos. We used occupational asbestos studies, mainly industrial cohorts, which form the core evidence on quantitative occupational asbestos exposure and (lung) cancer risk, and a more recently conducted, pooled general population case-control study. Contrary to expectations given the traditional view of cohort studies as providing stronger evidence, the case-control studies proved more informative for determining compensation thresholds. The cohort studies are representative of high asbestos exposure (median 90 fibre-years) in production (mines and factories) industries, compared to the case-control studies in SYNERGY exposed to significantly lower levels of mixed asbestos fibres (median 1.3 fibre-years) in industries using asbestos products (e.g., construction, maintenance). Meta-analysis of industrial cohort studies showed a relatively shallow exposure-response relation, clearly levelling off at higher exposures leading to a higher exposure threshold for PoC ≥0.5 than the Helsinki criteria which assumed a linear increasing risk with increasing exposure. Despite higher heterogeneity among occupational cohort studies, the combination of shallow exposure response and higher heterogeneity led to higher PoC, not lower PoC, when prediction intervals were used, compared to the general population pooled case-control studies. The recent general population pooled case-control study showed a considerable steeper exposure-response relation with increasing excess risk at higher exposures. This resulted in considerably lower exposure thresholds for PoC ≥0.5 and even lower thresholds for upper prediction intervals which account for uncertainty resulting particularly from heterogeneity between individual studies used in respective meta-analyses. The question arises as to which PoC estimates should be used and trusted in a compensation process. Several aspects must be considered
 
-Siemiatycki, et al. recommend a two stages for the calculation of the PoC, where the critical amount of exposure at which PoC = 0.5 (RR = 2) is estimated from the exposure-response curve from a published meta-analysis of studies in multiple populations, or individual epidemiological studies when the first is not available or feasible.[@Siemiatycki2014] As a second step, the fraction of cases exceeding the critical value of exposure can be estimated, requiring that the exposure metric is available for both steps. We chose lifetime cumulative exposure to asbestos determined from SYN-JEM as it is strongly associated with lung cancer, and meets the condition for the two-stepped approach.
+-   **Study quality, including the exposure assessment component**. An important limitation of the occupational cohort studies meta-regression is the clear indication of exposure-response underestimation due to individual study limitations, particularly varying exposure assessment quality. This issue is widely recognised in occupational epidemiology due to exposure misclassification and measurement error, discussed in the context of asbestos.[@Lenters2011; @Grandjean2004] Other potential biases include confounding from unmeasured confounders, particularly cigarette smoking, and possibly selection bias due to the healthy worker effect in the occupational cohort studies, the latter often resulting in effect underestimation.[@Consonni2025] Differences in study quality among the occupational cohort studies likely explain much of the between-study heterogeneity (I² = 92.7%).[@Lenters2011]
 
-One important limitation of the ECHA spline meta-regression is that it underestimates the exposure-response curve due to low quality exposure assessment in some studies, a widely recognized issue due to exposure misclassification and measurement error.[@Grandjean2004] Other potential sources of bias in ECHA are confounding due unmeasured confounders and possibly selection bias due to healthy worker effect in occupational cohorts, the latter most often resulting in effect underestimation.[@Consonni2025] The large between-study heterogeneity (I² = 92.7%) in ECHA suggests that uncertainties in the exposure-response relation are due to true between-study differences in design, conduct, and bias.
+-   Cumulative asbestos exposure in SYNERGY is based on SYN-JEM,[@Peters2016SYNJEM] which has the advantage of assigning values with one method based on modelled personal measurements of asbestos exposure across the pooled case-control studies. However, it potentially introduces Berkson-type error by using average exposure values,[@ArmstrongMeasurementError1998] resulting in imprecise (wider confidence intervals) exposure-response estimation.[@Rhomberg2011] Berkson-type error is also present in industrial cohort studies since exposures are also assigned at job level. but often at a more refined level than in general population studies (company-specific job codes versus ISCO-68). Unlike industrial cohort studies, SYNERGY shows less effect heterogeneity (I² = 63.4%). While most measurements used to develop SYN-JEM used phase contrast microscopy (PCM) with a lower limit of detection (LOD) of \~2,000 fibres/m³, 5% used electron microscopy (EM) with LOD 100 to 200 fibres/m³.[@Franken2025] In contrast, only one[@Courtice2016] of the industrial cohort studies used EM besides PCM and particle counting, whereas many applied conversion factors due to changes in analytic techniques over time, some study specific, some assessed in other studies.[@Lenters2011]
 
-Our second approach used the exposure-response estimated through meta-analysis of individual SYNERGY participant data. Cumulative exposure to asbestos in SYNERGY is based on SYN-JEM,[@Peters2016SYNJEM] which has the advantage of assigning values with a homogeneous method across studies. However, it introduces Berkson-type error by assigning average exposure values,[@ArmstrongMeasurementError1998] resulting in imprecise (wider confidence intervals) estimations of the exposure-response curve.[@Rhomberg2011] Contrary to ECHA, there is little heterogeneity of effects between studies in SYNERGY (I² = 92.7%). While there is for exposure misclassification, for instance, if the job title does not fully represent the average exposure for the specific workers' tasks, such misclassification is non-differential with respect to outcome due to the independent dedicated development of SYN-JEM. While most measurements used to develop SYN-JEM used phase contrast microscopy (PCM) with a lower limit of detection (LOD) of \~2,000 fibres/m³, 5% of measurements were with electron microscopy (EM) with LOD 100 to 200 fibres/m³.[@Franken2025] In contrast, none of the studies in ECHA used EM, whereas many applied conversion factors due to the changes over time in analytic techniques, thus highlighting the higher exposure quality in SYNERGY.[@Lenters2011]
+-   **Other reasons for study heterogeneity**. Exposure to different asbestos types may have contributed to between-study differences. However, potency difference between fibre types are considerably smaller for lung cancer than for mesothelioma.[@Hodgson2000] Moreover, the analysis by van der Bij et al.[@vanderbij2013] using a spline model instead of assuming linearity of the exposure response relation, as well as the analysis by ECHA,[@ECHA2021] suggest that the potency differences for lung cancer are even smaller than previously indicated by simple linear models rather than more advanced spline models, which more adequately describe the exposure-response relation.
 
-In the Dutch context, uncertainties are used in the favor of the worker to receive a one-time compensation for occupational diseases. Our approach incorporates substantial knowledge of the exposure-response relationship to define exposure thresholds of PoC = 50% at the upper bound of statistical uncertainty (95% PI). However, extensive documentation may not be available for other occupational diseases and exposures. Alternative ways of incorporating uncertainties may be used in such cases. For instance, lowering of the PoC threshold had been used in the United Kingdom to initiate partial payments at PoC of 20% and full payment above 50%,[@Wakeford2006] and Italy, where flexible use of PoC thresholds of 25% and 50% has been proposed according to the specific judicial scenario.[@AIRMpoc2017] Both cases use the upper bound of the 95%CI, which is different from the approach used in the US where greater weight is given to statistical uncertainties by using the 99%CI.[@EEOICPA2020] Lack of knowledge of the exposure-response curve in the population of interest can be a source of uncertainty in other cases, such as the German compensation scheme for cancer due to radiation, where dose-response predictions derived from radiation exposure in atomic bomb survivors in Hiroshima and Nagasaki are corrected to be applicable in the population of Germany.[@ProZES2020] Nonetheless, other sources of uncertainty remain largely unexplored, such as incorporation of potential residual confounding and selection into the estimations.
+-   **Relevance for asbestos risk assessment**. The industrial cohorts describe lung cancer risk at the high end of the exposure distribution, whereas case-control studies describe risk at considerably lower exposure levels. Most industrial cohorts included workers who started working before World War II and have been updated with additional follow-up, resulting in higher numbers of deceased workers and increased power to detect associations. However, exposure assessment for these early periods is inherently uncertain, as systematic personal air sampling was not routinely conducted before the 1970s. This allowed more detailed exploration of the shape of the association between exposure and disease. Nonetheless, industrial cohort studies often excluded workers with short employment duration (i.e., \<1 year employed). The number of observations at the low end of the exposure distribution (e.g., below 25-50 fibre-years) is limited for the occupational cohorts and knowledge about the risk at this level is strongly dependent on extrapolation to lower exposure levels and models used for extrapolations, which mostly assumed linearity.
 
-Strengths of this study include the large sample size and diverse representativeness of European and Canadian populations. The PoC can be calculated from epidemiological studies and is easy to communicate to occupational health workers, patients, and stakeholders. Nonetheless, incorporation of uncertainties into its calculation to benefit the individual worker affected by an occupational disease requires substantial knowledge of the sources of uncertainty. More recently, decision-theory approaches have been proposed as alternatives to counterfactual-based estimates such as the PoC.[@Sarvet2025] However, part of this debate remains largely theoretical, as both approaches would yield equivalent results when either detects harm.[@Sarvet2025a] Potential future directions for legal applications and workers' compensation could involve other health outcomes accounting for accelerated occurrence and different dimensions of affection, such as years of working life lost,[@YWLL2021] disability-adjusted life years,[@Haagsma2015] or loss of income.[@HernandezIncomeLoss2021] These approaches, however, also rely on average population effects to make inferences about the individual.
+-   Initial observations of increased asbestos health risk emerged in mining and industries processing asbestos in products like textile, asbestos cement, brake lining, and shipyards (asbestos insulation). Currently, elevated risk occurs in workers from industries not involved in primary asbestos production. A recent UK mesothelioma case-control study shows a clear shift in risk for the working population from primary production, where the first excess risks were observed, due to occupational asbestos exposure, to downstream industries, such as construction, since World War II.[@rake2009]
 
-{{< pagebreak >}}
+On the basis of these analyses, the Advisory Committee for the List of Occupational Diseases in the Netherlands advised the Minister of Social Affairs and Employment that the lifetime cumulative exposure threshold of 4.3 fibre-years based on SYNERGY meta-estimates to compensate workers occupationally exposed to asbestos is defensible. This threshold aligns better with the expected burden of asbestos-related lung cancer in the Netherlands, estimated at 426 per 10,000 cases, using the cumulative exposure information from SYNERGY lung cancer cases to obtain a population burden estimate. Most recent general population estimates of the lung cancer burden in the Netherlands projects 600 new asbestos-related lung cancer cases, based on registered mesothelioma cases and an assumed lung cancer/mesothelioma ratio,[@Gezondheidsraad2023] out of 14,089 cases diagnosed nationally in 2023.[@IKNL2026LungCancer] In contrast, estimates from cohort studies would result in few compensated workers, far below this expected burden. As a secondary consideration, Dutch workers currently applying for compensation were more recently exposed at lower mixed asbestos fibre levels.
+
+The PoC is easily communicated to medical specialists, occupational health specialists, patients, and stakeholders as an eligibility criterion for financial compensation. Nonetheless, harm definition is linked to a doubling in lung cancer risk.[@Sarvet2025] Asbestos is a no-threshold lung carcinogen, meaning any exposure level can increase lung cancer risk. Therefore, PoC ≥0.5 should not be interpreted as definitive evidence that lung cancer was caused by asbestos, but as a commonly used public health decision-making tool. While exposure-response-based PoC allows personalised decisions with individual cumulative exposure, it relies on population-average effects, not accounting for heterogeneity in occupational exposures nor timing of cancer occurrence. Applying uncertainties in the favour of claimants for workers’ compensation has been common practice to balance the limitations of the PoC.[@Wakeford2006; @Armstrong1996; @Merwin2008] Future directions for legal applications and workers’ compensation could involve decision-making using health outcomes accounting for accelerated occurrence[@Eidemuller2023] and different dimensions of affection, such as loss of life expectancy,[@RobinsGreenland1991] years of working life lost,[@YWLL2021] disability-adjusted life years,[@Haagsma2015] or loss of income.[@HernandezIncomeLoss2021]
+
+<br> <br>
 
 # Conclusions
 
-This study shows that individual participant data meta-analysis provides more reliable exposure-response estimates of lung cancer due to asbestos than traditional meta-regression of published studies for workers' compensation. Steeper exposure-response relations in SYNERGY with minimal between-study heterogeneity translate into lower compensation thresholds under the presumably plausible principle. Therefore, an exposure threshold of 4.3 fibre-years has been selected for the one-time compensation of workers occupationally exposed to asbestos in the Netherlands who develop lung cancer. The newer estimates based on SYNERGY should supersede those based on the Helsinki criteria.
+SYNERGY meta-analysis likely provided more reasonable estimates of asbestos-related lung cancer than traditional meta-regression of industrial cohort studies, given current occupational exposure to lower levels of generally mixed asbestos fibres in the Netherlands. Steeper exposure-response relations in SYNERGY with lower between-study heterogeneity translate into lower cut-off for compensation using the presumably plausible threshold. Therefore, an exposure threshold of 4.3 fibre-years was selected for the one-time compensation of workers occupationally exposed to asbestos in the Netherlands who develop lung cancer.
+
+{{< pagebreak >}}
+
+## Acknowledgements
+
+We extend our sincere appreciation to the SYNERGY study group and the principal investigators of the original studies: <https://synergy.iarc.fr/collaborators/>.
 
 ## Funding
 
 This work was supported by the Dutch Ministry of Social Affairs and Employment, grant number 25719.
+
+## Ethics statement
+
+The SYNERGY study was approved by the IARC Ethics Committee in addition to the individual study ethics approval.
 
 ## Competing interests
 
@@ -308,9 +395,13 @@ None reported.
 
 ## Data and code availability
 
-Data are available upon reasonable request (inquiries can be directed to Dr. Susan Peters. Alternatively, <https://synergy.iarc.who.int/contact/>).
+Data are available upon reasonable request (inquiries can be directed to Dr. Susan Peters (s.peters\@uu.nl). Alternatively, <https://synergy.iarc.who.int/contact/>.
 
 The source code for this manuscript, statistical analyses, and project documentation is available through the online repository: <https://github.com/UtrechtUniversity/PoC-Asbestos>.
+
+## AI-use statement
+
+Claude (Anthropic) was used to assist with rephrasing text and improving English grammar and style throughout this manuscript. All AI-generated content was reviewed and edited by the authors, who take full responsibility for the final content
 
 {{< pagebreak >}}
 

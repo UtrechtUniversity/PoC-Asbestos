@@ -1,0 +1,2 @@
+"Model"	"Risk_per_ffyr_est"	"Risk_per_ffyr_PI"	"Min_exp_50pct_PoC"	"Min_exp_conservative"	"Point_per_10k"	"Presumably_plausible_per_10k"
+"1"	"Main"	"6.8%"	"-3.1% ; 17.7%"	10.52	4.26	117	857

@@ -1,0 +1,3 @@
+"Model"	"Risk_per_ffyr_est"	"Risk_per_ffyr_PI"	"Min_exp_50pct_PoC"	"Min_exp_conservative"	"Point_per_10k"	"Presumably_plausible_per_10k"
+"1"	"Population controls"	"10.2%"	"3% ; 17.8%"	7.16	4.23	344	866
+"2"	"Hospital controls"	"2.3%"	"-3.6% ; 8.7%"	29.9	8.32	1	231

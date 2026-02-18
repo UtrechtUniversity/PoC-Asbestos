@@ -1,2 +1,2 @@
 "Model"	"Risk_per_ffyr_est"	"Risk_per_ffyr_PI"	"Min_exp_50pct_PoC"	"Min_exp_conservative"	"Point_per_10k"	"Presumably_plausible_per_10k"
-"1"	"Spline"	"0.9%"	"0% ; 2.6%"	81.71	26.09	0	3
+"1"	"Spline"	"1.1%"	"0% ; 3.6%"	62.93	18.19	0	17
