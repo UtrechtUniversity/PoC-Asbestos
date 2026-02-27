@@ -369,7 +369,8 @@ mixed_model_cum0 <- glmer(
     (1 + asbestos_cum0 | study_name),
   data = df, 
   family = binomial,
-  nAGQ = 1
+  control = glmerControl(optimizer = "bobyqa"),
+  nAGQ = 1,
   )
 
 saveRDS(mixed_model_cum0, file = paste0(tempfolder,"/one-stage_selective-random_cum0_main.rds"))
